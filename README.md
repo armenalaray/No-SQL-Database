@@ -7,7 +7,7 @@ The project comes with recordings of each coding session, so you can watch them 
 Youtube: https://www.youtube.com/channel/UCumRmCCamu0sJnRywpfWVTw
 
 The debugger is meant to have debugging essentials, Watch windows, (Source, dissasembly, memory) views, breakpoint inspection. 
-It is planned to be reliable, and to save user´s state, so that you could reload sessions when launching, 
+It is planned to be reliable and save user´s state, so that you could reload sessions when launching, 
 and fast so we can supersede Visual Studio's debugger. =)
 
 The series started on June 7th 2018. And we will take as much time as necessary to finish. 
