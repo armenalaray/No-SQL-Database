@@ -77,7 +77,6 @@ extern "C" {
         CPU_x64,
     }epdb_target_architectures;
     
-    
     typedef struct epdb_pdb_stream_header 
     {
         uint32_t Version;
@@ -112,6 +111,7 @@ extern "C" {
         uint32_t Padding;
     }epdb_dbi_stream_header;
     
+    //NOTE(Alex): Module substream data
     typedef struct epdb_section_contrib_entry 
     {
         uint16_t Section;
@@ -127,7 +127,7 @@ extern "C" {
     
     typedef struct epdb_module_info 
     {
-        uint32_t Unused1;
+        uint32_t Unused0;
         epdb_section_contrib_entry SectionContr;
         uint16_t Flags;
         uint16_t ModuleSymStream;
@@ -140,12 +140,49 @@ extern "C" {
         uint32_t SourceFileNameIndex;
         uint32_t PdbFilePathNameIndex;//38 + 26
         //64 bytes till here
-        char * ModuleName;
-        char * ObjFileName;
+        //NOTE(Alex): This are variable size
+        //char FirstStringLetter;
+        //char * ObjFileName;
     }epdb_module_info;
+    
+    //
+    //NOTE(Alex):  
+    //
+    
+#if 0
+    struct epdb_mod_info_stream {
+        uint32_t Signature;
+        uint8_t Symbols[SymbolSize-4];
+        uint8_t C11LineInfo[C11Size];
+        uint8_t C13LineInfo[C13Size];
+        
+        uint32_t GlobalRefsSize;
+        uint8_t GlobalRefs[GlobalRefsSize];
+    };
+#endif
+    
+    //NOTE(Alex): if value < LF_NUMERIC value resides into the next two bytes after symbol entry
+#define LF_NUMERIC 0x8000 
+#define CV_FIRST_NONPRIMITIVE 0x1000
+    
+    typedef struct epdb_symbol
+    {
+        uint16_t Length;
+        uint16_t Type;
+    }epdb_symbol;
+    
+    typedef struct epdb_symbol_iterator
+    {
+        uint32_t ScopeIndex;
+        epdb_symbol * CurrentScope;
+        uint16_t * ModuleSymBase;
+        char * At;
+    }epdb_symbol_iterator;
     
     
 #pragma pack(pop)
+    
+    //NOTE(Alex): Non packed DATA
     
     typedef enum epdb_stream_indices
     {
@@ -165,6 +202,7 @@ NOTE(Alex) : This are not know until Prev Streams being parsed!
         */
     }epdb_stream_indices;
     
+#if 0    
     typedef enum epdb_substream_indices
     {
         SubstreamIndex_ModInfoSize, // - The length of the Module Info Substream.
@@ -175,6 +213,7 @@ NOTE(Alex) : This are not know until Prev Streams being parsed!
         SubstreamIndex_OptionalDbgHeaderSize, // - The length of the Optional Debug Header Stream.
         SubstreamIndex_ECSubstreamSize, // - The length of the EC Substream.
     }epdb_substream_indices;
+#endif
     
     typedef struct epdb_block
     {
@@ -202,6 +241,12 @@ NOTE(Alex) : This are not know until Prev Streams being parsed!
     typedef struct epdb_module
     {
         epdb_module_info * Info;
+        
+        uint32_t ModuleNameSize;
+        char * ModuleName;
+        uint32_t ObjFileNameSize;
+        char * ObjFileName;
+        
         epdb_module * Next;
     }epdb_module;
     
@@ -228,6 +273,7 @@ NOTE(Alex) : This are not know until Prev Streams being parsed!
         
         uint32_t TempPDBStorageSize;
         memory_arena TempArena;
+        
         
         //NOTE(Alex): Temporal stream read back storage!
         epdb_stream * CurrentStream;

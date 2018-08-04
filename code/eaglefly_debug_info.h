@@ -40,6 +40,7 @@ enum efly_lexical_scope_type
     LScope_Function,
     LScope_Thunk,
     LScope_Block,
+    LScope_StructClass,
 };
 
 struct efly_function_data;
@@ -47,19 +48,6 @@ struct efly_thunk_data;
 struct efly_block_data;
 struct efly_struct_class_data;
 
-struct efly_lexical_scope
-{
-    s32 ScopeIndex;
-    efly_lexical_scope_type Type;
-    union
-    {
-        //NOTE(Alex): This is C/C++ Language dependent
-        efly_function_data * FuncScope;
-        efly_thunk_data * ThunkScope;
-        efly_block_data * BlockScope;
-        efly_struct_class_data * StructClass;
-    };
-};
 
 struct efly_symbol_entry
 {
@@ -81,20 +69,43 @@ struct efly_symbol_entry
     efly_symbol_entry * Next;
 };
 
-
-struct efly_disasm_code_block
+//NOTE(Alex): Scope 0 is going to be the Root always
+//NOTE(Alex): efly_lexical_scope and opcode_block map to the same code segmentation
+//TODO(Alex): Align this to the next power of 2 greater than sizeof(efly_lexical_scope) 512
+#pragma pack(push, 1) 
+struct efly_lexical_scope
 {
-    u32 CodeBlockIndex;
+    u32 ScopeIndex;
+    efly_lexical_scope_type Type;
     
+    union
+    {
+        //NOTE(Alex): This is C/C++ Language dependent
+        efly_function_data * FuncScope;
+        efly_thunk_data * ThunkScope;
+        efly_block_data * BlockScope;
+        efly_struct_class_data * StructClass;
+    };
+    
+    efly_symbol_entry * SymbolBlock;
+    
+    efly_lexical_scope * Next;
+    efly_lexical_scope * Prev;
+};
+#pragma pack(pop)
+
+struct efly_opcode_block
+{
+    u32 ScopeIndex;
     u32 CodeSegmentIndex;
     memory_index BeginOffset;
     memory_index EndOffset;
     
-    //efly_lexical_scope Scope;
-    efly_symbol_entry * SymbolEntryBlock;
+    //NOTE(Alex): This data captures scope independent symbol information 
+    efly_symbol_entry * SymbolBlock;
     
-    efly_disasm_code_block * Next;
-    efly_disasm_code_block * Prev;
+    efly_opcode_block * Next;
+    efly_opcode_block * Prev;
 };
 
 enum efly_target_architecture
@@ -111,9 +122,10 @@ struct efly_compiland_module
     u32 SourceFileCount;
     
     //TODO(Alex): u32 ModeViewFlags; Ways to display different views?
-    efly_disasm_code_block DisasmSentinel;
+    efly_opcode_block OpcodeSentinel;
     efly_lexical_scope RootLexicalScope;
 };
+
 
 struct efly_debug_info
 {
@@ -121,8 +133,14 @@ struct efly_debug_info
     efly_target_architecture TA;
     efly_target_type * TypesTable;
     
+#if 0    
     u32 ModuleCount;
     efly_compiland_module Modules[4096];
+#else
+    efly_opcode_block OpcodeSentinel;
+    efly_lexical_scope LexicalScopeSentinel;
+#endif
+    
 };
 
 

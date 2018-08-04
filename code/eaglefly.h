@@ -44,8 +44,7 @@ struct kerning_pair
 
 struct asset_glyph
 {
-    asset_bitmap Bitmap;
-    
+    efly_asset_bitmap Bitmap;
     r32 HAdvance;
     r32 LeftSideBearing;
     
@@ -59,20 +58,31 @@ struct asset_glyph
     s32 x0, y0, x1, y1;
 };
 
-//TODO(Alex): How do we wanna choose font glyphs?
-struct debug_state
+#if 0
+struct efly_debug_manager
 {
     memory_arena DebugArena;
     memory_arena TranArena;
     
+    efly_tracer_input * TracerInput;
+    sub_arena Out_TracerSubArena;
+    sub_arena In_TracerSubArena;
+};
+#endif
+
+//TODO(Alex): How do we wanna choose font glyphs?
+struct debug_state
+{
     b32 IsInitialized;
-    ttf_font DefaultTTF;
+    memory_arena DebugArena;
     
+    //NOTE(Alex): FONT_GLYPH DATA
+    
+    ttf_font DefaultTTF;
     u32 FontCount;
     asset_font Fonts[8];
     
     //TODO(Alex): Do ScaleTable
-    
 #if 0    
     u32 GlyphSizeCount;
     u32 CurrentGlyphSize;

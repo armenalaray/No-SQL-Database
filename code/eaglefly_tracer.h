@@ -14,30 +14,22 @@ struct win32_thread_id_map
     HANDLE hThread;
 };
 
-//NOTE(Alex): Are we gonna just allow to debug windows specific applications?
-struct tracer_input_data
-{
-    b32 RunFromCmdLine;
-    char * TargetImageFullPath;
-    char * TargetPDBFullPath;
-    char * CmdEXEFullPath;
-};
-
 struct win32_dispatcher_state
 {
     b32 IsInitialized;
     b32 PDBExistsForThisImage;
-    uint8_t OriginalCodeByte;
-    
-    b32 ContinueTracing;
     b32 InitProcess;
-    HANDLE HProcess;
     b32 ProcessIsRunning;
+    //TODO(Alex): Do Debug state machine 
+    b32 ContinueTracing;
     
+    HANDLE HProcess;
     DWORD ProcessExitCode;
     PROCESS_INFORMATION ProcessInfo;
-    char * CurrentAddressP;
+    load_process_data CurrentProcessData;
     
+    void * IP;
+    uint8_t OriginalCodeByte;
     u32 BreakPointCount;
     u32 BreakPointIndex;
     
@@ -45,18 +37,14 @@ struct win32_dispatcher_state
     win32_thread_id_map ThreadIDMap[4096];
     
     FILETIME IMAGELastWriteTime;
-    //NOTE(Alex): Input Data
-    //TODO(Alex): Provide a user input data queue?
-    tracer_input_data InputData; 
+    
+    efly_tracer_input TracerInput_; 
     
     memory_arena EDebugInfoArena;
     temp_memory EDebugInfoMem;
     
     //NOTE(Alex): LEXER DATA CONSTRUCTS
     efly_lexical_scope * CurrentLexicalScope;
-    
-    
-    
     
     //NOTE(Alex): Output  Data
     

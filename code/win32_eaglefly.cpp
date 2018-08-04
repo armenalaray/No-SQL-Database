@@ -208,12 +208,12 @@ Win32IsValidHandle(HANDLE Handle)
 }
 
 internal void
-Win32ProcessInputMessage(debug_button_state * FirstButtonState,
+Win32ProcessInputMessage(efly_button_state * FirstButtonState,
                          b32 IsDown, 
                          u32 Key)
 {
     Assert(FirstButtonState);
-    debug_button_state * ButtonState = (FirstButtonState + Key);
+    efly_button_state * ButtonState = (FirstButtonState + Key);
     if(ButtonState->ButtonEndedDown != IsDown)
     {
         ++ButtonState->TransitionCount;
@@ -222,19 +222,19 @@ Win32ProcessInputMessage(debug_button_state * FirstButtonState,
 }
 
 internal void
-Win32ProcessKeyboardMessage(debug_input * Input, b32 IsDown, debug_virtual_key Key)
+Win32ProcessKeyboardMessage(efly_input * Input, b32 IsDown, efly_vkey Key)
 {
     Win32ProcessInputMessage(Input->Keyboard.Buttons, IsDown, Key);
 }
 
 internal void
-Win32ProcessMouseMessage(debug_input * Input, b32 IsDown, debug_mouse_key Key)
+Win32ProcessMouseMessage(efly_input * Input, b32 IsDown, efly_mouse_key Key)
 {
     Win32ProcessInputMessage(Input->MouseButtons, IsDown, Key);
 }
 
 internal void
-Win32AddControlKeyFlag(debug_input * Input, b32 IsDown, debug_control_key_flags ControlFlags)
+Win32AddControlKeyFlag(efly_input * Input, b32 IsDown, efly_control_key_flags ControlFlags)
 {
     if(IsDown)
     {
@@ -380,7 +380,7 @@ Win32EndPlaying(win32_state * Win32State)
 
 internal b32 
 Win32WriteInputRecord(win32_state * Win32State, 
-                      debug_input * DebugInput)
+                      efly_input * DebugInput)
 {
     b32 Result = false;
     if(Win32State->InputDataFileH)
@@ -402,11 +402,11 @@ Win32WriteInputRecord(win32_state * Win32State,
 internal void 
 Win32ReadInputRecord(win32_state * Win32State, 
                      win32_memory_block * DebugBlock,
-                     debug_input * Input)
+                     efly_input * Input)
 {
     if(Win32State->InputDataFileH)
     {
-        debug_input Temp = {};
+        efly_input Temp = {};
         DWORD BytesRead = 0;
         if (ReadFile(Win32State->InputDataFileH,
                      &Temp,
@@ -446,7 +446,7 @@ Win32ReadInputRecord(win32_state * Win32State,
 
 internal void 
 Win32ProcessMessages(HWND Window, 
-                     debug_input * Input)
+                     efly_input * Input)
 {
     MSG Message = {};
     b32 ContinueProcessingMessages = true;
@@ -895,7 +895,7 @@ int       nCmdShow)
             
             win32_state Win32State = {};
             //Win32State.Win32DebugUpdateTracer = Win32DebugUpdateTracer;
-            debug_memory DebugMemory = {};
+            efly_memory DebugMemory = {};
             DebugMemory.DebugStorageSize = Gigabytes(1);
             DebugMemory.TransientStorageSize = Megabytes(500);
             DebugMemory.TracerStorageSize = Megabytes(500);
@@ -907,8 +907,6 @@ int       nCmdShow)
             
             DebugMemory.DebugReadEntireFile = &Win32ReadEntireFile;
             DebugMemory.DebugWriteEntireFile = &Win32WriteEntireFile;
-            
-            
             
             win32_memory_block DebugMemoryBlock = {TotalStorageSize, DebugMemory.DebugStorage}; 
             if(DebugMemory.DebugStorage)
@@ -941,7 +939,7 @@ int       nCmdShow)
                                                                      0,
                                                                      0);
                         Win32State.EFDViewBlock.Size = TotalStorageSize; 
-                        Win32State.InputStructSize = sizeof(debug_input); 
+                        Win32State.InputStructSize = sizeof(efly_input); 
                         Win32State.InputDataFullPath = out_InputDataFullPath; 
                     }
                     else
@@ -955,26 +953,25 @@ int       nCmdShow)
                 }
                 
                 
-                debug_input  DebugInput[2] = {0};
-                debug_input * LastInput = &DebugInput[0];
-                debug_input * NewInput = &DebugInput[1];
+                efly_input  DebugInput[2] = {0};
+                efly_input * LastInput = &DebugInput[0];
+                efly_input * NewInput = &DebugInput[1];
                 
-                debug_input LoopInput = {};
+                efly_input LoopInput = {};
                 
                 Win32LoadDLL(&Win32State, out_DLLFullPath, out_TempDLLFullPath, out_LockFullPath);
                 
                 while(GlobalRunning)
                 {
-                    debug_keyboard_controller * LastKeyboard = &LastInput->Keyboard;
-                    debug_keyboard_controller * NewKeyboard = &NewInput->Keyboard;
-                    
+                    efly_keyboard_controller * LastKeyboard = &LastInput->Keyboard;
+                    efly_keyboard_controller * NewKeyboard = &NewInput->Keyboard;
                     
                     for(u32 KeyIndex = 0;
                         KeyIndex < VKey_Count;
                         ++KeyIndex)
                     {
-                        debug_button_state * NewState = &NewKeyboard->Buttons[KeyIndex];
-                        debug_button_state * LastState = &LastKeyboard->Buttons[KeyIndex];
+                        efly_button_state * NewState = &NewKeyboard->Buttons[KeyIndex];
+                        efly_button_state * LastState = &LastKeyboard->Buttons[KeyIndex];
                         
                         NewState->TransitionCount = 0;
                         NewState->ButtonEndedDown = LastState->ButtonEndedDown;
@@ -1018,8 +1015,8 @@ int       nCmdShow)
                         KeyIndex < MouseKey_Count;
                         ++KeyIndex)
                     {
-                        debug_button_state * NewState = &NewInput->MouseButtons[KeyIndex];
-                        debug_button_state * LastState = &LastInput->MouseButtons[KeyIndex];
+                        efly_button_state * NewState = &NewInput->MouseButtons[KeyIndex];
+                        efly_button_state * LastState = &LastInput->MouseButtons[KeyIndex];
                         
                         NewState->TransitionCount = 0;
                         NewState->ButtonEndedDown = LastState->ButtonEndedDown;
@@ -1027,7 +1024,7 @@ int       nCmdShow)
                         u16 Flags = GetKeyState(VirtualKeys[KeyIndex]);
                         b32 IsDown = (Flags >> 15); 
                         
-                        Win32ProcessMouseMessage(NewInput, IsDown, (debug_mouse_key)KeyIndex);
+                        Win32ProcessMouseMessage(NewInput, IsDown, (efly_mouse_key)KeyIndex);
                     }
                     
                     POINT MousePos = {};
@@ -1052,34 +1049,16 @@ int       nCmdShow)
                         Win32LoadDLL(&Win32State, out_DLLFullPath, out_TempDLLFullPath, out_LockFullPath);
                     }
                     
-                    //NOTE(Alex): Test debug tracer
-                    //if(Win32State.Win32DebugUpdateTracer)
-                    {
-#if 0
-                        eaglefly_tracer.cpp:384:1: Win32DebugUpdateTracer(debug_memory * Memory, 
-                                                                          debug_input * Input, 
-                                                                          char * TargetImageFullPath, 
-                                                                          char * TargetPDBFullPath,  
-                                                                          char * CmdEXEFullPath)
-#endif
-                        
-                            Win32DebugUpdateTracer(&DebugMemory, 
-                                                   (Win32State.LoopIsPlaying) ? &LoopInput : NewInput, 
-                                                   out_TargetFullPath, 
-                                                   out_TargetPDBFullPath, 
-                                                   CmdEXEFullPath);
-                    }
-                    
+                    Win32DebugUpdateTracer(&DebugMemory);
                     
                     if(Win32State.DebugUpdateAndRender)
                     {
-                        asset_bitmap DebugBuffer = {};
+                        efly_asset_bitmap DebugBuffer = {};
                         DebugBuffer.BytesPerPixel = Win32GlobalBackBuffer.BytesPerPixel;
                         DebugBuffer.Width = Win32GlobalBackBuffer.Width;
                         DebugBuffer.Height = Win32GlobalBackBuffer.Height;
                         DebugBuffer.Data = Win32GlobalBackBuffer.Data;
-                        Win32State.DebugUpdateAndRender(&DebugBuffer, &DebugMemory, 
-                                                        (Win32State.LoopIsPlaying) ? &LoopInput : NewInput);
+                        Win32State.DebugUpdateAndRender(&DebugBuffer, &DebugMemory, (Win32State.LoopIsPlaying) ? &LoopInput : NewInput, out_TargetFullPath, out_TargetPDBFullPath, CmdEXEFullPath);
                     }
                     
                     
@@ -1092,7 +1071,7 @@ int       nCmdShow)
                     ReleaseDC(Window, WindowDC);
                     //Win32UpdateWindow(WindowDC, WindowDim, &Win32GlobalBackBuffer);
                     
-                    debug_input * Temp = LastInput;
+                    efly_input * Temp = LastInput;
                     LastInput = NewInput;
                     NewInput = Temp;
                 }
@@ -1428,13 +1407,13 @@ case WM_INPUT:
         {
             if(MouseButtonFlags & FlagCheck)
             {
-                Win32ProcessMouseMessage(Input, true, (debug_mouse_key)MouseButtonIndex);
+                Win32ProcessMouseMessage(Input, true, (efly_mouse_key)MouseButtonIndex);
             }
             
             FlagCheck <<= 1;
             if(MouseButtonFlags & FlagCheck)
             {
-                Win32ProcessMouseMessage(Input, false, (debug_mouse_key)MouseButtonIndex);
+                Win32ProcessMouseMessage(Input, false, (efly_mouse_key)MouseButtonIndex);
             }
             FlagCheck <<= 1;
         }

@@ -22,8 +22,8 @@ LinearBlend(r32 A, r32 t, r32 B)
 
 //TODO(ALex): Optimize this!
 internal void
-DrawRectangleAt(asset_bitmap * Buffer, 
-                asset_bitmap * Bitmap, 
+DrawRectangleAt(efly_asset_bitmap * Buffer, 
+                efly_asset_bitmap * Bitmap, 
                 r32 AtX, 
                 r32 AtY,
                 r32 Red = 1.0f, 
@@ -143,7 +143,7 @@ DrawRectangleAt(asset_bitmap * Buffer,
 }
 
 internal void
-ClearScreen(asset_bitmap * Buffer, r32 Red, r32 Green, r32 Blue, r32 Alpha)
+ClearScreen(efly_asset_bitmap * Buffer, r32 Red, r32 Green, r32 Blue, r32 Alpha)
 {
     //NOTE(Alex): AtX, AtY can be outside of the Buffer 
     //We need to map Screen Coordinates - to bitmap coordinates
@@ -237,10 +237,10 @@ PositionGlyph(debug_state * DebugState, u32 CodePoint)
     return Result;
 }
 
-internal asset_bitmap *
+internal efly_asset_bitmap *
 GetGlyphFromCodePoint(debug_state * DebugState, u32 CodePoint)
 {
-    asset_bitmap * Result = 0;
+    efly_asset_bitmap * Result = 0;
     asset_glyph * Glyph = GetGlyphMetrics(DebugState ,CodePoint);
     if(Glyph)
     {
@@ -287,7 +287,7 @@ GetKerningForPair(debug_state * DebugState,
 //TODO(Alex): Batch system for rendering glyphs! 
 //use codepoint list to modify a specific glyph to be rendered into the batch!   
 internal void 
-RenderText(debug_state * DebugState, asset_bitmap * Dest, char * Text)
+RenderText(debug_state * DebugState, efly_asset_bitmap * Dest, char * Text)
 {
     if(IsValidFont(&DebugState->Fonts[0]))
     {
@@ -304,7 +304,7 @@ RenderText(debug_state * DebugState, asset_bitmap * Dest, char * Text)
             r32 KerningAdvance = DebugState->CurrentFontScale * GetKerningForPair(DebugState, C0, C1);
             r32 HAdvance = DebugState->CurrentFontScale * GetHAdvance(DebugState, C0);
             vector_2 P = PositionGlyph(DebugState, C0);
-            asset_bitmap * Glyph = GetGlyphFromCodePoint(DebugState, C0);
+            efly_asset_bitmap * Glyph = GetGlyphFromCodePoint(DebugState, C0);
             
             if(Glyph)
             {
@@ -321,6 +321,7 @@ RenderText(debug_state * DebugState, asset_bitmap * Dest, char * Text)
 }
 
 #define MapMonoTo4Channel(Value) (((Value) << 24) | ((Value) << 16) | ((Value) << 8) | ((Value) << 0))
+
 
 //TODO(Alex) Suport unicode
 internal asset_glyph *
@@ -362,9 +363,7 @@ extern "C" DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRender)
     debug_state * DebugState = (debug_state*)Memory->DebugStorage;
     if(!DebugState->IsInitialized)
     {
-        InitializeArena(&DebugState->DebugArena, (char*)Memory->DebugStorage + sizeof(debug_state), Megabytes(500));
-        InitializeArena(&DebugState->TranArena, (char*)Memory->TransientStorage, Megabytes(500));
-        
+        InitializeArena(&DebugState->DebugArena, (char*)Memory->DebugStorage + sizeof(debug_state), Memory->DebugStorageSize - sizeof(debug_state));
         //NOTE(Alex): We keep zero Index for null or invalid glyph indices
         DebugState->GlyphCount = 1;
         
@@ -421,7 +420,6 @@ extern "C" DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRender)
                                                     &x0, &y0, &x1, &y1);
                 
 #else
-                
                 s32 Width = x1 - x0;
                 s32 Height = y1 - y0;
                 
@@ -482,7 +480,76 @@ extern "C" DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRender)
                 }
             }
         }
+        
+        
         DebugState->IsInitialized = true;
+    }
+    
+    transient_state * TranState = (transient_state *)Memory->TransientStorage; 
+    if(!TranState->IsInitialized)
+    {
+        InitializeArena(&TranState->TranArena, (char*)Memory->TransientStorage + sizeof(transient_state), Memory->TransientStorageSize - sizeof(transient_state));
+        SubArena(&TranState->TranArena, &TranState->Out_TracerSubArena, Megabytes(200));
+        SubArena(&TranState->TranArena, &TranState->In_TracerSubArena, Megabytes(200));
+        
+        TranState->IsInitialized = true;
+    }
+    
+    for(u32 VKeyIndex = VKey_F1;
+        VKeyIndex < VKey_FCount;
+        ++VKeyIndex)
+    {
+        efly_input_command * NewCommand = 0;
+        if(FUNKEY_PRESSED(Input, VKeyIndex))
+        {
+            NewCommand = TranState->TracerInput.CommandFirstFree;
+            if(NewCommand)
+            {
+                TranState->TracerInput.CommandFirstFree = NewCommand->Next; 
+            }
+            else
+            {
+                NewCommand = PushStruct(&TranState->Out_TracerSubArena.Arena, efly_input_command);
+            }
+        }
+        
+        if(NewCommand)
+        {
+            switch(VKeyIndex)
+            {
+                case VKey_F1:
+                {
+                    NewCommand->Type = InputCommand_LOAD_PROCESS;
+                    NewCommand->LoadProcessData.RunFromCmdLine = true;
+                    NewCommand->LoadProcessData.TargetImageFullPath = TargetImageFullPath;
+                    NewCommand->LoadProcessData.TargetPDBFullPath = TargetPDBFullPath;
+                    NewCommand->LoadProcessData.CmdEXEFullPath = CmdEXEFullPath;
+                }break;
+                case VKey_F2:
+                {
+                    //TODO(Alex): Findout data composition for this command!
+                    NewCommand->Type = InputCommand_CONTINUE;
+                }break;
+                default:
+                {
+                    InvalidCodePath;
+                }break;
+            }
+            
+            efly_input_command * Command = TranState->TracerInput.FirstCommand;
+            if(Command)
+            {
+                while(Command->Next)
+                {
+                    Command = Command->Next;
+                }
+                Command->Next = NewCommand;
+            }
+            else
+            {
+                TranState->TracerInput.FirstCommand = NewCommand;
+            }
+        }
     }
     
     ClearScreen(FrameBuffer, 0.2f, 0.2f, 0.6f, 1.0f);

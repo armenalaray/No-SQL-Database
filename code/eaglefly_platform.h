@@ -90,10 +90,9 @@ extern "C"{
     }
     
     
-    internal void 
-        ConcatStrings(char * SourceA, u32 CountA, 
-                      char * SourceB, u32 CountB, 
-                      char * Dest, u32 CountDest)
+    internal void ConcatStrings(char * SourceA, u32 CountA, 
+                                char * SourceB, u32 CountB, 
+                                char * Dest, u32 CountDest)
     {
         Assert(CountA  + CountB < CountDest);
         
@@ -127,10 +126,22 @@ extern "C"{
         return Result;
     }
     
-    
-    enum debug_virtual_key
+    inline void CopyString(char * Dest_, char * Source_, uint32_t Size)
     {
-        VKey_0,
+        char * Dest = Dest_;
+        char * Source = Source_;
+        uint32_t BytesCopied = 0;
+        while(BytesCopied < Size)
+        {
+            *Dest++ = *Source++;
+            ++BytesCopied;
+        }
+    }
+    
+    
+    enum efly_vkey
+    {
+        VKey_0 = 0,
         VKey_1,
         VKey_2,
         VKey_3,
@@ -166,6 +177,7 @@ extern "C"{
         VKey_X,
         VKey_Y,
         VKey_Z,
+        Vkey_AlphaNumCount,
         
         VKey_F1,
         VKey_F2,
@@ -179,8 +191,9 @@ extern "C"{
         VKey_F10,
         VKey_F11,
         VKey_F12,
+        VKey_FCount,
         
-        VKey_OEM_1,
+        VKey_OEM_1 = VKey_FCount + 1,
         VKey_OEM_2,
         VKey_OEM_3,
         VKey_OEM_4,
@@ -215,7 +228,7 @@ extern "C"{
         VKey_Count,
     };
     
-    enum debug_mouse_key
+    enum efly_mouse_key
     {
         MouseKey_Left,
         MouseKey_Right,
@@ -225,46 +238,48 @@ extern "C"{
         MouseKey_Count,
     };
     
-    enum debug_control_key_flags
+    enum efly_control_key_flags
     {
         ControlKey_Shift = (1<<0),
         ControlKey_Alt = (1<<1),
         ControlKey_Ctrl = (1<<2),
     };
     
-    struct debug_button_state
+    struct efly_button_state
     {
         b32 ButtonEndedDown;
         u32 TransitionCount;
     };
     
-    struct debug_keyboard_controller
+    struct efly_keyboard_controller
     {
-        debug_button_state Buttons[VKey_Count];
-        debug_button_state FunctionKeys[MAX_NUM_FUNC_KEYS];
+        efly_button_state Buttons[VKey_Count];
+        //efly_button_state FunctionKeys[MAX_NUM_FUNC_KEYS];
     };
     
-    struct debug_input
+    struct efly_input
     {
-        debug_keyboard_controller Keyboard;
-        debug_button_state MouseButtons[MouseKey_Count]; 
+        efly_keyboard_controller Keyboard;
+        efly_button_state MouseButtons[MouseKey_Count]; 
         r32 MouseX, MouseY, MouseZ;
         r32 WheelDelta;
         
         u8 ControlKeyFlags;
     };
     
-    inline b32 ControlKeyIsToggled(debug_input * Input, debug_control_key_flags Flags)
+    inline b32 ControlKeyIsToggled(efly_input * Input, efly_control_key_flags Flags)
     {
         b32 Result = (Input->ControlKeyFlags & Flags);
         return Result;
     }
     
-    inline b32 WasPressed(debug_input *  Input, debug_virtual_key VKey)
+#define FUNKEY_PRESSED(Input, VKeyIndex) WasPressed(Input, (efly_vkey)VKeyIndex)
+    
+    inline b32 WasPressed(efly_input *  Input, efly_vkey VKey)
     {
         b32 Result = false;
         
-        debug_button_state BState = Input->Keyboard.Buttons[VKey];
+        efly_button_state BState = Input->Keyboard.Buttons[VKey];
         
         if((BState.TransitionCount > 1) || 
            ((BState.TransitionCount == 1)
@@ -276,8 +291,7 @@ extern "C"{
         return Result;
     }
     
-    
-    struct asset_bitmap
+    struct efly_asset_bitmap
     {
         u32 BytesPerPixel;
         s32 Width;
@@ -285,9 +299,9 @@ extern "C"{
         void * Data;
     };
     
-    struct debug_memory;
+    struct efly_memory;
     
-#define DEBUG_UPDATE_AND_RENDER(Name) void (Name)(asset_bitmap * FrameBuffer, debug_memory * Memory, debug_input * Input)
+#define DEBUG_UPDATE_AND_RENDER(Name) void (Name)(efly_asset_bitmap * FrameBuffer, efly_memory * Memory, efly_input * Input, char * TargetImageFullPath, char * TargetPDBFullPath, char * CmdEXEFullPath)
     typedef DEBUG_UPDATE_AND_RENDER(debug_update_and_render);
     DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRenderStub)
     {
@@ -295,8 +309,8 @@ extern "C"{
     }
     
 #if 0    
-#define WIN32_LOAD_EDEBUG_INFO(Name) void (Name)(win32_dispatcher_state * DispState, temp_memory * EDebugMemory, char * TargetPDBFullPat)
-    typedef WIN32_LOAD_EDEBUG_INFO(win32_load_edebug_info);
+#define WIN32_LOAD_EDEBUG_INFO(Name) void (Name)(win32_dispatcher_state * DispState, memory_arena * out_Arena, char * TargetPDBFullPath)
+    typedef WIN32_LOAD_EDEBUG_INFO(win32_load_debug_info);
     WIN32_LOAD_EDEBUG_INFO(Win32LoadEDebugInfoStub)
     {
         //NOTE(Alex): Win32LoadEDebugInfo not grabbed from DLL
@@ -325,7 +339,7 @@ extern "C"{
     //NOTE(Alex): Memory Arena's and resources
     //
     
-    struct debug_memory
+    struct efly_memory
     {
         memory_index DebugStorageSize;
         void * DebugStorage;
@@ -335,7 +349,6 @@ extern "C"{
         
         memory_index TracerStorageSize;
         void * TracerStorage;
-        
         
 #if EAGLEFLY_INTERNAL
         debug_read_entire_file * DebugReadEntireFile;
@@ -351,19 +364,26 @@ extern "C"{
         memory_index Used;
     };
     
-    internal void InitializeArena(memory_arena * Arena, void * Base, u64 Size)
+    struct sub_arena
+    {
+        memory_arena * ParentArena;
+        memory_arena Arena;
+    };
+    
+    internal void InitializeArena(memory_arena * Arena, void * Base, memory_index Size)
     {
         Arena->Base = Base;
         Arena->Size = Size;
         Arena->Used = 0;
     }
     
+    
 #define PushArray(Arena, Count, type) (type *)PushSize(Arena, Count * sizeof(type))
+#define PushString(Arena, Count, type) (type *)PushArray(Arena, Count, type)
 #define PushStruct(Arena, type) (type *)PushSize(Arena, sizeof(type))
     
     //TODO(Alex): Add Alignment
-    internal void *
-        PushSize(memory_arena * Arena, u32  Size)
+    internal void * PushSize(memory_arena * Arena, memory_index Size)
     {
         Assert(Arena && Arena->Base);
         Assert((Arena->Used + Size)  < Arena->Size);
@@ -371,6 +391,14 @@ extern "C"{
         void * Result = (char *)Arena->Base + Arena->Used;
         Arena->Used += Size;
         return Result;
+    }
+    
+    inline void SubArena(memory_arena * Arena, sub_arena * out_SubArena, memory_index Size)
+    {
+        out_SubArena->ParentArena = Arena;
+        Assert(Size <= (Arena->Size - Arena->Used));
+        InitializeArena(&out_SubArena->Arena, (char*)Arena->Base + Arena->Used, Size);
+        PushSize(Arena, Size);
     }
     
     struct temp_memory
@@ -383,9 +411,8 @@ extern "C"{
     inline temp_memory BeginTempMemory(memory_arena * Arena)
     {
         temp_memory Result = {};
-        
         char * Base = (char*)Arena->Base + Arena->Used;
-        Assert((memory_index)Base < Arena->Size);
+        Assert(Arena->Used < Arena->Size);
         
         Result.Arena = Arena;
         Result.Base = Base; 
@@ -402,6 +429,73 @@ extern "C"{
         --TempMem->TempCount; 
         Assert(TempMem->TempCount == 0);
     }
+    
+    //
+    //NOTE(Alex): Usaful tools constructs
+    //
+    
+#define INIT_DOUBLY_LLIST(Sentinel)\
+    (Sentinel)->Next = (Sentinel);\
+    (Sentinel)->Prev = (Sentinel);\
+    
+#define ADD_TAIL_DOUBLY_LLIST(Sentinel, Instance)\
+    (Instance)->Next = (Sentinel);\
+    (Instance)->Prev = (Sentinel)->Prev;\
+    (Sentinel)->Prev->Next = (Instance);\
+    (Sentinel)->Prev = (Instance);
+    
+    //
+    //NOTE(Alex): Tracer Input Data
+    //
+    
+    typedef enum efly_input_command_type
+    {
+        InputCommand_NONE = 0,
+        InputCommand_STEP_NEXT = (1 << 0),
+        InputCommand_STEP_INTO = (1 << 1),
+        InputCommand_STEP_OUT = (1 << 2),
+        InputCommand_CONTINUE = (1 << 3),
+        InputCommand_BREAK_ALL = (1 << 4),
+        InputCommand_WALK_STACK = (1 << 5),
+        InputCommand_UNLOAD_PROCESS = (1 << 6),
+        InputCommand_LOAD_PROCESS = (1 << 7),
+    }efly_input_command_type;
+    
+    typedef struct load_process_data
+    {
+        b32 RunFromCmdLine;
+        char * TargetImageFullPath;
+        char * TargetPDBFullPath;
+        char * CmdEXEFullPath;
+    }load_process_data;
+    
+    typedef struct efly_input_command
+    {
+        efly_input_command_type Type;
+        union
+        {
+            load_process_data LoadProcessData;
+        };
+        
+        efly_input_command * Next;
+    }efly_input_command;
+    
+    //NOTE(Alex): Are we gonna just allow to debug windows specific applications?
+    typedef struct efly_tracer_input
+    {
+        efly_input_command * FirstCommand;
+        efly_input_command * CommandFirstFree;
+    }efly_tracer_input;
+    
+    typedef struct transient_state
+    {
+        b32 IsInitialized;
+        memory_arena TranArena;
+        sub_arena Out_TracerSubArena;
+        sub_arena In_TracerSubArena;
+        
+        efly_tracer_input TracerInput;
+    }transient_state;
     
 #if defined(__cplusplus)
 }

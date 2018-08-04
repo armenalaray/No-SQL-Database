@@ -120,11 +120,14 @@ GoToFreePageMap(pdb_manager * PDBmanager)
 }
 #endif
 
+
+
+
+
 inline void 
 INIT_STREAM_BLOCK(epdb_block * Sentinel)
 {
-    Sentinel->Next = Sentinel;
-    Sentinel->Prev = Sentinel;
+    INIT_DOUBLY_LLIST(Sentinel);
 }
 
 inline void
@@ -133,12 +136,11 @@ ADD_TAIL_STREAM_BLOCK(epdb_manager * PManager, memory_arena * Arena, epdb_block 
     epdb_block * Block = PushStruct(Arena, epdb_block); 
     Block->Base_ = PManager->BeginOfFile + (PManager->SBlock->BlockSize * Index);
     Block->Index = Index;
-    Block->Next = Sentinel;
-    Block->Prev = Sentinel->Prev;
-    Sentinel->Prev->Next = Block;
-    Sentinel->Prev = Block;
-    
+    ADD_TAIL_DOUBLY_LLIST(Sentinel, Block);
 }
+
+
+
 
 #define BLOCK_COUNT(PManager, Size) CeilR32Tou32((r32)(Size) / (r32)((PManager)->SBlock->BlockSize))  
 
@@ -234,11 +236,11 @@ END_STREAM_EXT(epdb_manager * PManager)
 #define GET_STREAM_HEADER(Stream) GET_STREAM_HEADER_(Stream, epdb_##Stream##_header)
 
 
-inline void BEGIN_SUBSTREAM_EXT(epdb_manager * PManager, epdb_stream * dbi_stream)
+inline void BEGIN_SUBSTREAM_EXT(epdb_manager * PManager, epdb_stream * stream, uint32_t Offset)
 {
     if(PManager)
     {
-        PManager->SubstreamPtr = dbi_stream->FirstBlockBase + sizeof(epdb_dbi_stream_header);  
+        PManager->SubstreamPtr = stream->FirstBlockBase + Offset;
     }
 }
 
@@ -246,7 +248,6 @@ inline epdb_substream
 CREATE_SUBSTREAM(epdb_manager * PManager, epdb_stream * Stream, memory_index Size)
 {
     epdb_substream Result = {};
-    
     if(PManager->SubstreamPtr)
     {
         Result.Stream = Stream;
@@ -260,27 +261,165 @@ CREATE_SUBSTREAM(epdb_manager * PManager, epdb_stream * Stream, memory_index Siz
 }
 
 inline void
-END_SUBSTREAM_EXT(epdb_manager * PManager)
+END_SUBSTREAM_EXT(epdb_manager * PManager) 
 {
     PManager->SubstreamPtr = 0;
 }
 
+#define STATIC_MODULE_INFO_SIZE 64
+
+
 internal void
 GetAllModulesFromPDB(epdb_manager * PManager, epdb_substream ModSubstream)
 {
-    
+    char * ModuleName, * ObjFileName;
+    epdb_module_info * Source = (epdb_module_info*)ModSubstream.Base;
+    epdb_module * Dest = 0;
+    epdb_module * PrevModule = 0;
+    if(Source)
+    {
+        uint32_t ModByteCount = 0;
+        for(uint32_t ByteIndex = 0;
+            ByteIndex < ModSubstream.Size;)
+        {
+            if(Source->Unused0 == 0)
+            {
+                Dest = PushStruct(&PManager->TempArena, epdb_module);
+                Dest->Info = Source;
+                
+                ModuleName = (char*)Source + sizeof(epdb_module_info);
+                Dest->ModuleNameSize = StringLength(ModuleName) + 1;
+                ObjFileName = ModuleName + (Dest->ModuleNameSize);
+                Dest->ObjFileNameSize = StringLength(ObjFileName) + 1;
+                
+                Dest->ModuleName = PushString(&PManager->TempArena, Dest->ModuleNameSize, char);
+                Dest->ObjFileName = PushString(&PManager->TempArena, Dest->ObjFileNameSize, char);
+                
+                CopyString(Dest->ModuleName, ModuleName, Dest->ModuleNameSize);
+                CopyString(Dest->ObjFileName, ObjFileName, Dest->ObjFileNameSize);
+                
+                if(!PManager->FirstModule)
+                {
+                    PManager->FirstModule = Dest;
+                }
+                
+                if(PrevModule)
+                {
+                    PrevModule->Next = Dest;
+                }
+                PrevModule = Dest;
+                
+                CREATE_STREAM(PManager, &PManager->Directory, Source->ModuleSymStream);
+                
+                ModByteCount = sizeof(epdb_module_info) + Dest->ModuleNameSize + Dest->ObjFileNameSize;
+                //TODO(Alex): handle different architectures
+                uint32_t Offset = (ModByteCount & (sizeof(uint32_t) - 1));
+                uint32_t PaddingBytes = (Offset) ? sizeof(uint32_t) - Offset : 0;
+                
+                ModByteCount += PaddingBytes;
+                
+                ByteIndex += ModByteCount;
+                Source = (epdb_module_info*)((char*)Source + ModByteCount);
+            }
+            else
+            {
+                //TODO(Alex): Transform MBCS formatted strings to utf8 as needed! 
+                break;
+            }
+        }
+        
+    }
 }
 
-internal void
-CreateTracerSymbolsForModule(epdb_manager * PManager, epdb_module * Module, efly_debug_info * out_EDebugInfo)
+inline b32 
+IsValidModule(epdb_module * Module)
 {
-    CREATE_STREAM(PManager, &PManager->Directory, Module->Info->ModuleSymStream);
+    b32 Result = (Module->ModuleNameSize &&
+                  Module->ModuleName &&
+                  Module->ObjFileNameSize &&
+                  Module->ObjFileName &&
+                  Module->Info);
+    
+    return Result;
 }
 
-//TODO(Alex): Make this a DLL?
-//NOTE(Alex): Pass PDBFileFullPath as Arguments[1] 
-//Win32LoadEDebugInfoFromPDB(DispState, DispState->EDebugInfoMem, InputData->TargetPDBFullPath);
-int main(u32 ArgCount, char ** Arguments)
+//TODO(Alex): Write this onto a file
+internal void
+CreateTracerSymbolsForModule(epdb_manager * PManager, epdb_module * Module, memory_arena * DestArena)
+{
+    if(IsValidModule(Module))// && DestArena)
+    {
+        epdb_module_info * ModInfo = Module->Info;
+        epdb_stream * ModStream = PManager->Directory.Streams[ModInfo->ModuleSymStream]; 
+        
+        uint32_t Signature = *(uint32_t *)ModStream->FirstBlockBase;
+        
+        BEGIN_SUBSTREAM_EXT(PManager, ModStream, sizeof(Signature));
+        epdb_substream SymbolSS = CREATE_SUBSTREAM(PManager, ModStream, ModInfo->SymByteSize - 4);
+        epdb_substream LineInfo11SS = CREATE_SUBSTREAM(PManager, ModStream,  ModInfo->C11ByteSize);
+        epdb_substream LineInfo13SS = CREATE_SUBSTREAM(PManager, ModStream,  ModInfo->C13ByteSize);
+        END_SUBSTREAM_EXT(PManager);
+        
+        epdb_symbol_iterator SymIter = {};
+        SymIter.At = SymbolSS.Base;
+        //SymIter.ModuleSymBase = SymIter.At;
+        //SymIter.CurrentScope = (uint16_t*)SymbolSS.Base;
+        
+        //efly_debug_info  * DebugInfo = PushStruct(DestArena, efly_debug_info);
+        //INIT_DOUBLY_LLIST(&DebugInfo->LexicalScopeSentinel);
+        
+        for(;SymIter.At < (SymbolSS.Base + SymbolSS.Size);)
+        {
+            //efly_lexical_scope * Scope = PushStruct(DestArena, efly_lexical_scope);
+            //ADD_TAIL_DOUBLY_LLIST(&DebugInfo->LexicalScopeSentinel, Scope);
+        }
+        
+    }
+}
+
+//
+//NOTE(Alex): EagleFly Data constructs needed
+//
+
+#if 0
+//TODO(Alex): Create lexical scopes based on this idea
+internal void 
+PUSH_STACK(win32_dispatcher_state * DispState, memory_arena *  Arena, memory_index Address, opcode_block * Sentinel, opcode_block * OBlock)
+{
+    efly_lexical_scope * Result = 0;
+    if(NUM_BETWEEN(Address, OBlock->EndOffset, OBlock->BeginOffset))
+    {
+        DispState->DispState->LexicalScopeFound = true;
+    }
+    else if(Oblock->Next != Sentinel)
+    {
+        PUSH_STACK(win32_dispatcher_state * DispState, memory_index Address, Sentinel, Oblock->Next);
+    }
+    
+    if(DispState->LexicalScopeFound)
+    {
+        Result = PushStruct(&DispState->EDebugInfoArena, efly_lexical_scope);
+        ADD_TAIL_DOUBLY_LLIST(Sentinel, Result);
+    }
+}
+
+//NOTE(Alex): This will create the call stack from PDB symbol information
+internal efly_lexical_scope * 
+CONSTRUCT_LEXICAL_SCOPE(win32_dispatcher_state * DispState, memory_index Address)
+{
+    efly_lexical_scope * Result = 0;
+    if(DispState->EDebugInfoMem)
+    {
+        edebug_info * DebugInfo = (edebug_info*)DispState->EDebugInfoMem; 
+        PUSH_STACK(win32_dispatcher_state * DispState, memory_index Address, &DebugInfo->OpcodeSentinel, DebugInfo->OpcodeSentinel->Next);
+    }
+    
+    return Result;
+}
+#endif
+
+//extern "C" WIN32_LOAD_EDEBUG_INFO(Win32LoadEDebugInfo)
+int main(uint32_t ArgCount, char ** Arguments)
 {
     //NOTE(Alex): Arguments[0] is EXE FullPath!
     //TODO(Alex): Make User choose pdb TargetFullPath! 
@@ -362,9 +501,11 @@ int main(u32 ArgCount, char ** Arguments)
                     Assert((sizeof(epdb_dbi_stream_header) + TotalDBISubstreamSize) == dbi_stream->Size);  
                     
                     //epdb_GetDBISubstreams();
-                    BEGIN_SUBSTREAM_EXT(PManager, dbi_stream);
-                    epdb_substream ModSubstream = CREATE_SUBSTREAM(PManager, dbi_stream, SubstreamIndex_ModInfoSize);
+                    BEGIN_SUBSTREAM_EXT(PManager, dbi_stream, sizeof(epdb_dbi_stream_header));
+                    epdb_substream ModSubstream = CREATE_SUBSTREAM(PManager, dbi_stream, DBIStreamHeader->ModInfoSize);
+                    
 #if 0                    
+                    //TODO Alex: Parse other substreams 
                     epdb_substream ModSubstream = CREATE_SUBSTREAM(dbi_stream, DBIStreamHeader->SectionContributionSize);
                     epdb_substream ModSubstream = CREATE_SUBSTREAM(dbi_stream, DBIStreamHeader->SectionMapSize); 
                     epdb_substream ModSubstream = CREATE_SUBSTREAM(dbi_stream, DBIStreamHeader->SourceInfoSize);
@@ -375,7 +516,12 @@ int main(u32 ArgCount, char ** Arguments)
                     END_SUBSTREAM_EXT(PManager);
                     
                     GetAllModulesFromPDB(PManager, ModSubstream);
-                    CreateTracerSymbolsForModule(PManager, PManager->FirstModule, &out_DebugInfo);
+                    
+                    CREATE_STREAM(PManager, &PManager->Directory, DBIStreamHeader->SymRecordStream);
+                    CREATE_STREAM(PManager, &PManager->Directory, DBIStreamHeader->GlobalStreamIndex);
+                    CREATE_STREAM(PManager, &PManager->Directory, DBIStreamHeader->PublicStreamIndex);
+                    
+                    CreateTracerSymbolsForModule(PManager, PManager->FirstModule, 0);
                     
                     //TODO(Alex): This could not be compact inside a block, use get offset block to find the proper data
                     //NOTE(Alex): This is an array of epdb_mod_info's
