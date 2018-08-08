@@ -14,6 +14,13 @@ struct win32_thread_id_map
     HANDLE hThread;
 };
 
+//NOTE(Alex): We probably want to see processor specific memory segmentations changes accross process state_
+struct memory_segment
+{
+    u32 SegmentIndex; //Up to 65536 segments
+    u64 Offset;
+};
+
 struct win32_dispatcher_state
 {
     b32 IsInitialized;
@@ -28,10 +35,13 @@ struct win32_dispatcher_state
     PROCESS_INFORMATION ProcessInfo;
     load_process_data CurrentProcessData;
     
-    void * IP;
     uint8_t OriginalCodeByte;
-    u32 BreakPointCount;
-    u32 BreakPointIndex;
+    
+    memory_segment Segments[65536];
+    
+    u32 BPCount;
+    u32 CurrentBPIndex;
+    memory_index BPAddresses[4096];
     
     unsigned int  win32_thread_id_map_count;
     win32_thread_id_map ThreadIDMap[4096];

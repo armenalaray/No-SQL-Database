@@ -126,6 +126,26 @@ typedef struct DECLSPEC_ALIGN(16) _CONTEXT {
     DWORD64 LastExceptionFromRip;
 } CONTEXT, *PCONTEXT;
 
+//NOTE(Alex): Exception Records for 32 bit and 64 bit
+typedef struct _EXCEPTION_RECORD32 {
+    DWORD    ExceptionCode;
+    DWORD ExceptionFlags;
+    DWORD ExceptionRecord;
+    DWORD ExceptionAddress;
+    DWORD NumberParameters;
+    DWORD ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];
+} EXCEPTION_RECORD32, *PEXCEPTION_RECORD32;
+
+typedef struct _EXCEPTION_RECORD64 {
+                            DWORD    ExceptionCode;
+                            DWORD ExceptionFlags;
+                            DWORD64 ExceptionRecord;
+                            DWORD64 ExceptionAddress;
+                            DWORD NumberParameters;
+                            DWORD __unusedAlignment;
+                            DWORD64 ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];
+                        } EXCEPTION_RECORD64, *PEXCEPTION_RECORD64;
+                        
 */
 
 inline bool Win32IsValidThreadIDMap(win32_thread_id_map * Map)
@@ -182,12 +202,12 @@ Win32GetHandleFromID(win32_dispatcher_state * DispState, memory_index ID, void *
     return Result;
 }
 
-internal void * 
+internal memory_index
 win32GetProcessStartAddress(win32_dispatcher_state * DispState, DEBUG_EVENT * DebugEvent)
 {
     //TODO(Alex): lpStartAddress is busted we need to find a better way to get the REAL process start address
     Assert(DebugEvent);
-    void * Result = DebugEvent->u.CreateProcessInfo.lpStartAddress; 
+    memory_index Result = (memory_index)DebugEvent->u.CreateProcessInfo.lpStartAddress; 
     return Result;
 }
 
@@ -512,7 +532,7 @@ Win32DebugUpdateTracer(efly_memory * Memory)
         DispState->ContinueTracing = true;
         
         //TODO(Alex): Set BreakPointCount in Debug Manager
-        DispState->BreakPointCount = 2;//NOTE(Alex): Initial system breakpoint
+        DispState->BPCount = 1;
         DispState->IsInitialized = true;
     }
     
@@ -542,14 +562,34 @@ Win32DebugUpdateTracer(efly_memory * Memory)
             DEBUG_EVENT Out_DebugEvent;
             DWORD ContinueStatus = DBG_CONTINUE;
             
-            WaitForDebugEvent(&Out_DebugEvent, 0);
+            b32 ResultGathered = WaitForDebugEvent(&Out_DebugEvent, 0);
+            if(ResultGathered)
             {
                 switch(Out_DebugEvent.dwDebugEventCode)
                 {
                     case EXCEPTION_DEBUG_EVENT:
                     {
+                        
                         b32 EFirstChance = (Out_DebugEvent.u.Exception.dwFirstChance) ? true : false;
-                        EXCEPTION_RECORD ERecord = Out_DebugEvent.u.Exception.ExceptionRecord;
+                        
+#if defined(_M_IX86)
+                        EXCEPTION_RECORD32 ERecord = Out_DebugEvent.u.Exception.ExceptionRecord;
+#elif defined(_M_X64)
+                        EXCEPTION_RECORD TempRecord = Out_DebugEvent.u.Exception.ExceptionRecord;
+                        EXCEPTION_RECORD64 ERecord = {};
+                        ERecord.ExceptionCode = TempRecord.ExceptionCode;
+                        ERecord.ExceptionFlags = TempRecord.ExceptionFlags;
+                        ERecord.ExceptionRecord = (DWORD64)TempRecord.ExceptionRecord;
+                        ERecord.ExceptionAddress = (DWORD64)TempRecord.ExceptionAddress;
+                        ERecord.NumberParameters = TempRecord.NumberParameters;
+                        ERecord.__unusedAlignment = 0;
+                        for(uint32_t Index = 0;
+                            Index < EXCEPTION_MAXIMUM_PARAMETERS;
+                            ++Index)
+                        {
+                            ERecord.ExceptionInformation[Index] = TempRecord.ExceptionInformation[Index];
+                        }
+#endif
                         
                         switch(ERecord.ExceptionCode)
                         {
@@ -564,35 +604,42 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                 }
 #endif
                                 
-                                if(DispState->BreakPointIndex && DispState->ContinueTracing)
+                                if(((memory_index)ERecord.ExceptionAddress == DispState->BPAddresses[DispState->CurrentBPIndex])
+                                   && DispState->ContinueTracing)
                                 {
                                     DispState->ContinueTracing = false;
                                     //TODO(Alex): These is platform specific, handle each platform as well!
                                     CONTEXT TContext = {};
                                     TContext.ContextFlags = CONTEXT_ALL;
                                     GetThreadContext(DispState->ProcessInfo.hThread, &TContext);
-                                    --TContext.Rip;  
                                     
-                                    Win32Displayx64RegistersFromContext(DispState, &TContext);
+#if defined(_M_IX86)
+                                    void * IP = (void*)(--TContext.Eip);  
+#elif defined(_M_X64)
+                                    void * IP = (void*)(--TContext.Rip);  
+#endif
                                     
-                                    SetThreadContext(DispState->ProcessInfo.hThread, &TContext);
+                                    //NOTE(Alex): Set resume bit after breakpoint processing
+                                    TContext.EFlags |= 0x10000; 
+                                    TContext.EFlags |= 0x100; 
                                     
+                                    //TODO(Alex):Win32DisplayRegistersFromContext(DispState, &TContext, ArchMode);
                                     SIZE_T BytesWritten = {};
                                     if(WriteProcessMemory(DispState->ProcessInfo.hProcess,
-                                                          (void*)TContext.Rip,
+                                                          IP,
                                                           &DispState->OriginalCodeByte,
                                                           1,
                                                           &BytesWritten) && (BytesWritten == 1))
                                     {
-                                        FlushInstructionCache(DispState->ProcessInfo.hProcess,
-                                                              (void*)TContext.Rip,
-                                                              1);
+                                        FlushInstructionCache(DispState->ProcessInfo.hProcess, IP, 1);
                                     }
                                     
                                     //TODO(Alex): This has to go on the collation step, put it here temporarilly 
-                                    //TODO(Alex): Add Memory Layout, 
                                     //DisplayDisAtIntructionP(DispState, SymTable);
                                     //TODO(Alex): Define a debugger platform identifier for x64 x86 modes
+                                    
+                                    Win32Displayx64RegistersFromContext(DispState, &TContext);
+                                    SetThreadContext(DispState->ProcessInfo.hThread, &TContext);
                                     
 #if 0                                
                                     DispState->CurrentLexicalScope = GET_LEXICAL_SCOPE(DispState, (memory_index)TContext.Rip);
@@ -604,17 +651,116 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                     
                                     //address_line_map * LineMap = GetLineMapFromAddress(DispState, );
                                 }
-                                
+                                else
+                                {
+                                    SET_BREAKPOINT_AT(DispState, (void*)DispState->BPAddresses[0]);
+                                }
                             }break;
+                            //NOTE(Alex): A trace trap or other single-instruction mechanism signaled that one instruction has been executed.
                             case EXCEPTION_SINGLE_STEP:
                             {
-                                
-                            }
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to read from or write to a virtual address for which it does not have the appropriate access.
+                            case EXCEPTION_ACCESS_VIOLATION:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to access an array element that is out of bounds and the underlying hardware supports bounds checking. 
+                            case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to read or write data that is misaligned on hardware that does not provide alignment. 
+                            //For example, 16-bit values must be aligned on 2-byte boundaries; 32-bit values on 4-byte boundaries, and so on.
+                            case EXCEPTION_DATATYPE_MISALIGNMENT:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): One of the operands in a floating-point operation is denormal. A denormal value is one that is too small to represent as a standard floating-point value.
+                            case EXCEPTION_FLT_DENORMAL_OPERAND:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to divide a floating-point value by a floating-point divisor of zero.
+                            case EXCEPTION_FLT_DIVIDE_BY_ZERO:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The result of a floating-point operation cannot be represented exactly as a decimal fraction.
+                            case EXCEPTION_FLT_INEXACT_RESULT:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): This exception represents any floating-point exception not included in this list.
+                            case EXCEPTION_FLT_INVALID_OPERATION:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The exponent of a floating-point operation is greater than the magnitude allowed by the corresponding type.
+                            case EXCEPTION_FLT_OVERFLOW:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The stack overflowed or underflowed as the result of a floating-point operation.
+                            case EXCEPTION_FLT_STACK_CHECK:
+                            {
+                                int x = 5;
+                            }break;
+                            
+                            //NOTE(Alex): The exponent of a floating-point operation is less than the magnitude allowed by the corresponding type.
+                            case EXCEPTION_FLT_UNDERFLOW:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to execute an invalid instruction.
+                            case EXCEPTION_ILLEGAL_INSTRUCTION:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to access a page that was not present, and the system was unable to load the page. For example, this exception might occur if a network connection is lost while running a program over the network.
+                            case EXCEPTION_IN_PAGE_ERROR:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to divide an integer value by an integer divisor of zero.
+                            case EXCEPTION_INT_DIVIDE_BY_ZERO:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The result of an integer operation caused a carry out of the most significant bit of the result.
+                            case EXCEPTION_INT_OVERFLOW:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): An exception handler returned an invalid disposition to the exception dispatcher. Programmers using a high-level language such as C should never encounter this exception.
+                            case EXCEPTION_INVALID_DISPOSITION:
+                            {
+                                int x = 5;
+                            }break;
+                            //NOTE(Alex): The thread tried to continue execution after a noncontinuable exception occurred.
+                            case EXCEPTION_NONCONTINUABLE_EXCEPTION:
+                            {
+                                int x = 5;
+                            }break;
+                            
+                            //NOTE(Alex): The thread tried to execute an instruction whose operation is not allowed in the current machine mode.
+                            case EXCEPTION_PRIV_INSTRUCTION:
+                            {
+                                int x = 5;
+                            }break;
+                            
+                            //NOTE(Alex): The thread used up its stack.
+                            case EXCEPTION_STACK_OVERFLOW:
+                            {
+                                int x = 5;
+                            }break;
                             default:
                             {
-                                ContinueStatus = DBG_EXCEPTION_NOT_HANDLED;
+                                //ContinueStatus = DBG_EXCEPTION_NOT_HANDLED;
                             }break;
                         }
+                        
                         
                     }break;
                     
@@ -660,13 +806,9 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                   Out_DebugEvent.u.CreateProcessInfo.lpBaseOfImage,
                                   Out_DebugEvent.u.CreateProcessInfo.lpStartAddress);
                         OutputDebugStringA(Buffer);
-                        
                         //NOTE(Alex): We will stop at extern "C" int mainCRTStartup() : 00007FF6A6D21000
-                        DispState->IP = (char*)win32GetProcessStartAddress(DispState, &Out_DebugEvent);
-                        SET_BREAKPOINT_AT(DispState, DispState->IP);
-                        
+                        DispState->BPAddresses[0] = win32GetProcessStartAddress(DispState, &Out_DebugEvent);
                     }break;
-                    
                     case EXIT_PROCESS_DEBUG_EVENT:
                     {
                         DispState->ProcessExitCode = Out_DebugEvent.u.ExitProcess.dwExitCode;
@@ -744,30 +886,26 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                         //InvalidCodePath;
                     }break;
                 }
-                
-                if(!DispState->ContinueTracing && PROCESS_INPUT_COMMAND(&out_Command, InputCommand_CONTINUE))
-                {
-                    DispState->ContinueTracing = true;
-                }
-                
-                //NOTE(Alex): We should not close any Handles being returned from the debugee application
-                //ContinueDebugEvent will close them for us
-                if(DispState->ContinueTracing)
-                {
-                    //SAVE_WATCH_SYMBOLS(DispState);
-                    //TODO(Alex): Use permanent arenas and make a list of breakpointlexical scope storage so that we don't need to create them every time!
-                    ++DispState->BreakPointIndex;
-                    if(DispState->BreakPointIndex >= DispState->BreakPointCount)
-                    {
-                        DispState->BreakPointIndex = 1;
-                    }
-                    
-                    DESTRUCT_LEXICAL_SCOPE(DispState->CurrentLexicalScope);
-                    ContinueDebugEvent(DispState->ProcessInfo.dwProcessId,
-                                       DispState->ProcessInfo.dwThreadId,
-                                       ContinueStatus);
-                }
+            }//NOTE(Alex): 
+            
+            
+            if(!DispState->ContinueTracing && PROCESS_INPUT_COMMAND(&out_Command, InputCommand_CONTINUE))
+            {
+                DispState->ContinueTracing = true;
             }
+            
+            //NOTE(Alex): We should not close any Handles being returned from the debugee application
+            //ContinueDebugEvent will close them for us
+            if(DispState->ContinueTracing)
+            {
+                //SAVE_WATCH_SYMBOLS(DispState);
+                //TODO(Alex): Use permanent arenas and make a list of breakpointlexical scope storage so that we don't need to create them every time!
+                DESTRUCT_LEXICAL_SCOPE(DispState->CurrentLexicalScope);
+                ContinueDebugEvent(DispState->ProcessInfo.dwProcessId,
+                                   DispState->ProcessInfo.dwThreadId,
+                                   ContinueStatus);
+            }
+            
         }
     }
 }

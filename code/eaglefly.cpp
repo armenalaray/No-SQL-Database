@@ -322,7 +322,6 @@ RenderText(debug_state * DebugState, efly_asset_bitmap * Dest, char * Text)
 
 #define MapMonoTo4Channel(Value) (((Value) << 24) | ((Value) << 16) | ((Value) << 8) | ((Value) << 0))
 
-
 //TODO(Alex) Suport unicode
 internal asset_glyph *
 AddNextGlyphIndex(debug_state * DebugState, 
@@ -520,7 +519,7 @@ extern "C" DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRender)
                 case VKey_F1:
                 {
                     NewCommand->Type = InputCommand_LOAD_PROCESS;
-                    NewCommand->LoadProcessData.RunFromCmdLine = true;
+                    NewCommand->LoadProcessData.RunFromCmdLine = false;
                     NewCommand->LoadProcessData.TargetImageFullPath = TargetImageFullPath;
                     NewCommand->LoadProcessData.TargetPDBFullPath = TargetPDBFullPath;
                     NewCommand->LoadProcessData.CmdEXEFullPath = CmdEXEFullPath;
