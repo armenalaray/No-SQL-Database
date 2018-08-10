@@ -526,12 +526,16 @@ extern "C" DEBUG_UPDATE_AND_RENDER(DebugUpdateAndRender)
                 }break;
                 case VKey_F2:
                 {
-                    //TODO(Alex): Findout data composition for this command!
+                    NewCommand->Type = InputCommand_STEP_NEXT;
+                }break;
+                case VKey_F3:
+                {
                     NewCommand->Type = InputCommand_CONTINUE;
                 }break;
+                
                 default:
                 {
-                    InvalidCodePath;
+                    //InvalidCodePath;
                 }break;
             }
             

@@ -149,28 +149,22 @@ typedef struct _EXCEPTION_RECORD64 {
 */
 
 #if 0
-inline b32 
-Win32IsDuplicateThreadIDMap(id_map * IDMap, memory_index ID, ptrv Handle)
-{
-    b32 Result = IDMap->
-}
-#endif
-
 inline b32
 Win32IsValidIDMap(id_map * IDMap)
 {
     b32 Result = (IDMap && IDMap->ID && IDMap->Handle);
     return Result;
 }
+#endif
 
 //NOTE(Alex): Each key has to be unique! 
 internal id_map *   
-Win32GetHandleFromID(win32_dispatcher_state * DispState, memory_arena * Arena, memory_index ID, void * Handle = 0)
+Win32GetHandleFromID(win32_dispatcher_state * DispState, memory_arena * Arena, memory_index ID, u32 Type = 0, void * Handle = 0)
 {
     id_map * Result = 0;
     //TODO(Alex): BETTER HASH FUNCTION!
-    u32 Bucket = (u32)(ID  & (ArrayCount(DispState->IDHash) - 1));
-    id_map ** Base = DispState->IDHash + Bucket;
+    u32 Bucket = (u32)(ID  & (ArrayCount(DispState->IDMapHash) - 1));
+    id_map ** Base = DispState->IDMapHash + Bucket;
     
     for(id_map * Iter = *Base;
         Iter;
@@ -183,10 +177,21 @@ Win32GetHandleFromID(win32_dispatcher_state * DispState, memory_arena * Arena, m
         }
     }
     
-    if(Handle && !Result)
+    if(Handle && !Result && Arena)
     {
-        Result = PushStruct(Arena, id_map);
+        Result = DispState->IDMapFirstFree;
+        
+        if(Result)
+        {
+            DispState->IDMapFirstFree = Result->Next;
+        }
+        else
+        {
+            Result = PushStruct(Arena, id_map);
+        }
+        
         Result->ID = ID;
+        Result->Type = (id_map_type)Type;
         Result->Handle = Handle;
         
         Result->Next = *Base;
@@ -196,8 +201,40 @@ Win32GetHandleFromID(win32_dispatcher_state * DispState, memory_arena * Arena, m
     return Result;
 }
 
+internal void
+Win32RemoveHandleFromID(win32_dispatcher_state * DispState, memory_index ID)
+{
+    id_map * Result = 0;
+    //TODO(Alex): BETTER HASH FUNCTION!
+    u32 Bucket = (u32)(ID  & (ArrayCount(DispState->IDMapHash) - 1));
+    id_map ** Base = DispState->IDMapHash + Bucket;
+    id_map * Iter = *Base;
+    id_map * Prev = 0;
+    for(;
+        Iter;
+        Prev = Iter, Iter = Iter->Next)
+    {
+        if(Iter->ID == ID)
+        {
+            if(Prev)
+            {
+                Prev->Next = Iter->Next;
+            }
+            else
+            {
+                *Base = Iter->Next;
+            }
+            
+            Iter->Next = DispState->IDMapFirstFree;
+            DispState->IDMapFirstFree = Iter;
+            break;
+        }
+    }
+}
+
+#if 0
 internal u32
-GetProcessIndex(win32_dispatcher_state * DispState, memory_index ProcessIndex)
+GetProcessHandle(win32_dispatcher_state * DispState, memory_index ProcessIndex)
 {
     u32 Result = 0;
     for(u32 Index = 1;
@@ -214,6 +251,7 @@ GetProcessIndex(win32_dispatcher_state * DispState, memory_index ProcessIndex)
     
     return Result;
 }
+#endif
 
 #if 0
 
@@ -349,20 +387,20 @@ Win32Displayx64Registers(win32_dispatcher_state * DispState, CONTEXT * TContext)
 internal void
 Win32UnloadIMAGE(win32_dispatcher_state * DispState)
 {
-    EndTempMemory(&DispState->EDebugInfoMem);
+    EndTempMemory(&DispState->AssetTempMem);
     //TODO(Alex): Unload Process And PDB out of memory!
 }
 
 internal void
-Win32LoadIMAGE(win32_dispatcher_state * DispState, process_state * PState, process_info * PInfo)
+Win32LoadIMAGE(win32_dispatcher_state * DispState, efly_process * Process)
 {
-    //TODO(Alex): Shall we reload the target process on recompilation?
+    process_state * PState = &Process->State;
+    process_info * PInfo = &Process->Info;
     if(!PState->ProcessIsRunning)
     {
         //TODO(Alex): Do we want to have a custom setup for the window?
         STARTUPINFO StartupInfo = {};
         StartupInfo.cb = sizeof(STARTUPINFO);
-        PROCESS_INFORMATION ProcessInfo = {};
         
         load_process_data * ProcessData = &PInfo->LoadProcessData;
         char Command[1024] = {0};
@@ -381,7 +419,7 @@ Win32LoadIMAGE(win32_dispatcher_state * DispState, process_state * PState, proce
             TargetName = ProcessData->TargetImageFullPath;
         }
         
-        DispState->EDebugInfoMem = BeginTempMemory(&DispState->EDebugInfoArena);
+        DispState->AssetTempMem = BeginTempMemory(&DispState->AssetArena);
         //TODO(Alex): Make this a working thread
         //DispState->PDBExistsForThisImage = Win32LoadEDebugInfoFromPDB(DispState, DispState->EDebugInfoArena, ProcessData->TargetPDBFullPath);
         //if(DispState->PDBExistsForThisImage)
@@ -413,24 +451,54 @@ Win32LoadIMAGE(win32_dispatcher_state * DispState, process_state * PState, proce
     }
 }
 
+//TODO(Alex): Make a Handle system for IDMaps
+internal efly_process * 
+Win32GetProcessFromID(win32_dispatcher_state * DispState,  memory_index ProcessIndex)
+{
+    efly_process * Result = 0;
+    id_map * Map = Win32GetHandleFromID(DispState, 0, ProcessIndex);
+    if(Map && (Map->Type == IDMap_Process))
+    {
+        Result = (efly_process*)Map->Handle;
+    }
+    
+    return Result;
+}
+
 
 internal void
 BEGIN_PROCESS(win32_dispatcher_state * DispState, load_process_data * PData)
 {
     if(PData)
     {
-        u32 Index = DispState->TargetPCount++;
-        process_info * PInfo = DispState->PInfos + Index;
-        PInfo->LoadProcessData = *PData;
+        Assert(DispState->StorageCount <  ArrayCount(DispState->DebugStorage));
+        id_map * Map = DispState->IDMapFirstFree;
+        efly_debug_storage * Storage = 0;
+        if(Map)
+        {
+            Storage = (efly_debug_storage*)Map->Handle;
+        }
+        else
+        {
+            Storage = DispState->DebugStorage + DispState->StorageCount++;
+        }
         
-        process_state * PState = DispState->PStates + Index;
-        PState->ContinueTracing = true;
-        PState->IsInitialized = true;
-        
-        Win32LoadIMAGE(DispState, PState, PInfo);
+        Storage->P.Info.LoadProcessData = *PData;
+        Storage->P.State.ContinueTracing = true;
+        Storage->P.State.IsInitialized = true;
+        Win32LoadIMAGE(DispState, &Storage->P);
+        if(Storage->P.State.ProcessIsRunning)
+        {
+            Win32GetHandleFromID(DispState, &DispState->TranState->Out_TracerSubArena.Arena, Storage->P.Info.ProcessInfo.dwProcessId, IDMap_Process, Storage);
+        }
     }
 }
 
+internal void
+END_PROCESS(win32_dispatcher_state * DispState, memory_index ProcessIndex)
+{
+    Win32RemoveHandleFromID(DispState, ProcessIndex);
+}
 
 inline memory_index
 GET_NATURAL_BOUNDARY(memory_index Size)
@@ -451,7 +519,7 @@ GET_LEXICAL_SCOPE(win32_dispatcher_state * DispState, process_state * PState,  m
     efly_lexical_scope * Result = 0;
     if(PState->PDBExistsForThisImage)
     {
-        efly_debug_info * DebugInfo = (efly_debug_info*)DispState->EDebugInfoMem.Base; 
+        efly_debug_info * DebugInfo = (efly_debug_info*)DispState->AssetArena.Base; 
         for(efly_opcode_block * OBlock = DebugInfo->OpcodeSentinel.Next;
             OBlock != &DebugInfo->OpcodeSentinel;
             OBlock = OBlock->Next)
@@ -552,19 +620,19 @@ PROCESS_INPUT_COMMAND(efly_input_command * Command, efly_input_command_type Type
 internal void
 Win32DebugUpdateTracer(efly_memory * Memory)
 {
-    win32_dispatcher_state * DispState = (win32_dispatcher_state *)Memory->TracerStorage; 
     transient_state * TranState = (transient_state *)Memory->TransientStorage; 
-    
-    if(!DispState->IsInitialized)
-    {
-        InitializeArena(&DispState->EDebugInfoArena, (char*)Memory->TracerStorage + sizeof(win32_dispatcher_state), Memory->TracerStorageSize - sizeof(win32_dispatcher_state)); 
-        //NOTE(Alex): We will always start with process index = 1
-        DispState->TargetPCount = 1;
-        DispState->IsInitialized = true;
-    }
-    
     if(TranState->IsInitialized)
     {
+        win32_dispatcher_state * DispState = (win32_dispatcher_state *)Memory->TracerStorage; 
+        if(!DispState->IsInitialized)
+        {
+            InitializeArena(&DispState->AssetArena, (char*)Memory->TracerStorage + sizeof(win32_dispatcher_state), Memory->TracerStorageSize - sizeof(win32_dispatcher_state)); 
+            //NOTE(Alex): We will always start with process index = 1
+            DispState->StorageCount = 1;
+            DispState->TranState = TranState;
+            DispState->IsInitialized = true;
+        }
+        
         efly_input_command out_Command = {};
         POP_INPUT_COMMAND(&TranState->TracerInput, &out_Command);
         if(PROCESS_INPUT_COMMAND(&out_Command, InputCommand_LOAD_PROCESS))
@@ -586,11 +654,16 @@ Win32DebugUpdateTracer(efly_memory * Memory)
         DEBUG_EVENT Out_DebugEvent;
         DWORD ContinueStatus = DBG_CONTINUE;
         b32 ResultGathered = WaitForDebugEvent(&Out_DebugEvent, 0);
-        u32 ProcessID = GetProcessIndex(DispState, Out_DebugEvent.dwProcessId);
-        if(ProcessID)
+        efly_process * Process = Win32GetProcessFromID(DispState, Out_DebugEvent.dwProcessId);
+        if(Process)
         {
-            process_state * PState = DispState->PStates + ProcessID;
-            process_info * PInfo = DispState->PInfos + ProcessID;
+            process_state * PState = &Process->State;
+            process_info * PInfo = &Process->Info;
+            
+            CONTEXT TContext = {};
+            TContext.ContextFlags = CONTEXT_ALL;
+            GetThreadContext(PInfo->ProcessInfo.hThread, &TContext);
+            
             if(ResultGathered)
             {
                 if(PState->ProcessIsRunning)
@@ -617,13 +690,12 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                 ERecord.ExceptionInformation[Index] = TempRecord.ExceptionInformation[Index];
                             }
 #endif
+                            //NOTE(Alex): Set resume bit after breakpoint processing
+                            TContext.EFlags |= 0x10000; 
                             
                             b32 EFirstChance = (Out_DebugEvent.u.Exception.dwFirstChance) ? true : false;
                             if(EFirstChance)
                             {
-                                CONTEXT TContext = {};
-                                TContext.ContextFlags = CONTEXT_ALL;
-                                GetThreadContext(PInfo->ProcessInfo.hThread, &TContext);
                                 switch(ERecord.ExceptionCode)
                                 {
                                     case EXCEPTION_BREAKPOINT:
@@ -633,9 +705,8 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                         {
                                             //TODO(Alex): These is platform specific, handle each platform as well!
                                             PState->ContinueTracing = false;
-                                            //NOTE(Alex): Set resume bit after breakpoint processing
-                                            TContext.EFlags |= 0x10000; 
-                                            TContext.EFlags |= 0x100; 
+                                            
+                                            //TContext.EFlags |= 0x100; 
 #if defined(_M_IX86)
                                             void * IP = (void*)(--TContext.Eip);  
 #elif defined(_M_X64)
@@ -679,7 +750,6 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                     {
                                         PState->ContinueTracing = false;
                                         Win32Displayx64Registers(DispState, &TContext);
-                                        TContext.EFlags |= 0x10000; 
                                     }break;
                                     //NOTE(Alex): The thread tried to read from or write to a virtual address for which it does not have the appropriate access.
                                     case EXCEPTION_ACCESS_VIOLATION:
@@ -780,12 +850,9 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                         //ContinueStatus = DBG_EXCEPTION_NOT_HANDLED;
                                     }break;
                                 }
-                                
-                                SetThreadContext(PInfo->ProcessInfo.hThread, &TContext);
                             }
                             
                         }break;
-                        
                         case OUTPUT_DEBUG_STRING_EVENT:
                         {
                             OUTPUT_DEBUG_STRING_INFO DebugString = Out_DebugEvent.u.DebugString;
@@ -843,6 +910,7 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                             
                             PState->ProcessIsRunning = false;
                             PState->InitProcess = false;
+                            END_PROCESS(DispState, Out_DebugEvent.dwProcessId);
                         }break;
                         
                         case CREATE_THREAD_DEBUG_EVENT:
@@ -881,8 +949,7 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                             DWORD GetModuleFileNameExA(HANDLE  hProcess,
                                                        HMODULE hModule,
                                                        LPSTR   lpFilename,
-                                                       DWORD   nSize
-                                                       );
+                                                       DWORD   nSize);
                         }break;
                         
                         case UNLOAD_DLL_DEBUG_EVENT:
@@ -918,6 +985,13 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                 PState->ContinueTracing = true;
             }
             
+            if(!PState->ContinueTracing && PROCESS_INPUT_COMMAND(&out_Command, InputCommand_STEP_NEXT))
+            {
+                TContext.EFlags |= 0x100; 
+                PState->ContinueTracing = true;
+            }
+            
+            SetThreadContext(PInfo->ProcessInfo.hThread, &TContext);
             //NOTE(Alex): We should not close any Handles being returned from the debugee application
             //ContinueDebugEvent will close them for us
             if(PState->ContinueTracing)
