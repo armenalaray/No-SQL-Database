@@ -42,6 +42,7 @@ extern "C"{
     typedef uintptr_t uptr;
     typedef intptr_t sptr;
     
+    typedef void * ptrv; 
 #include "eaglefly_intrinsics.h"
     
 #define internal static 
@@ -476,7 +477,6 @@ extern "C"{
         {
             load_process_data LoadProcessData;
         };
-        
         efly_input_command * Next;
     }efly_input_command;
     
