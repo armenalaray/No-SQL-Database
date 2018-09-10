@@ -361,7 +361,15 @@ CreateTracerSymbolsForModule(epdb_manager * PManager, epdb_module * Module, memo
         END_SUBSTREAM_EXT(PManager);
         
         epdb_symbol_iterator SymIter = {};
-        SymIter.At = SymbolSS.Base;
+        SymIter.ModuleSymBase = SymbolSS.Base;
+        Assert((*(uint32_t*)SymIter.ModuleSymBase) == 0x00000001); 
+        
+        SymIter.At = SymIter.ModuleSymBase + 4;
+        uint16_t SymLength = *(uint16_t*)SymIter.At;
+        SymIter.At += SymLength + 2;
+        
+        
+        
         //SymIter.ModuleSymBase = SymIter.At;
         //SymIter.CurrentScope = (uint16_t*)SymbolSS.Base;
         

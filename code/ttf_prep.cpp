@@ -131,7 +131,6 @@ READ_ENTIRE_FILE(Win32ReadEntireFile)
 
 #define MoveByTypeSize(Ptr, Count, type) Ptr = (type*)Ptr + Count
 
-
 inline u16
 GetNextWORD(ttf_state * TTFState)
 {

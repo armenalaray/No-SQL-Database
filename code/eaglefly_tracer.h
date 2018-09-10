@@ -36,29 +36,36 @@ struct process_info
     //TODO(Alex) : Make ID process system  
     load_process_data LoadProcessData;
     
+    ptrv HFile;
     ptrv BaseOfImage;
     ptrv StartAddress;
 };
 
+//TODO(Alex): Do Debug state machine 
 struct process_state
 {
-    b32 IsInitialized;
-    b32 PDBExistsForThisImage;
-    b32 InitProcess;
-    b32 ProcessIsRunning;
-    //TODO(Alex): Do Debug state machine 
-    b32 ContinueTracing;
+    b32 IsInitialized, PDBExistsForThisImage, InitProcess, ProcessIsRunning, ContinueTracing;
 };
 
 struct efly_process
 {
+    process_info Info; process_state State;
+};
+
+
+#if 0
+struct efly_dll
+{
     process_info Info;
     process_state State;
 };
+#endif
+
 
 enum id_map_type
 {
     IDMap_Process = 1,
+    IDMap_DLL,
     IDMap_Thread,
 };
 
@@ -80,6 +87,7 @@ union efly_debug_storage
 struct win32_dispatcher_state
 {
     b32 IsInitialized;
+    b32 IsDummyBP;
     transient_state * TranState;
     
     id_map * IDMapFirstFree;

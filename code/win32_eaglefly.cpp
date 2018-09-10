@@ -911,6 +911,7 @@ int       nCmdShow)
             win32_memory_block DebugMemoryBlock = {TotalStorageSize, DebugMemory.DebugStorage}; 
             if(DebugMemory.DebugStorage)
             {
+                
                 HANDLE DebugDataFileH = CreateFileA(out_DebugDataFullPath,
                                                     GENERIC_READ|GENERIC_WRITE,
                                                     FILE_SHARE_READ,
@@ -952,17 +953,26 @@ int       nCmdShow)
                     CloseHandle(DebugDataFileH);
                 }
                 
-                
                 efly_input  DebugInput[2] = {0};
                 efly_input * LastInput = &DebugInput[0];
                 efly_input * NewInput = &DebugInput[1];
                 
                 efly_input LoopInput = {};
-                
                 Win32LoadDLL(&Win32State, out_DLLFullPath, out_TempDLLFullPath, out_LockFullPath);
                 
+#if EFLY_INTERNAL
+                LARGE_INTEGER ClockFreq;
+                QueryPerformanceFrequency(&ClockFreq);
+                r32 InvClockFreq = 1.0f / ClockFreq.QuadPart;
+                LARGE_INTEGER BeginTS;
+                LARGE_INTEGER EndTS;
+#endif
                 while(GlobalRunning)
                 {
+#if EFLY_INTERNAL
+                    QueryPerformanceCounter(&BeginTS);
+#endif
+                    BEGIN_TIME_STAMP(InputProcessing);
                     efly_keyboard_controller * LastKeyboard = &LastInput->Keyboard;
                     efly_keyboard_controller * NewKeyboard = &NewInput->Keyboard;
                     
@@ -1032,7 +1042,9 @@ int       nCmdShow)
                     //TODO(Alex): Transform this according to canvas
                     NewInput->MouseX = (r32)MousePos.x;
                     NewInput->MouseY = (r32)MousePos.y;
+                    END_TIME_STAMP();
                     
+                    BEGIN_TIME_STAMP(LiveCode);
                     if(Win32State.IsRecording)
                     {
                         Win32WriteInputRecord(&Win32State, NewInput);
@@ -1048,9 +1060,14 @@ int       nCmdShow)
                         Win32UnloadDLL(&Win32State);
                         Win32LoadDLL(&Win32State, out_DLLFullPath, out_TempDLLFullPath, out_LockFullPath);
                     }
+                    END_TIME_STAMP();
                     
+                    
+                    BEGIN_TIME_STAMP(DebugTracer);
                     Win32DebugUpdateTracer(&DebugMemory);
+                    END_TIME_STAMP();
                     
+                    BEGIN_TIME_STAMP(DebugUpdateAndRender);
                     if(Win32State.DebugUpdateAndRender)
                     {
                         efly_asset_bitmap DebugBuffer = {};
@@ -1060,7 +1077,7 @@ int       nCmdShow)
                         DebugBuffer.Data = Win32GlobalBackBuffer.Data;
                         Win32State.DebugUpdateAndRender(&DebugBuffer, &DebugMemory, (Win32State.LoopIsPlaying) ? &LoopInput : NewInput, out_TargetFullPath, out_TargetPDBFullPath, CmdEXEFullPath);
                     }
-                    
+                    END_TIME_STAMP();
                     
                     HDC WindowDC = GetDC(Window);
                     //win32_window_dimendion WindowDim = Win32GetWindowDimension(Window);
@@ -1074,6 +1091,22 @@ int       nCmdShow)
                     efly_input * Temp = LastInput;
                     LastInput = NewInput;
                     NewInput = Temp;
+                    
+#if 0                    
+#if EFLY_INTERNAL
+                    QueryPerformanceCounter(&EndTS);
+                    //TODO(Alex): Do we want to prevent overflow here?
+                    u64 Delta = EndTS.QuadPart - BeginTS.QuadPart;
+                    r32 DeltaS = (r32)Delta * InvClockFreq;
+                    r32 DeltaMS =  DeltaS * 1000;
+                    r32 FPS = 1.0f / DeltaS;
+                    
+                    char Buffer[1024] = {0};
+                    _snprintf_s(Buffer, ArrayCount(Buffer), "MS: %.10f, FPS: %.10f\n", DeltaMS, FPS);
+                    OutputDebugString(Buffer);
+#endif
+#endif
+                    
                 }
             }
         }

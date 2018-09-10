@@ -149,7 +149,7 @@ extern "C" {
     //NOTE(Alex):  
     //
     
-#if 0
+#if 0    
     struct epdb_mod_info_stream {
         uint32_t Signature;
         uint8_t Symbols[SymbolSize-4];
@@ -163,7 +163,9 @@ extern "C" {
     
     //NOTE(Alex): if value < LF_NUMERIC value resides into the next two bytes after symbol entry
 #define LF_NUMERIC 0x8000 
-#define CV_FIRST_NONPRIMITIVE 0x1000
+#define TI_FIRST_NONPRIMITIVE 0x1000
+#define TI_NOTYPE 0
+    
     
     typedef struct epdb_symbol
     {
@@ -175,7 +177,7 @@ extern "C" {
     {
         uint32_t ScopeIndex;
         epdb_symbol * CurrentScope;
-        uint16_t * ModuleSymBase;
+        char * ModuleSymBase;
         char * At;
     }epdb_symbol_iterator;
     
@@ -282,7 +284,6 @@ NOTE(Alex) : This are not know until Prev Streams being parsed!
         char * SubstreamPtr;
         
     }epdb_manager;
-    
     
     /*
     typedef enum CV_CPU_TYPE_e {   

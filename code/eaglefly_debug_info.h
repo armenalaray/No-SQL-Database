@@ -48,7 +48,6 @@ struct efly_thunk_data;
 struct efly_block_data;
 struct efly_struct_class_data;
 
-
 struct efly_symbol_entry
 {
     //TODO(Alex): Local Scope

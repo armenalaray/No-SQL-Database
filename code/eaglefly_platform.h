@@ -1,7 +1,6 @@
 #ifndef EAGLEFLY_PLATFORM_H
 
 #include "stdint.h"
-
 //TODO(Alex): Start filling this platform layer
 #ifdef COMPILER_MSVC
 #undef COMPILER_MSVC
@@ -45,15 +44,20 @@ extern "C"{
     typedef void * ptrv; 
 #include "eaglefly_intrinsics.h"
     
+#define BYTE_PTR(Ptr) ((uint8_t*)(Ptr))
+#define SBYTE_PTR(Ptr) ((int8_t*)(Ptr))
+#define CHAR_PTR(Ptr) ((char*)(Ptr))
+    
+#define WORD_PTR(Ptr) ((uint16_t*)(Ptr))
+#define DWORD_PTR(Ptr) ((uint32_t*)(Ptr))
+#define QWORD_PTR(Ptr) ((uint64_t*)(Ptr))
+    
 #define internal static 
 #define global_variable static 
 #define local_persist static 
     
 #define BITMAP_BYTES_PER_PIXEL 4
-#define Assert(Expression) if(!(Expression)){*(int*)(0) = 6;}
 #define ArrayCount(Array) sizeof((Array)) / sizeof(Array[0]) 
-#define InvalidCodePath Assert(!"Not Expected case")
-    
     
 #define Kilobytes(Size) ((Size) * 1024LL)
 #define Megabytes(Size) (Kilobytes(Size) * 1024LL)
@@ -61,6 +65,14 @@ extern "C"{
     
 #define NUM_BUTTONS_PROCESSED  
 #define MAX_NUM_FUNC_KEYS 12
+    
+#if EFLY_INTERNAL
+#define Assert(Expression) if(!(Expression)){*(int*)(0) = 6;}
+#define InvalidCodePath Assert(!"Not Expected case")
+#else
+#define Assert(...)
+#define InvalidCodePath
+#endif
     
     //TODO(Alex): intrinsics.h
     
@@ -264,7 +276,6 @@ extern "C"{
         efly_button_state MouseButtons[MouseKey_Count]; 
         r32 MouseX, MouseY, MouseZ;
         r32 WheelDelta;
-        
         u8 ControlKeyFlags;
     };
     
@@ -351,7 +362,7 @@ extern "C"{
         memory_index TracerStorageSize;
         void * TracerStorage;
         
-#if EAGLEFLY_INTERNAL
+#if EFLY_INTERNAL
         debug_read_entire_file * DebugReadEntireFile;
         debug_write_entire_file * DebugWriteEntireFile;
 #endif
@@ -496,6 +507,17 @@ extern "C"{
         
         efly_tracer_input TracerInput;
     }transient_state;
+    
+    //NOTE(Alex): Internal perf counters 
+    
+    typedef struct i_debug_events
+    {
+        s64 PerfTime;
+    }perf_counters;
+    
+    
+#define BEGIN_TIME_STAMP(Name)
+#define END_TIME_STAMP()
     
 #if defined(__cplusplus)
 }

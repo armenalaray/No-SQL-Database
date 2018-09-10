@@ -21,9 +21,7 @@ inline u32 FloorR32Tou32(r32 Value)
     return Result;
 }
 
-
 #elif COMPILER_LLVM
-
-
+//TODO(Alex): Add LLVM compiler specific intrinsics 
 #endif
 

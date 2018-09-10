@@ -370,7 +370,7 @@ Win32Displayx64Registers(win32_dispatcher_state * DispState, CONTEXT * TContext)
 {
     char Buffer[4096] = {0};
     sprintf_s(Buffer, ArrayCount(Buffer), "----------\nRegisters at 0x%p:\nRax: 0x%p\nRcx: 0x%p\nRdx: 0x%p\nRbx: 0x%p\nRsp: 0x%p\nRbp: 0x%p\nRsi: 0x%p\nRdi: 0x%p\nR8: 0x%p\nR9: 0x%p\n", 
-              (void*)(TContext->Rip + 1),
+              (void*)TContext->Rip,
               (void*)TContext->Rax,
               (void*)TContext->Rcx,
               (void*)TContext->Rdx,
@@ -444,7 +444,6 @@ Win32LoadIMAGE(win32_dispatcher_state * DispState, efly_process * Process)
         }
 #endif
         //LoadSymbolsForImage(DispState);
-        //TODO(Ale): We want only the path here!
         //TODO(Alex): The dispatcher doesn thave to know about symbols, we could have a second call inside here
         //HERE is where the debug manager is going to be
         
@@ -616,6 +615,8 @@ PROCESS_INPUT_COMMAND(efly_input_command * Command, efly_input_command_type Type
     return Result;
 }
 
+
+
 //TODO(Alex): Implement print_f function ourselves!
 internal void
 Win32DebugUpdateTracer(efly_memory * Memory)
@@ -630,6 +631,7 @@ Win32DebugUpdateTracer(efly_memory * Memory)
             //NOTE(Alex): We will always start with process index = 1
             DispState->StorageCount = 1;
             DispState->TranState = TranState;
+            DispState->IsDummyBP = true;
             DispState->IsInitialized = true;
         }
         
@@ -653,6 +655,8 @@ Win32DebugUpdateTracer(efly_memory * Memory)
         
         DEBUG_EVENT Out_DebugEvent;
         DWORD ContinueStatus = DBG_CONTINUE;
+        //TODO(Alex): Do we want to handle multiple Processes at the same time, 
+        //if we do we will need to change the Winapi for our own debug message tracing stuff
         b32 ResultGathered = WaitForDebugEvent(&Out_DebugEvent, 0);
         efly_process * Process = Win32GetProcessFromID(DispState, Out_DebugEvent.dwProcessId);
         if(Process)
@@ -663,7 +667,6 @@ Win32DebugUpdateTracer(efly_memory * Memory)
             CONTEXT TContext = {};
             TContext.ContextFlags = CONTEXT_ALL;
             GetThreadContext(PInfo->ProcessInfo.hThread, &TContext);
-            
             if(ResultGathered)
             {
                 if(PState->ProcessIsRunning)
@@ -701,12 +704,10 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                     case EXCEPTION_BREAKPOINT:
                                     {
                                         //NOTE(Alex): We dont handle the first breakpoint made by the system! 
+                                        
                                         if(((memory_index)ERecord.ExceptionAddress == DispState->BPAddresses[DispState->CurrentBPIndex]) && PState->ContinueTracing)
                                         {
                                             //TODO(Alex): These is platform specific, handle each platform as well!
-                                            PState->ContinueTracing = false;
-                                            
-                                            //TContext.EFlags |= 0x100; 
 #if defined(_M_IX86)
                                             void * IP = (void*)(--TContext.Eip);  
 #elif defined(_M_X64)
@@ -723,27 +724,32 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                             {
                                                 FlushInstructionCache(PInfo->ProcessInfo.hProcess, IP, 1);
                                             }
-                                            
-                                            //TODO(Alex): This has to go on the collation step, put it here temporarilly 
-                                            //DisplayDisAtIntructionP(PInfo, SymTable);
-                                            //TODO(Alex): Define a debugger platform identifier for x64 x86 modes
-                                            
-                                            Win32Displayx64Registers(DispState, &TContext);
-                                            
+                                        }
+                                        
+                                        
+                                        //TODO(Alex): This has to go on the collation step, put it here temporarilly 
+                                        //DisplayDisAtIntructionP(PInfo, SymTable);
+                                        //TODO(Alex): Define a debugger platform identifier for x64 x86 modes
+                                        Win32Displayx64Registers(DispState, &TContext);
+                                        
 #if 0                                
-                                            PInfo->CurrentLexicalScope = GET_LEXICAL_SCOPE(PInfo, (memory_index)TContext.Rip);
-                                            DisplaySourceFileAtLine(DispState, PInfo->CurrentLexicalScope);
-                                            DisplayLocalSymmbols(DispState, DispState->CurrentLexicalScope);
-                                            DisplayWatchSymbols(DispState, DispState->CurrentLexicalScope);
-                                            DisplayCallStack(DispState, DispState->CurrentLexicalScope);
+                                        PInfo->CurrentLexicalScope = GET_LEXICAL_SCOPE(PInfo, (memory_index)TContext.Rip);
+                                        DisplaySourceFileAtLine(DispState, PInfo->CurrentLexicalScope);
+                                        DisplayLocalSymmbols(DispState, DispState->CurrentLexicalScope);
+                                        DisplayWatchSymbols(DispState, DispState->CurrentLexicalScope);
+                                        DisplayCallStack(DispState, DispState->CurrentLexicalScope);
 #endif
-                                            
-                                            //address_line_map * LineMap = GetLineMapFromAddress(DispState, );
+                                        //address_line_map * LineMap = GetLineMapFromAddress(DispState, );
+                                        
+                                        if(DispState->IsDummyBP)
+                                        {
+                                            DispState->IsDummyBP = false;
                                         }
                                         else
                                         {
-                                            SET_BREAKPOINT_AT(DispState, PInfo, (void*)DispState->BPAddresses[0]);
+                                            PState->ContinueTracing = false;
                                         }
+                                        
                                     }break;
                                     //NOTE(Alex): A trace trap or other single-instruction mechanism signaled that one instruction has been executed.
                                     case EXCEPTION_SINGLE_STEP:
@@ -879,10 +885,8 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                 *Char = '\0'; 
                                 OutputDebugStringA(Buffer);
                             }
-                            
                             free(Buffer);
                         }break;
-                        
                         case CREATE_PROCESS_DEBUG_EVENT:
                         {
                             char Buffer[4096] = {0};
@@ -898,8 +902,10 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                             //NOTE(Alex): We will stop at extern "C" int mainCRTStartup() : 00007FF6A6D21000
                             DispState->BPAddresses[0] = win32GetProcessStartAddress(DispState, &Out_DebugEvent);
                             DispState->CurrentBPIndex = 0;
+                            SET_BREAKPOINT_AT(DispState, PInfo, (void*)DispState->BPAddresses[0]);
                             PInfo->BaseOfImage = Out_DebugEvent.u.CreateProcessInfo.lpBaseOfImage;
                             PInfo->StartAddress = Out_DebugEvent.u.CreateProcessInfo.lpStartAddress;
+                            PInfo->HFile = Out_DebugEvent.u.CreateProcessInfo.hFile;
                         }break;
                         case EXIT_PROCESS_DEBUG_EVENT:
                         {
@@ -911,6 +917,7 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                             PState->ProcessIsRunning = false;
                             PState->InitProcess = false;
                             END_PROCESS(DispState, Out_DebugEvent.dwProcessId);
+                            CloseHandle(PInfo->HFile);
                         }break;
                         
                         case CREATE_THREAD_DEBUG_EVENT:
@@ -945,13 +952,9 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                       Out_DebugEvent.u.LoadDll.hFile, 
                                       Out_DebugEvent.u.LoadDll.lpBaseOfDll);
                             OutputDebugStringA(Buffer);
-                            
-                            DWORD GetModuleFileNameExA(HANDLE  hProcess,
-                                                       HMODULE hModule,
-                                                       LPSTR   lpFilename,
-                                                       DWORD   nSize);
+                            //TODO(Alex): Load DLL Symbols if any?
+                            Win32GetHandleFromID(DispState, &TranState->Out_TracerSubArena.Arena, (memory_index)Out_DebugEvent.u.LoadDll.lpBaseOfDll, IDMap_DLL, Out_DebugEvent.u.LoadDll.hFile);
                         }break;
-                        
                         case UNLOAD_DLL_DEBUG_EVENT:
                         {
                             char Buffer[4096] = {0};
@@ -959,7 +962,8 @@ Win32DebugUpdateTracer(efly_memory * Memory)
                                       (void*)0,//Win32GetHandleFromID(DispState, (memory_index)Out_DebugEvent.u.UnloadDll.lpBaseOfDll), 
                                       Out_DebugEvent.u.UnloadDll.lpBaseOfDll);
                             OutputDebugStringA(Buffer);
-                            //UNLOAD_DLL_DEBUG_INFO     UnloadDll;
+                            id_map * Map =  Win32GetHandleFromID(DispState, 0, (memory_index)Out_DebugEvent.u.UnloadDll.lpBaseOfDll);
+                            CloseHandle(Map->Handle);
                         }break;
                         
                         case RIP_EVENT:
