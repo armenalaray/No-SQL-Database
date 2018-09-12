@@ -38,7 +38,7 @@ IFDEF FIBONACCI_TEST
 
 	increment: 
 	mov eax, dword ptr[Count]
-	inc eax
+	inc  eax
 	mov dword ptr[Count], eax
 
 	comparison:
@@ -106,13 +106,18 @@ ELSEIFDEF MESSAGEBOX_TEST
 	START PROC
 
 	sub rsp, 28h     ;Shadow space, align instruction pointer 
+	;cvtqd2pd xmm1, xmm2 
+
+	mov [rax * 2 + rbx + 5], 8 
 	mov rcx, 0 	  ;HWND = 0 
 	lea rdx, caption ;LPCSTR lpText 
 	lea r8, message  ;LPCStr lpCaption
 	mov r9d, 0 	  ;uType = MB_OK
 	call MessageBoxA ;Call MessageBox API function
 	mov ecx, eax     ;uExitCode = MessageBox()
-	call ExitProcess
+
+
+call ExitProcess
 
 	START ENDP
 

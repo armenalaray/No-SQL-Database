@@ -26,8 +26,7 @@ extern "C" {
 #define MAX_SECTION_COUNT 4096
     
     //NOTE(Alex): REX prefix byte included in x64
-#define MAX_OPCODE_BOUND_64 18
-#define MAX_OPCODE_BOUND_32 17
+#define MAX_INSTRUCTION_OPCOUNT 15
     
 #define MAX_PREFIX_COUNT_64 5
 #define MAX_PREFIX_COUNT_32 4

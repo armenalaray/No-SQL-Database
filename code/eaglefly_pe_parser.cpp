@@ -323,8 +323,7 @@ int main(int Argcount, char ** Arguments)
                         PrefixIndex < MAX_PREFIX_COUNT_64; 
                         ++PrefixIndex)
                     {
-                        //AddPrefixFlag(PrefixByte);
-                        
+                        //AddPrefixCheckFlag(PrefixByte);
                         switch(*PrefixByte)
                         {
                             case OpcodePrefix_REX:
@@ -355,6 +354,10 @@ int main(int Argcount, char ** Arguments)
                         
                         ++PrefixByte;
                     }
+                    
+                    
+                    
+                    
                     
 #if 0                    
                     //Hints = PushArray(Arena, Count,eflype_opcode_size_hints);
