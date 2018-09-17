@@ -52,6 +52,9 @@ extern "C"{
 #define DWORD_PTR(Ptr) ((uint32_t*)(Ptr))
 #define QWORD_PTR(Ptr) ((uint64_t*)(Ptr))
     
+#define CSTRUCT(Name) typedef struct Name 
+#define CENUM(Name) typedef enum  Name 
+    
 #define internal static 
 #define global_variable static 
 #define local_persist static 
@@ -509,7 +512,6 @@ extern "C"{
     }transient_state;
     
     //NOTE(Alex): Internal perf counters 
-    
     typedef struct i_debug_events
     {
         s64 PerfTime;

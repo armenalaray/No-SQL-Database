@@ -21,18 +21,16 @@ extern "C" {
     // NOTE(Alex): Intel Itanium 8k 
     // NOTE(Alex): Intel x86 and MIPS  4k 
 #define ARCH_PAGE_SIZE 4096
-    
 #define SECTION_NAME_COUNT 8
 #define MAX_SECTION_COUNT 4096
     
-    //NOTE(Alex): REX prefix byte included in x64
 #define MAX_INSTRUCTION_OPCOUNT 15
-    
 #define MAX_PREFIX_COUNT_64 5
 #define MAX_PREFIX_COUNT_32 4
+#define MONO_OPCODE_TABLE_SIZE 256
+#define MAX_INSTRUCTION_OPERAND_COUNT 24
     
 #pragma pack(push,1)
-    
     // NOTE(Alex): Symbol extraction data structures
     //-----------------------------------------------------------------------------
     /*
@@ -44,7 +42,7 @@ extern "C" {
 #define COFF_DTYPE_NULL 0x00
 */
     
-    typedef struct debug_symbol_info
+    CSTRUCT(debug_symbol_info)
     {
         uint32_t Signature : 1;
         uint32_t A : 2;
@@ -52,7 +50,7 @@ extern "C" {
         uint32_t C = 4;
     }debug_symbol_info;
     
-    typedef struct coff_sym_table_record
+    CSTRUCT(coff_sym_table_record)
     {
         char Name[8];
         uint32_t Value;
@@ -93,7 +91,7 @@ extern "C" {
         MACHINE_TYPE_WCEMIPSV2 = 0x169 //NOTE(Alex):MIPS little-endian WCE v2 
     }machine_type;
     
-    typedef struct eflype_coff_header
+    CSTRUCT(eflype_coff_header)
     {
         //NOTE(Alex):The number that identifies the type of target machine. For more information, see Machine Types. 
         uint16_t MachineType;
@@ -111,7 +109,7 @@ extern "C" {
         uint16_t Characteristics;
     }eflype_coff_header;
     
-    typedef struct eflype_standard_opt_header
+    CSTRUCT(eflype_standard_opt_header)
     {
         // NOTE(Alex): The unsigned integer that identifies the state of the image file. The most common number is 0x10B, which identifies it as a normal executable file. 0x107 identifies it as a ROM image, and 0x20B identifies it as a PE32+ executable. 
         uint16_t Magic;
@@ -133,7 +131,7 @@ extern "C" {
         uint32_t BaseOfData;
     }eflype_standard_opt_header;
     
-    typedef struct elfype_plus_standard_opt_header
+    CSTRUCT(elfype_plus_standard_opt_header)
     {
         // NOTE(Alex): The unsigned integer that identifies the state of the image file. The most common number is 0x10B, which identifies it as a normal executable file. 0x107 identifies it as a ROM image, and 0x20B identifies it as a PE32+ executable. 
         uint16_t Magic;
@@ -153,7 +151,7 @@ extern "C" {
         uint32_t BaseOfCode;
     }eflype_plus_standard_opt_header;
     
-    typedef struct eflype_plus_windows_opt_header
+    CSTRUCT(eflype_plus_windows_opt_header)
     {
         // NOTE(Alex): The preferred address of the first byte of image when loaded into memory; must be a multiple of 64 K. The default for DLLs is 0x10000000. The default for Windows CE EXEs is 0x00010000. The default for Windows NT, Windows 2000, Windows XP, Windows 95, Windows 98, and Windows Me is 0x00400000. 
         uint64_t ImageBase;
@@ -201,7 +199,7 @@ extern "C" {
         uint32_t NumberOfRvaAndSizes;
     }eflype_plus_windows_opt_header;
     
-    typedef struct eflype_windows_opt_header
+    CSTRUCT(eflype_windows_opt_header)
     {
         // NOTE(Alex): The preferred address of the first byte of image when loaded into memory; must be a multiple of 64 K. The default for DLLs is 0x10000000. The default for Windows CE EXEs is 0x00010000. The default for Windows NT, Windows 2000, Windows XP, Windows 95, Windows 98, and Windows Me is 0x00400000. 
         uint32_t ImageBase;
@@ -249,7 +247,7 @@ extern "C" {
         uint32_t NumberOfRvaAndSizes;
     }eflype_windows_opt_header;
     
-    typedef struct eflype_section_header
+    CSTRUCT(eflype_section_header)
     {
         //NOTE(Alex): An 8-byte, null-padded UTF-8 encoded string. If the string is exactly 8 characters long, there is no terminating null. For longer names, this field contains a slash (/) that is followed by an ASCII representation of a decimal number that is an offset into the string table. Executable images do not use a string table and do not support section names longer than 8 characters. Long names in object files are truncated if they are emitted to an executable file. 
         char Name[8];
@@ -276,14 +274,15 @@ extern "C" {
         uint32_t Characteristics;
     }eflype_section_header;
     
-    typedef struct eflype_data_directory{
+    CSTRUCT(eflype_data_directory)
+    {
         uint32_t VA;
         uint32_t Size;
     }eflype_data_directory;
     
 #pragma pack(pop)
     
-    typedef struct eflype_opt_header
+    CSTRUCT(eflype_opt_header)
     {
         b32 PE32Type;//NOTE(Alex): 0 - PE32 , 1 - PE32Plus
         struct
@@ -375,13 +374,13 @@ extern "C" {
         SectionID_count
     }eflype_section_id;
     
-    struct eflype_section_entry
+    CSTRUCT(eflype_section_entry)
     {
         eflype_section_id ID;
         uint32_t Index;
-    };
+    }eflype_section_entry;
     
-    typedef struct eflype_manager
+    CSTRUCT(eflype_manager)
     {
         void * Base;
         void * At;
@@ -391,17 +390,20 @@ extern "C" {
         uint32_t SectionCount;
         eflype_section_header * SHeaderTable[MAX_SECTION_COUNT];
         eflype_section_entry SectionTable[MAX_SECTION_COUNT];
-        
-        
-        //MnemonicTable[];
-        char * CodeSegmentBase;
-        char * COpcodeByte;
-        char * OpcodeBase;
-        
-        uint32_t OpByteCount;
-        uint32_t InstructionCount;
-        
     }eflype_manager;
+    
+    //NOTE(Alex): EFLY_DISASM 
+    //-------------------------------------------------------------------------
+#if 0    
+    CSTRUCT(efly_opcode_instruction)
+    {
+        
+        //NOTE(Alex): Up to 3 Operands
+        uint32_t OperandCount;
+    };
+#endif
+    
+    
     
     typedef enum efly_opcode_prefixes
     {
@@ -412,15 +414,98 @@ extern "C" {
         OpcodePrefix_LOCKAndRepeat,
     }efly_opcode_prefixes;
     
-#if 0    
-    typedef struct efly_opcode_instruction
+    typedef enum efly_opcode_table_type
     {
+        OpTable_None = 0,
+        OpTable_Mono = 1,
+    }efly_primary_opcode_size;
+    
+    CENUM(efly_addressing_modes)
+    {
+        AddressingMode_DirectAddress,
+        AddressingMode_VEX_GPR,
+        AddressingMode_RegControl,
+        AddressingMode_RegDebug,
+        AddressingMode_MODRM_GPR_Mem,
+        AddressingMode_rFLAGS,
+        AddressingMode_RegGPR,
+        AddressingMode_VEX_yMM,
+        AddressingMode_Immediate,
+        AddressingMode_RIP_offset,
+        AddressingMode_8b_imm_yMM,//NOTE(Alex): The upper 4 bits of the 8 bit immediate selects a XMM or YMM register
+        AddressingMode_MODRM_Mem_only,
+        AddressingMode_RM_MMX,
+        AddressingMode_NO_MODRM,
+        AddressingMode_RegMMX,
+        AddressingMode_MODRM_MMX_Mem,
+        AddressingMode_RM_GPR_only,
+        AddressingMode_Reg_Segment,
+        AddressingMode_RM_yMM,
+        AddressingMode_Reg_yMM,
+        AddressingMode_MODRM_yMM_Mem,
+        AddressingMode_DS_rSI_Mem,
+        AddressingMode_ES_rDI_Mem,
+        AddressingMode_Count,
+    }efly_addressing_modes;
+    
+    CENUM(efly_operand_types)
+    {
+        OperandType_a,
+        OperandType_b,
+        OperandType_c,
+        OperandType_d,
+        OperandType_dq,
+        OperandType_p,
+        OperandType_pd,
+        OperandType_pi,
+        OperandType_ps,
+        OperandType_q,
+        OperandType_qq,
+        OperandType_s,
+        OperandType_sd,
+        OperandType_ss,
+        OperandType_si,
+        OperandType_v,
+        OperandType_w,
+        OperandType_x,
+        OperandType_y,
+        OperandType_z,
+    }efly_operand_types;
+    
+    CSTRUCT(efly_mnemonic)
+    {
+        uint16_t Size;
+        char * Text;
+        uint16_t OperandCount;
+        char AddressingTypeFlags[MAX_INSTRUCTION_OPERAND_COUNT];
+    }efly_mnemonic;
+    
+#if 0    
+    CENUM(efly_size_attr)
+    {
+        OperandSize_Attr_16,
+        OperandSize_Attr_32,
+        OperandSize_Attr_64,
         
-        //NOTE(Alex): Up to 3 Operands
-        uint32_t OperandCount;
+        AddressSize_Attr_16,
+        AddressSize_Attr_32,
+        AddressSize_Attr_64,
     };
 #endif
     
+    CSTRUCT(efly_disasm_state)
+    {
+        memory_arena DisasmArena;
+        char * MonoOpcodeTable;
+        char * COpcodeByte;
+        char * COpcodeBase;
+        char * CodeSegmentBase;
+        size_t CodeSegmentSize;
+        //TODO(Alex): Support bigger Size PEFiles?
+        size_t RVAOpcodeBase;
+        size_t OpByteCount;
+        size_t InstructionCount;
+    }efly_opcode_table;
     
 #if defined(__cplusplus)
 }

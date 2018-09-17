@@ -7,6 +7,7 @@ Parses COFF and PE Files and etracts symbol and type information out of
 #include <Windows.h>
 #include "eaglefly_platform.h"
 #include "eaglefly_pe_parser.h"
+#include "stdio.h"
 
 internal void * 
 Win32AllocateMemory(memory_index Size)
@@ -160,6 +161,12 @@ EFlyLexOpcode(eflype_manager * PEManager, char * Base, char * Max)
     return Result;
 }
 
+internal void
+DecodeOpcode(efly_disasm_state * DisasmState, char * MonoOpcode, efly_mnemonic * CMnemonic, efly_opcode_table_type OpTableType)
+{
+    
+}
+
 int main(int Argcount, char ** Arguments)
 {
     b32 IsPEFile = false;
@@ -296,34 +303,41 @@ int main(int Argcount, char ** Arguments)
                     ++HeaderSource;
                 }
                 
-                eflype_section_header * SHeader = GetSectionHeader(&PEManager, SectionID_text); 
-                char * CodeSegmentBase = CHAR_PTR(PEManager.Base) + SHeader->PointerToRawData; 
-                //TODO(Alex): Disassembly startup x64 / IA-32
-                char * COpcodeByte = CodeSegmentBase; 
-                char * OpcodeBase = COpcodeByte;
-                uint32_t OpByteCount = 0;
-                
                 //TODO(Alex): Find a way to find out whether opcode is x64 or x86
                 //NOTE(Alex): Now we are assuming is x64 opcode
-                b32 InstructionFound = false;
+                
+                /*
+NOTE(Alex): For starters ... 
+                One opcode byte encoding without MOD R/M Opcode extensions
+                Memory constraint not necessary
+                
+                //TODO(Alex): Make an independent pass for the disassembler so it 
+is totally isolated from the PE parser 
+                */
+                
+                
+                eflype_section_header * SHeader = GetSectionHeader(&PEManager, SectionID_text); 
+                
+                efly_disasm_state DisasmState = {};
+                DisasmState.CodeSegmentBase = CHAR_PTR(PEManager.Base) + SHeader->PointerToRawData; 
+                DisasmState.COpcodeByte = DisasmState.CodeSegmentBase; 
+                DisasmState.COpcodeBase = DisasmState.COpcodeByte;
+                DisasmState.CodeSegmentSize = SHeader->SizeOfRawData;
+                //TODO(Alex): Load this from file?
+                //InitializeOpcodeTable(DisasmState, DisasmState.MonoOpcodeTable, MONO_OPCODE_TABLE_SIZE);
+                
+#if 0                
+                char * PrefixMinBound = DisasmState.COpcodeByte;
+                char * PrefixMaxBound = PrefixMinBound + MAX_PREFIX_COUNT_64;
                 for(uint32_t ByteIndex = 0;
-                    ByteIndex < SHeader->SizeOfRawData;
+                    ByteIndex < DisasmState.CodeSegmentSize;
                     ++ByteIndex)
                 {
-                    InstructionFound = false;
-                    //PushOpcodeToBuffer(&PEManager->OpcodeArena, COpcodeByte++);
-                    //InstructionFound = EFlyLexOpcode(PEManager, OpcodeBase, COpcodeByte);
-                    //eflype_opcode_size_hints * Hints = 0;
-                    //if(FindREXPrefix(Block) || AddressSizeOW() || OperandSizeOW())
-                    char * MinBound = COpcodeByte;
-                    char * MaxBound = MinBound + MAX_PREFIX_COUNT_64;
-                    char * PrefixByte = MinBound; 
-                    
                     for(uint32_t PrefixIndex = 0; 
                         PrefixIndex < MAX_PREFIX_COUNT_64; 
                         ++PrefixIndex)
                     {
-                        //AddPrefixCheckFlag(PrefixByte);
+                        AddPrefixCheckFlag(PrefixByte);
                         switch(*PrefixByte)
                         {
                             case OpcodePrefix_REX:
@@ -352,30 +366,131 @@ int main(int Argcount, char ** Arguments)
                             }break;
                         }
                         
-                        ++PrefixByte;
+                        ++DisasmState.COpcodeByte;
                     }
-                    
-                    
-                    
-                    
-                    
-#if 0                    
-                    //Hints = PushArray(Arena, Count,eflype_opcode_size_hints);
-                    
-                    eflype_opcode_bloc * Block = LexOpcodeBlock(PEManager);
-                    ListInstructionrefixes(PEManager, Block);
-                    FindInstructionMnemonic(PEManager, Block);
-                    
-                    FindOperands(Block);
-#endif
-                    
-                    if(InstructionFound)
-                    {
-                        OpcodeBase = COpcodeByte;
-                    }
-                    
-                    ++OpByteCount;
                 }
+#endif
+                
+                //TODO(Alex): Add Prefix identification
+                //TODO(Alex): Shall we make the user choose which size attrivutes  
+                //the instruction arquitecture should target? Or we use the current arquitecture?
+                char * MonoOpcode = DisasmState.COpcodeByte;
+                efly_mnemonic * CMnemonic = PushStruct(&DisasmState.DisasmArena, efly_mnemonic);
+                DecodeOpcode(&DisasmState, MonoOpcode, CMnemonic, OpTable_Mono);
+                //printf_s("%s", CMnemonic->Size, CMnemonic->Text);
+                
+#define GET_H4BIT_WORD(...) 0
+#define GET_L4BIT_WORD(...) 0
+                
+                for(uint32_t  OperandIndex = 0;
+                    OperandIndex < CMnemonic->OperandCount;
+                    ++OperandIndex)
+                {
+                    char * Operand = CMnemonic->AddressingTypeFlags + OperandIndex;
+                    uint8_t AddressingMode = GET_H4BIT_WORD(Operand);
+                    uint8_t Type = GET_L4BIT_WORD(Operand);
+                    
+                    switch(AddressingMode)
+                    {
+                        case AddressingMode_DirectAddress:
+                        {
+                            
+                        }break;
+                        case AddressingMode_VEX_GPR:
+                        {
+                            
+                        }break;
+                        case AddressingMode_RegControl:
+                        {
+                            
+                        }break;
+                        case AddressingMode_RegDebug:
+                        {
+                        }break;
+                        case AddressingMode_MODRM_GPR_Mem:
+                        {
+                        }break;
+                        case AddressingMode_rFLAGS:
+                        {
+                        }break;
+                        case AddressingMode_RegGPR:
+                        {
+                        }break;
+                        case AddressingMode_VEX_yMM:
+                        {
+                        }break;
+                        case AddressingMode_Immediate:
+                        {
+                        }break;
+                        case AddressingMode_RIP_offset:
+                        {
+                        }break;
+                        case AddressingMode_8b_imm_yMM:
+                        {
+                        }break;//NOTE(Alex): The upper 4 bits of the 8 bit immediate selects a XMM or YMM register
+                        case AddressingMode_MODRM_Mem_only:
+                        {
+                        }break;
+                        case AddressingMode_RM_MMX:
+                        {
+                        }break;
+                        case AddressingMode_NO_MODRM:
+                        {
+                        }break;
+                        case AddressingMode_RegMMX:
+                        {
+                        }break;
+                        case AddressingMode_MODRM_MMX_Mem:
+                        {
+                        }break;
+                        
+                        case AddressingMode_RM_GPR_only:
+                        {
+                        }break;
+                        case AddressingMode_Reg_Segment:
+                        {
+                        }break;
+                        case AddressingMode_RM_yMM:
+                        {
+                        }break;
+                        case AddressingMode_Reg_yMM:
+                        {
+                        }break;
+                        case AddressingMode_MODRM_yMM_Mem:
+                        {
+                        }break;
+                        case AddressingMode_DS_rSI_Mem:
+                        {
+                        }break;
+                        case AddressingMode_ES_rDI_Mem:
+                        {
+                        }break;
+                        case AddressingMode_Count:
+                        {
+                        }break;
+                        default:
+                        {
+                            InvalidCodePath;
+                        }
+                    }
+                    
+                }
+                
+                
+#if 0                
+                //Hints = PushArray(Arena, Count,eflype_opcode_size_hints);
+                eflype_opcode_bloc * Block = LexOpcodeBlock(PEManager);
+                ListInstructionrefixes(PEManager, Block);
+                FindInstructionMnemonic(PEManager, Block);
+                FindOperands(Block);
+                
+                if(InstructionFound)
+                {
+                    DisasmState.OpcodeBase = DisasmState.COpcodeByte;
+                }
+#endif
+                
+                ++DisasmState.OpByteCount;
             }
             else
             {

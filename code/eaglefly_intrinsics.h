@@ -21,6 +21,18 @@ inline u32 FloorR32Tou32(r32 Value)
     return Result;
 }
 
+//TODO(Alex): cpuid funtion 
+
+#if 0
+#if ARCH_AMD64
+inline u32 CPUID(s32 )
+{
+    
+}
+#endif
+#endif
+
+
 #elif COMPILER_LLVM
 //TODO(Alex): Add LLVM compiler specific intrinsics 
 #endif
