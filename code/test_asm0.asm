@@ -116,10 +116,23 @@ ELSEIFDEF MESSAGEBOX_TEST
 	call MessageBoxA ;Call MessageBox API function
 	mov ecx, eax     ;uExitCode = MessageBox()
 
-
-call ExitProcess
+	call ExitProcess
 
 	START ENDP
+
+ELSEIFDEF OPCODE_ENCODING
+	.data
+	extrn ExitProcess: PROC
+	value DWORD 28
+
+	.code
+	START PROC
+	XOR EAX, EAX
+	ADD EAX, value
+	call ExitProcess
+	START ENDP
+
+
 
 ; speculative execution could store the value pointed to by F000H before being modified into rbx!, thats why we put a serializing instruction such as SFENCE 
 ;mov rax, cr3

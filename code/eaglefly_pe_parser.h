@@ -253,7 +253,10 @@ extern "C" {
         char Name[8];
         //NOTE(Alex): The total size of the section when loaded into memory. If this value is greater than SizeOfRawData, the section is zero-padded. This field is valid only for executable images and should be set to zero for object files. 
         uint32_t VirtualSize; 
-        //NOTE(Alex): For executable images, the address of the first byte of the section relative to the image base when the section is loaded into memory. For object files, this field is the address of the first byte before relocation is applied; for simplicity, compilers should set this to zero. Otherwise, it is an arbitrary value that is subtracted from offsets during relocation. 
+        //NOTE(Alex): For executable images, the address of the first byte of the section 
+        //relative to the image base when the section is loaded into memory. 
+        //For object files, this field is the address of the first byte before relocation is applied; for simplicity, compilers should set this to zero. 
+        //Otherwise, it is an arbitrary value that is subtracted from offsets during relocation. 
         uint32_t VirtualAddress; 
         //NOTE(Alex): The size of the section (for object files) or the size of the initialized data on disk (for image files). For executable images, this must be a multiple of FileAlignment from the optional header. If this is less than VirtualSize, the remainder of the section is zero-filled. Because the SizeOfRawData field is rounded but the VirtualSize field is not, it is possible for SizeOfRawData to be greater than VirtualSize as well. When a section contains only uninitialized data, this field should be zero. 
         uint32_t SizeOfRawData; 
@@ -355,7 +358,6 @@ extern "C" {
             uint32_t NumberOfRvaAndSizes;
         };
     }eflype_opt_header;
-    
     
     typedef enum eflype_section_id
     {
@@ -472,13 +474,55 @@ extern "C" {
         OperandType_z,
     }efly_operand_types;
     
+    
+    CENUM(efly_operand_types_)
+    {
+        OperandType_BYTE = 1,
+        OperandType_WORD = 2,
+        OperandType_DWORD = 4,
+        OperandType_QWORD = 8,
+        OperandType_XMM = 16,
+        OperandType_YMM = 32,
+        OperandType_ZMM = 64,
+    }efly_operand_types_;
+    
+    //IMPORTANT(Alex): This has to match the columns of RegNamesTable!
+    CENUM(efly_reg_types)
+    {
+        RegType_8bit,
+        RegType_16bit,
+        RegType_32bit,
+        RegType_MMX,
+        RegType_XMM,
+        RegType_64bit,
+        RegType_Ctrl,
+        //RegType_ExtCtrl,
+        RegType_Dbg,
+        //RegType_ExtDbg,
+    }efly_reg_types;
+    
+    
+    CSTRUCT(efly_operand)
+    {
+        uint32_t Type;
+        efly_addressing_modes AddrMode;
+    }efly_operand;
+    
     CSTRUCT(efly_mnemonic)
     {
         uint16_t Size;
         char * Text;
         uint16_t OperandCount;
-        char AddressingTypeFlags[MAX_INSTRUCTION_OPERAND_COUNT];
+        efly_operand Operands[MAX_INSTRUCTION_OPERAND_COUNT];
     }efly_mnemonic;
+    
+    CSTRUCT(efly_instruction)
+    {
+        char * FilePtrBase;
+        uint32_t Size;
+        uint32_t BufferCount;
+        char Buffer[4096];
+    }efly_instruction;
     
 #if 0    
     CENUM(efly_size_attr)
@@ -496,11 +540,15 @@ extern "C" {
     CSTRUCT(efly_disasm_state)
     {
         memory_arena DisasmArena;
+        
         char * MonoOpcodeTable;
-        char * COpcodeByte;
-        char * COpcodeBase;
+        char * CFilePtrByte;
+        char * CFilePtrBase;
+        
         char * CodeSegmentBase;
         size_t CodeSegmentSize;
+        
+        size_t IP;
         //TODO(Alex): Support bigger Size PEFiles?
         size_t RVAOpcodeBase;
         size_t OpByteCount;

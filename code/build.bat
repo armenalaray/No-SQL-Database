@@ -32,8 +32,8 @@ IF NOT EXIST ..\..\testbuild\ mkdir..\..\testbuild\
 pushd ..\..\testbuild\ 
 
 REM ML64 Tests
-ML64 -DFIBONACCI_TEST -nologo -Zi -Fl -Fo %ASM_OBJ% -c ..\eaglefly\code\test_asm0.asm
-REM ML64 -DMESSAGEBOX_TEST -nologo -Zi -Fl -w ..\eaglefly\code\test_asm0.asm /link /subsystem:console -defaultlib:kernel32.lib -defaultlib:user32.lib -entry:START 
+REM ML64 -DFIBONACCI_TEST -nologo -Zi -Fl -Fo %ASM_OBJ% -c ..\eaglefly\code\test_asm0.asm
+ML64 -DOPCODE_ENCODING -nologo -Zi -Fl -w ..\eaglefly\code\test_asm0.asm /link /subsystem:console -defaultlib:kernel32.lib -defaultlib:user32.lib -entry:START 
 
 REM cl %CommonCompilerFlags% ..\eaglefly\code\test_debug_target.cpp /link %CommonLinkerFlags% %ASM_OBJ% 
 popd
