@@ -123,12 +123,14 @@ ELSEIFDEF MESSAGEBOX_TEST
 ELSEIFDEF OPCODE_ENCODING
 	.data
 	extrn ExitProcess: PROC
-	value DWORD 28
+	Num0 DWORD 16
+    Num1 WORD 8
 
 	.code
 	START PROC
 	XOR EAX, EAX
-	ADD EAX, value
+	ADD EAX, Num0
+	MOV CX, AX
 	call ExitProcess
 	START ENDP
 

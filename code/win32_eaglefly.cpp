@@ -31,7 +31,7 @@ Win32DeallocateMemory(void * Memory)
     }
 }
 
-WRITE_ENTIRE_FILE(Win32WriteEntireFile)
+DEBUG_WRITE_ENTIRE_FILE(Debug_Win32WriteEntireFile)
 {
     b32 Result = false;
     HANDLE Handle = CreateFileA(FileName,

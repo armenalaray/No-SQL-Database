@@ -13,17 +13,14 @@ del *.pdb > NUL 2> NUL
 REM PDB Parser
 REM cl %CommonCompilerFlags% ..\eaglefly\code\eaglefly_pdb_parser.cpp /link %CommonLinkerFlags%
 
-REM PE/obj file Parser
-cl %CommonCompilerFlags% ..\eaglefly\code\eaglefly_pe_parser.cpp /link %CommonLinkerFlags%
+REM Win32 disasmsembler 
+cl %CommonCompilerFlags% ..\eaglefly\code\win32_eaglefly_disasm.cpp /link %CommonLinkerFlags%
 
 echo WAITING FOR PDB > lock.tmp
 REM cl %CommonCompilerFlags%  ..\eaglefly\code\eaglefly.cpp -LD /link -incremental:no -opt:ref -PDB:eaglefly_%random%.pdb -EXPORT:DebugUpdateAndRender 
 del lock.tmp
 
 REM cl %CommonCompilerFlags% ..\eaglefly\code\win32_eaglefly.cpp -Fmwin32_eaglefly.map /link %CommonLinkerFlags%
-
-REM BSCMAKE win32_eaglefly.sbr eaglefly.sbr   
-
 popd 
 
 REM Test Builds ------------------------------------------------------------------------------------------------

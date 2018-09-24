@@ -2,8 +2,9 @@
 NOTE(Alex): eaglefly_pe_parser.h
 
 Parses PE Files, finds Opcode data and starts disassemble process to x64 - x86 architectures, in intel style.
-
 96 Maximum num of PE sections allowes in Windows
+
+
 */
 
 #if defined(__cplusplus)
@@ -23,12 +24,6 @@ extern "C" {
 #define ARCH_PAGE_SIZE 4096
 #define SECTION_NAME_COUNT 8
 #define MAX_SECTION_COUNT 4096
-    
-#define MAX_INSTRUCTION_OPCOUNT 15
-#define MAX_PREFIX_COUNT_64 5
-#define MAX_PREFIX_COUNT_32 4
-#define MONO_OPCODE_TABLE_SIZE 256
-#define MAX_INSTRUCTION_OPERAND_COUNT 24
     
 #pragma pack(push,1)
     // NOTE(Alex): Symbol extraction data structures
@@ -393,167 +388,6 @@ extern "C" {
         eflype_section_header * SHeaderTable[MAX_SECTION_COUNT];
         eflype_section_entry SectionTable[MAX_SECTION_COUNT];
     }eflype_manager;
-    
-    //NOTE(Alex): EFLY_DISASM 
-    //-------------------------------------------------------------------------
-#if 0    
-    CSTRUCT(efly_opcode_instruction)
-    {
-        
-        //NOTE(Alex): Up to 3 Operands
-        uint32_t OperandCount;
-    };
-#endif
-    
-    
-    
-    typedef enum efly_opcode_prefixes
-    {
-        OpcodePrefix_REX,
-        OpcodePrefix_AddressSizeOV,
-        OpcodePrefix_OperandSizeOV,
-        OpcodePrefix_SegmentOV,
-        OpcodePrefix_LOCKAndRepeat,
-    }efly_opcode_prefixes;
-    
-    typedef enum efly_opcode_table_type
-    {
-        OpTable_None = 0,
-        OpTable_Mono = 1,
-    }efly_primary_opcode_size;
-    
-    CENUM(efly_addressing_modes)
-    {
-        AddressingMode_DirectAddress,
-        AddressingMode_VEX_GPR,
-        AddressingMode_RegControl,
-        AddressingMode_RegDebug,
-        AddressingMode_MODRM_GPR_Mem,
-        AddressingMode_rFLAGS,
-        AddressingMode_RegGPR,
-        AddressingMode_VEX_yMM,
-        AddressingMode_Immediate,
-        AddressingMode_RIP_offset,
-        AddressingMode_8b_imm_yMM,//NOTE(Alex): The upper 4 bits of the 8 bit immediate selects a XMM or YMM register
-        AddressingMode_MODRM_Mem_only,
-        AddressingMode_RM_MMX,
-        AddressingMode_NO_MODRM,
-        AddressingMode_RegMMX,
-        AddressingMode_MODRM_MMX_Mem,
-        AddressingMode_RM_GPR_only,
-        AddressingMode_Reg_Segment,
-        AddressingMode_RM_yMM,
-        AddressingMode_Reg_yMM,
-        AddressingMode_MODRM_yMM_Mem,
-        AddressingMode_DS_rSI_Mem,
-        AddressingMode_ES_rDI_Mem,
-        AddressingMode_Count,
-    }efly_addressing_modes;
-    
-    CENUM(efly_operand_types)
-    {
-        OperandType_a,
-        OperandType_b,
-        OperandType_c,
-        OperandType_d,
-        OperandType_dq,
-        OperandType_p,
-        OperandType_pd,
-        OperandType_pi,
-        OperandType_ps,
-        OperandType_q,
-        OperandType_qq,
-        OperandType_s,
-        OperandType_sd,
-        OperandType_ss,
-        OperandType_si,
-        OperandType_v,
-        OperandType_w,
-        OperandType_x,
-        OperandType_y,
-        OperandType_z,
-    }efly_operand_types;
-    
-    
-    CENUM(efly_operand_types_)
-    {
-        OperandType_BYTE = 1,
-        OperandType_WORD = 2,
-        OperandType_DWORD = 4,
-        OperandType_QWORD = 8,
-        OperandType_XMM = 16,
-        OperandType_YMM = 32,
-        OperandType_ZMM = 64,
-    }efly_operand_types_;
-    
-    //IMPORTANT(Alex): This has to match the columns of RegNamesTable!
-    CENUM(efly_reg_types)
-    {
-        RegType_8bit,
-        RegType_16bit,
-        RegType_32bit,
-        RegType_MMX,
-        RegType_XMM,
-        RegType_64bit,
-        RegType_Ctrl,
-        //RegType_ExtCtrl,
-        RegType_Dbg,
-        //RegType_ExtDbg,
-    }efly_reg_types;
-    
-    
-    CSTRUCT(efly_operand)
-    {
-        uint32_t Type;
-        efly_addressing_modes AddrMode;
-    }efly_operand;
-    
-    CSTRUCT(efly_mnemonic)
-    {
-        uint16_t Size;
-        char * Text;
-        uint16_t OperandCount;
-        efly_operand Operands[MAX_INSTRUCTION_OPERAND_COUNT];
-    }efly_mnemonic;
-    
-    CSTRUCT(efly_instruction)
-    {
-        char * FilePtrBase;
-        uint32_t Size;
-        uint32_t BufferCount;
-        char Buffer[4096];
-    }efly_instruction;
-    
-#if 0    
-    CENUM(efly_size_attr)
-    {
-        OperandSize_Attr_16,
-        OperandSize_Attr_32,
-        OperandSize_Attr_64,
-        
-        AddressSize_Attr_16,
-        AddressSize_Attr_32,
-        AddressSize_Attr_64,
-    };
-#endif
-    
-    CSTRUCT(efly_disasm_state)
-    {
-        memory_arena DisasmArena;
-        
-        char * MonoOpcodeTable;
-        char * CFilePtrByte;
-        char * CFilePtrBase;
-        
-        char * CodeSegmentBase;
-        size_t CodeSegmentSize;
-        
-        size_t IP;
-        //TODO(Alex): Support bigger Size PEFiles?
-        size_t RVAOpcodeBase;
-        size_t OpByteCount;
-        size_t InstructionCount;
-    }efly_opcode_table;
     
 #if defined(__cplusplus)
 }

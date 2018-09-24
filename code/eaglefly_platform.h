@@ -314,6 +314,12 @@ extern "C"{
         void * Data;
     };
     
+    struct debug_file_content
+    {
+        void * Content;
+        u32 Size;
+    };
+    
     struct efly_memory;
     
 #define DEBUG_UPDATE_AND_RENDER(Name) void (Name)(efly_asset_bitmap * FrameBuffer, efly_memory * Memory, efly_input * Input, char * TargetImageFullPath, char * TargetPDBFullPath, char * CmdEXEFullPath)
@@ -337,18 +343,13 @@ extern "C"{
     //NOTE(Alex): File I/O Tools
     //
     
-    struct debug_file_content
-    {
-        void * Content;
-        u32 Size;
-    };
+#define DEBUG_READ_ENTIRE_FILE(Name) debug_file_content Name(char * FileName)
+    typedef DEBUG_READ_ENTIRE_FILE(debug_read_entire_file);
+    
+#define DEBUG_WRITE_ENTIRE_FILE(Name) b32 Name(char * FileName, void * Data, u32 BytesToWrite)
+    typedef DEBUG_WRITE_ENTIRE_FILE(debug_write_entire_file);
     
     
-#define READ_ENTIRE_FILE(Name) debug_file_content Name(char * FileName)
-    typedef READ_ENTIRE_FILE(debug_read_entire_file);
-    
-#define WRITE_ENTIRE_FILE(Name) b32 Name(char * FileName, void * Data, u32 BytesToWrite)
-    typedef WRITE_ENTIRE_FILE(debug_write_entire_file);
     
     //
     //NOTE(Alex): Memory Arena's and resources
@@ -446,7 +447,7 @@ extern "C"{
     }
     
     //
-    //NOTE(Alex): Usaful tools constructs
+    //NOTE(Alex): Useful tools constructs
     //
     
 #define INIT_DOUBLY_LLIST(Sentinel)\
