@@ -21,7 +21,33 @@ inline u32 FloorR32Tou32(r32 Value)
     return Result;
 }
 
+
+struct bit_info
+{
+    u32 Index;
+    b32 Set;
+};
+
+
+inline bit_info BitScanForwardU32(uint32_t Value)
+{
+    bit_info Result = {};
+    Result.Set = _BitScanForward((DWORD *)&Result.Index, Value);  
+    return Result;
+}
+
+inline bit_info BitScanReverseU32(uint32_t Value)
+{
+    bit_info Result = {};
+    Result.Set = _BitScanReverse((DWORD *)&Result.Index, Value);  
+    return Result;
+}
+
+
+
 //TODO(Alex): cpuid funtion 
+
+
 
 #if 0
 #if ARCH_AMD64

@@ -71,13 +71,17 @@ extern "C"{
     
 #if EFLY_INTERNAL
 #define Assert(Expression) if(!(Expression)){*(int*)(0) = 6;}
+    
+#define CTAssert__(Expression, ID) global_variable uint32_t Var##ID[(Expression) ? 1 : -1]
+#define CTAssert_(Expression, ID) CTAssert__(Expression, ID)
+#define CTAssert(Expression) CTAssert_(Expression, __COUNTER__)
+    
 #define InvalidCodePath Assert(!"Not Expected case")
 #else
 #define Assert(...)
 #define InvalidCodePath
 #endif
     
-    //TODO(Alex): intrinsics.h
     
     inline u32 TruncateR32ToU32(r32 Value)
     {
@@ -98,10 +102,17 @@ extern "C"{
         return Result;
     }
     
-    inline u32 TruncateU64ToU32(u64 Value)
+    inline u32 SafeTruncateU64ToU32(u64 Value)
     {
-        Assert(Value & 0xFFFFFFFF);
+        Assert(!(Value & ~0xFFFFFFFF));
         u32 Result = (u32)Value;
+        return Result;
+    }
+    
+    inline u16 SafeTruncateU32ToU16(u32 Value)
+    {
+        Assert(!(Value & ~0xFFFF));
+        u16 Result = (u16)Value;
         return Result;
     }
     

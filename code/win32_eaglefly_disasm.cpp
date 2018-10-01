@@ -2,6 +2,14 @@
 NOTE(Alex): This is gonna be our win32 platform layer!
 Work from here, write the usage code first and see the API!
 
+
+//TODO(Alex): Find a way to find out whether opcode is x64 or x86
+//TODO(Alex): Support Big Endianness?
+//NOTE(Alex): Now we are assuming is x64 opcode
+
+NOTE(Alex): For starters ... 
+One opcode byte encoding without MOD R/M Opcode extensions
+Memory constraint not necessary
 */
 
 #include <Windows.h>
@@ -49,7 +57,7 @@ DEBUG_READ_ENTIRE_FILE(Debug_Win32ReadEntireFile)
         LARGE_INTEGER U64Size = {};
         if(GetFileSizeEx(Handle, &U64Size))
         {
-            u32 U32Size = TruncateU64ToU32(U64Size.QuadPart);
+            u32 U32Size = SafeTruncateU64ToU32(U64Size.QuadPart);
             DWORD BytesRead = 0;
             
             void * Content = Win32AllocateMemory(U32Size);
@@ -79,20 +87,6 @@ DEBUG_READ_ENTIRE_FILE(Debug_Win32ReadEntireFile)
     return Result;
 }
 
-
-
-//TODO(Alex): Find a way to find out whether opcode is x64 or x86
-//TODO(Alex): Support Big Endianness?
-//NOTE(Alex): Now we are assuming is x64 opcode
-
-/*
-NOTE(Alex): For starters ... 
-One opcode byte encoding without MOD R/M Opcode extensions
-Memory constraint not necessary
-
-//TODO(Alex): Make an independent pass for the disassembler so it 
-is totally isolated from the PE parser 
-*/
 
 internal b32
 EFlyLexOpcode(eflype_manager * PEManager, char * Base, char * Max)
@@ -158,62 +152,439 @@ ByteIsPrefix(char Byte)
     return Result;
 }
 
-
-internal eflyop_bgroup * 
-CreateBGroup(efly_disasm_state * DisasmState)
+inline uint32_t 
+MakeMask(uint32_t BitCount)
 {
-    eflyop_bgroup * Result = DisasmState->FirstFreeBGroup;
-    if(Result)
-    {
-        DisasmState->FirstFreeBGroup = Result->Next;
-    }
-    else
-    {
-        Result = PushStruct(&DisasmState->DisasmArena, eflyop_bgroup);
-    }
+    uint32_t Result = 0;
     
-    if(!DisasmState->FirstBGroup)
+    for(uint32_t BitIndex = 0;
+        BitIndex < BitCount;
+        ++BitIndex)
     {
-        DisasmState->FirstBGroup = Result;
+        Result |= (1 << BitIndex);
     }
     
     return Result;
 }
 
+inline uint32_t
+GetBits(efly_disasm_state * DisasmState, eflyop_encoding * Encoding, eflyop_bfield_type BFieldFlag)
+{
+    uint32_t Result = 0;
+    
+    //TODO(Alex): Make special case MainOpcode extension!
+    for(uint32_t BFieldIndex = 0;
+        BFieldIndex < Encoding->TotalBFieldCount;
+        ++BFieldIndex)
+    {
+        eflyop_bfield * BField = Encoding->BFields + BFieldIndex;
+        if(BField->Type == BFieldFlag)
+        {
+            uint32_t ByteOffset = BField->BitOffset / 8; 
+            uint32_t BitOffset = BField->BitOffset % 8; 
+            uint8_t Temp = Encoding->Base[ByteOffset];
+            uint32_t Mask = MakeMask(BField->BitCount);
+            Result = (Temp >> BitOffset) & Mask;
+            break;
+        }
+    }
+    
+    return Result;
+}
+
+internal void 
+BeginAddressExtraction(efly_disasm_state * DisasmState)
+{
+    
+}
 
 internal void
-TranslateMainOpcode(efly_disasm_state * DisasmState, eflyop_bgroup * PrefixGroup, char * MainOpByte, eflyop_prototype * out_OpProt)
+GetEffectiveAddressMnemonic(efly_disasm_state * DisasmState, uint32_t BitField, char * Out_Buffer, uint32_t BufferCount, 
+                            eflyop_flags * Flags)
 {
-#if 0    
-    switch(*PrefixByte)
-    {
-        case OpcodePrefix_REX:
-        {
-            
-        }break;
-        case OpcodePrefix_AddressSizeOV:
-        {
-            
-        }break;
-        case OpcodePrefix_OperandSizeOV:
-        {
-            
-        }break;
-        case OpcodePrefix_SegmentOV:
-        {
-            
-        }break;
-        case OpcodePrefix_LOCKAndRepeat:
-        {
-            
-        }break;
-        default:
-        {
-            InvalidCodePath;
-        }break;
-    }
-#endif
+    
 }
+
+internal void 
+EndAddressExtraction(efly_disasm_state * DisasmState)
+{
+    
+}
+
+#define SignExtend16(value) SignExtend_(value, sizeof(uint16_t))
+#define SignExtend32(value) SignExtend_(value, sizeof(uint32_t))
+
+inline uint32_t
+SignExtend_(uint32_t Value, uint32_t  ByteSize)
+{
+    uint32_t Result = 0;
+    bit_info BitInfo = BitScanReverseU32(Value);
+    
+    if(BitInfo.Set)
+    {
+        uint32_t Mask = 0;
+        uint32_t MaskCount = ((ByteSize * 8) - BitInfo.Index);
+        Mask = MakeMask(MaskCount);
+        Result = (Value | (Mask << BitInfo.Index));
+        
+        if(ByteSize == 2)
+        {
+            Result = SafeTruncateU32ToU16(Result);
+        }
+    }
+    
+    return Result;
+}
+
+#define GET_H4BIT_BYTE(Byte) (Byte) >> 4
+#define GET_L4BIT_BYTE(Byte) (Byte) & 0x0F
+
+internal b32
+TranslateOpcodeAt(efly_disasm_state * DisasmState, 
+                  char * CFilePtr, 
+                  eflyop_bgroup * PrefixGroup, 
+                  eflyop_prototype * Out_OpProt, 
+                  b32 Is64BitMode)
+{
+    b32 Result = false;
+    if(!DisasmState->TablesPresent)
+    {
+        //TODO(Alex): Load them Lazily
+        OutputDebugStringA("Opcode Table not found");
+        Result = DisasmState->TablesPresent = true;
+        
+        uint8_t FakeEncoding[2] = 
+        {
+            0x00, 0xC0, //NOTE(Alex): 0000 000w : 11 reg1 reg2;;
+        };
+        
+#if 1   
+        //NOTE(Alex): Test Table Entry!
+        eflyop_table_entry * TestEntry = DisasmState->OneByteTablex64; //NOTE(Alex): 0000 000w : 11 reg1 reg2;
+        eflyop_encoding * TestEncoding = DisasmState->EncodingsTable; //NOTE(Alex): 0000 000w : 11 reg1 reg2;
+        
+        TestEntry->Mnemonic = "ADD";
+        TestEntry->EncodingIndex = 0;
+        TestEntry->OperandCount = 2;
+        
+        TestEntry->OperandInfos[0].AddrMode = AddressingMode_MODRM_GPR_Mem;
+        TestEntry->OperandInfos[0].Type = OperandTypeInfo_b;
+        TestEntry->OperandInfos[1].AddrMode = AddressingMode_RegGPR;
+        TestEntry->OperandInfos[1].Type = OperandTypeInfo_b;
+        
+        
+        TestEncoding->TotalBFieldCount = 7;
+        TestEncoding->BFields[0].Type = BitField_mainopbyte;
+        TestEncoding->BFields[0].BitCount = 8;
+        TestEncoding->BFields[0].BitOffset = 0;
+        
+        TestEncoding->BFields[1].Type = BitField_d;
+        TestEncoding->BFields[1].BitCount = 1;
+        TestEncoding->BFields[1].BitOffset = 1;
+        
+        TestEncoding->BFields[2].Type = BitField_w;
+        TestEncoding->BFields[2].BitCount = 1;
+        TestEncoding->BFields[2].BitOffset = 0;
+        
+        TestEncoding->BFields[3].Type = BitField_mod;
+        TestEncoding->BFields[3].BitCount = 2;
+        TestEncoding->BFields[3].BitOffset = 8 + 6;
+        
+        TestEncoding->BFields[4].Type = BitField_reg1;
+        TestEncoding->BFields[4].BitCount = 3;
+        TestEncoding->BFields[4].BitOffset = 8 + 3;
+        
+        TestEncoding->BFields[5].Type = BitField_reg2;
+        TestEncoding->BFields[5].BitCount = 3;
+        TestEncoding->BFields[5].BitOffset = 8 + 0;
+        
+        TestEncoding->BFields[6].Type = BitField_modrmbyte;
+        TestEncoding->BFields[6].BitCount = 8;
+        TestEncoding->BFields[6].BitOffset = 8 + 0;
+        
+        TestEncoding->Base = FakeEncoding;
+        
+#endif
+        
+        //Result = LoadTable(Blah);
+        //if(Result)
+        {
+#if 0    
+            uint8_t MainOpByte = *CFilePtr;
+            //if(PrefixGroup->ByteCount)
+            {
+                char * MandatoryPrefix, * PrevByte;
+                PrevByte = *(MainOpByte - 1);
+                if(*PrevByte == OpcodePrefix_REX)
+                {
+                    MandatoryPrefix = MandatoryPrefix
+                }
+                else
+                {
+                    MandatoryPrefix = PrevByte;
+                }
+            }
+#else
+            uint8_t MainOpByte = 0x00; 
+#endif
+            
+            //TODO(Alex): Make OneByteOpcodeTable Fit into memory!
+            uint32_t XOffset = GET_H4BIT_BYTE(MainOpByte);
+            uint32_t YOffset = GET_L4BIT_BYTE(MainOpByte);
+            
+            //TODO(Alex): Make a caching system for fast lookup
+            eflyop_table_entry * Table = DisasmState->OneByteTablex64; //(Is64BitMode) ? DisasmState->OneBytex64Table : DisasmState->OneByteOpTablex86;
+            Assert((XOffset >= 0) && (XOffset <= 0xF) && 
+                   (YOffset >= 0) && (YOffset <= 0xF));
+            
+            eflyop_table_entry * Entry = Table + (YOffset * 0x10 + XOffset);
+            eflyop_encoding * Encoding = DisasmState->EncodingsTable + Entry->EncodingIndex;
+            
+            //(char)GetNextBits(Encoding->Buffer, Offset, Count)
+            
+            eflyop_flags OpFlagsArray[8] = {};
+#if 1                
+            for(uint32_t OperandIndex = 0;
+                OperandIndex < Entry->OperandCount;
+                ++OperandIndex)
+            {
+                eflyop_operand_info * OperandInfo = Entry->OperandInfos + OperandIndex;
+                eflyop_flags * OpFlags = OpFlagsArray + OperandIndex;
+                
+                switch(OperandInfo->AddrMode)
+                {
+                    case AddressingMode_DirectAddress:
+                    {
+                        
+                    }break;
+                    case AddressingMode_VEX_GPR:
+                    {
+                        //TODO(Alex): VEX Encoding
+                    }break;
+                    case AddressingMode_RegControl:
+                    {
+                        
+                    }break;
+                    
+                    case AddressingMode_RegDebug:
+                    {
+                    }break;
+                    case AddressingMode_MODRM_GPR_Mem:
+                    {
+                        OpFlags->MODRMNext = true;
+                        OpFlags->OperandType = OperandType_GPR | OperandType_Mem;
+                    }break;
+                    case AddressingMode_rFLAGS:
+                    {
+                    }break;
+                    case AddressingMode_RegGPR:
+                    {
+                        OpFlags->OperandType = OperandType_GPR;
+                    }break;
+                    case AddressingMode_VEX_yMM:
+                    {
+                    }break;
+                    case AddressingMode_Immediate:
+                    {
+                    }break;
+                    case AddressingMode_RIP_offset:
+                    {
+                    }break;
+                    case AddressingMode_8b_imm_yMM:
+                    {
+                    }break;//NOTE(Alex): The upper 4 bits of the 8 bit immediate selects a XMM or YMM register
+                    case AddressingMode_MODRM_Mem_only:
+                    {
+                        OpFlags->MODRMNext = true;
+                        OpFlags->OperandType = OperandType_Mem;
+                    }break;
+                    case AddressingMode_RM_MMX:
+                    {
+                        
+                    }break;
+                    case AddressingMode_NO_MODRM:
+                    {
+                        OpFlags->MODRMNext = false;
+                    }break;
+                    
+                    case AddressingMode_RegMMX:
+                    {
+                        OpFlags->OperandType = OperandType_MMX;
+                        OpFlags->DataSize = DataSize_MMX;
+                    }break;
+                    
+                    case AddressingMode_MODRM_MMX_Mem:
+                    {
+                        OpFlags->MODRMNext = true;
+                        OpFlags->OperandType = OperandType_MMX; 
+                    }break;
+                    
+                    case AddressingMode_RM_GPR_only:
+                    {
+                    }break;
+                    case AddressingMode_Reg_Segment:
+                    {
+                    }break;
+                    case AddressingMode_RM_yMM:
+                    {
+                    }break;
+                    case AddressingMode_Reg_yMM:
+                    {
+                    }break;
+                    case AddressingMode_MODRM_yMM_Mem:
+                    {
+                        OpFlags->MODRMNext = true;
+                        OpFlags->OperandType = OperandType_YMM; 
+                        OpFlags->DataSize = DataSize_YMM; 
+                    }break;
+                    case AddressingMode_DS_rSI_Mem:
+                    {
+                    }break;
+                    case AddressingMode_ES_rDI_Mem:
+                    {
+                    }break;
+                    case AddressingMode_Count:
+                    {
+                    }break;
+                    default:
+                    {
+                        InvalidCodePath;
+                    }
+                }
+                
+            }
+#endif
+            
+            
+            uint32_t reg, mod, rm, sreg2, sreg3, reg1, reg2, reg3, imm, eee, s, w, d, tttn, ModRMByte, SIBByte;
+            b32 RegToMODRM = false;
+            
+            //NOTE(Alex): So since we dont know the order od regs sregs, the encoding already knows that, we just have to have a call for all the special bits
+            sreg2 = GetBits(DisasmState, Encoding, BitField_sreg2);
+            sreg3 = GetBits(DisasmState, Encoding, BitField_sreg3);
+            reg1 = GetBits(DisasmState, Encoding, BitField_reg1);
+            reg2 = GetBits(DisasmState, Encoding, BitField_reg2);
+            reg3 = GetBits(DisasmState, Encoding, BitField_reg3);
+            reg = GetBits(DisasmState, Encoding, BitField_reg);
+            eee = GetBits(DisasmState, Encoding, BitField_eee);
+            mod = GetBits(DisasmState, Encoding, BitField_mod);
+            rm = GetBits(DisasmState, Encoding, BitField_rm);
+            w = GetBits(DisasmState, Encoding, BitField_w);
+            imm = GetBits(DisasmState,Encoding, BitField_imm);
+            s = GetBits(DisasmState,Encoding, BitField_s);
+            d = GetBits(DisasmState,Encoding, BitField_d);
+            tttn = GetBits(DisasmState,Encoding, BitField_tttn);
+            ModRMByte = GetBits(DisasmState,Encoding, BitField_modrmbyte);
+            SIBByte = GetBits(DisasmState,Encoding, BitField_sibbyte);
+            
+            Assert(MainOpByte == (uint8_t)GetBits(DisasmState, Encoding, BitField_mainopbyte));
+            //Assert((MainOpByte + 1)  == (uint8_t)GetBits(DisasmState, Encoding, BitField_modrmbyte));
+            
+            RegToMODRM = (d) ? false : true; 
+            
+#define BUFFER_COUNT 128
+            char BufferA[BUFFER_COUNT] = {0};
+            char BufferB[BUFFER_COUNT] = {0};
+            char BufferC[BUFFER_COUNT] = {0};
+            
+            eflyop_operand Source = {};
+            eflyop_operand Dest = {};
+            
+            if(tttn)
+            {
+                //NOTE(Alex): Only for conditional jumps and set on condition
+#if 0                
+                char * ConMnemonic = DisasmState->ConditionTable + tttn;
+                fprintf("%s%s", Entry->Mnemonic, ConMnemonic);
+#endif
+                
+            }
+            
+            if(ModRMByte)
+            {
+                BeginAddressExtraction(DisasmState);
+                GetEffectiveAddressMnemonic(DisasmState, ModRMByte, BufferA, BUFFER_COUNT, OpFlagsArray);
+                GetEffectiveAddressMnemonic(DisasmState, ModRMByte, BufferB, BUFFER_COUNT, OpFlagsArray);
+                GetEffectiveAddressMnemonic(DisasmState, SIBByte, BufferC, BUFFER_COUNT, OpFlagsArray);
+                EndAddressExtraction(DisasmState);
+                
+                Source.Data = (RegToMODRM)  ? BufferA : BufferB;
+                Dest.Data = (RegToMODRM)  ? BufferB : BufferA;
+                printf_s(" %*s %*s ", Dest.LetterCount, Dest.Data, Source.LetterCount, Source.Data);
+            }
+            else
+            {
+                //NOTE(Alex): Has to be encoded inside main opcode
+                BeginAddressExtraction(DisasmState);
+                GetEffectiveAddressMnemonic(DisasmState, reg, BufferA, BUFFER_COUNT, OpFlagsArray);
+                EndAddressExtraction(DisasmState);
+                printf_s(" %s ", BufferA);
+            }
+            
+            // NOTE(Alex): The sign-extend (s) bit occurs in instructions with immediate data fields that are being extended from 8 bits to 16 or 32 bits.
+            if(s)
+            {
+                if(!(imm >> 8))
+                {
+                    if(Dest.DataSize == DataSize_16Bit)
+                    {
+                        imm = SignExtend16(imm);
+                    }
+                    else if(Dest.DataSize == DataSize_32Bit)
+                    {
+                        imm = SignExtend32(imm);
+                    }
+                }
+                
+                printf_s("%x", imm);
+            }
+            
+#if 0    
+            //NOTE(Alex): Prefix decoding
+            uint32_t PrefixFlags = 0;
+            for(uint32_t PrefixIndex = 0;
+                PrefixIndex < PrefixGroup->ByteCount;
+                ++PrefixIndex)
+            {
+                char * CPrefix = PrefixGroup->MinFilePtr + PrefixIndex;
+                
+                switch(*CPrefix)
+                {
+                    case 0xF0:
+                    {
+                        PrefixFlags |= OpcodePrefix_LOCK;
+                    }break;
+                    case 0xF2:
+                    {
+                        PrefixFlags |= OpcodePrefix_REPNE;
+                        PrefixFlags |= OpcodePrefix_BND;
+                    }break;
+                    case OpcodePrefix_OperandSizeOV:
+                    {
+                        PrefixFlags |= OpcodePrefix_LOCK;
+                    }break;
+                    case OpcodePrefix_SegmentOV:
+                    {
+                        PrefixFlags |= OpcodePrefix_LOCK;
+                    }break;
+                    case OpcodePrefix_LOCKAndRepeat:
+                    {
+                        PrefixFlags |= OpcodePrefix_LOCK;
+                    }break;
+                    default:
+                    {
+                        InvalidCodePath;
+                    }break;
+                }
+            }
+#endif
+        }
+    }
+    
+    
+    return Result;
+}
+
 
 internal void
 DecodeExtraBytes(efly_disasm_state * DisasmState, char * MODRMByte, eflyop_prototype * OpProt)
@@ -243,12 +614,17 @@ PrintInstructionSymbols(efly_disasm_state * DisasmState, uint32_t Count, char * 
 }
 
 
+//TODO(Alex): Load this from file?
+//TODO(Alex): Add Prefix identification
+//TODO(Alex): Shall we make the user choose which size attrivutes  
+//the instruction arquitecture should target? Or we use the current arquitecture?
+
+
 #define REG_TABLE_DIM_X 7
 #define REG_TABLE_DIM_Y 8
 
 int main(u32 ArgCount, char ** Arguments)
 {
-    
     char * RegNamesTable[256] = 
     {
         "AL", "AX", "EAX", "MM0", "XMM0", "RAX", "R8", "CR0", "DR0",  
@@ -261,9 +637,13 @@ int main(u32 ArgCount, char ** Arguments)
         "BH", "DI", "EDI", "MM7", "XMM7", "RDI", "R15", "CR7", "DR7",
     };
     
+    
     char * FileName = Arguments[1];
     printf_s("Arg1: %s", Arguments[1]);
     debug_file_content PEContent = Debug_Win32ReadEntireFile(FileName);
+    
+    //TODO(Alex): shall we let the user define this?
+    b32 Is64BitMode = true;
     
     eflype_manager PEManager = {};
     if(eflype_InitParser(&PEManager, &PEContent))
@@ -280,187 +660,56 @@ int main(u32 ArgCount, char ** Arguments)
         DisasmState->CodeSectionSize = TextHeader->SizeOfRawData;
         DisasmState->IP = TextHeader->VirtualAddress;
         
-        //InitializeOpcodeTable(DisasmState, DisasmState.MonoOpcodeTable, MONO_OPCODE_TABLE_SIZE);
         
         
-        //TODO(Alex): Load this from file?
-        //TODO(Alex): Add Prefix identification
-        //TODO(Alex): Shall we make the user choose which size attrivutes  
-        //the instruction arquitecture should target? Or we use the current arquitecture?
-        
-        eflyop_bgroup * PrefixBGroup = 0;
+        eflyop_bgroup PrefixBGroup = {};
         eflyop_prototype OpProt_ = {};
         eflyop_prototype * out_OpProt = &OpProt_;
         
         u32 FirstPassByteCount =  MAX_PREFIX_COUNT_64 + MAX_MAIN_OPCODE_COUNT;
         
+        uint32_t BufferCount = 0;
+        char Buffer[4096];
+        //TODO(Alex): Assert not going out of bounds
         for(;
             DisasmState->CFilePtrByte < (DisasmState->CFilePtrBase + DisasmState->CodeSectionSize);)
         {
-            char * MainOpByte = 0;
-            char * Byte = DisasmState->CFilePtrByte;
-            for(u32 Index = 0;
-                Index < FirstPassByteCount;
-                ++Index)
+            if(ByteIsPrefix(*DisasmState->CFilePtrByte))
             {
-                
-                if(ByteIsPrefix(*Byte))
+                if(!PrefixBGroup.MinFilePtr)
                 {
-                    if(!PrefixBGroup)
+                    PrefixBGroup.MinFilePtr = DisasmState->CFilePtrByte;
+                }
+                
+                Assert(PrefixBGroup.ByteCount < MAX_PREFIX_COUNT_64);
+                ++PrefixBGroup.ByteCount;
+                
+                ++DisasmState->CFilePtrByte;
+            }
+            else
+            {
+                //NOTE(Alex): This will move the CFilePtr
+                //eflyop_bitfield BField= GetNextBits(Buffer, 8);
+                if(TranslateOpcodeAt(DisasmState, DisasmState->CFilePtrByte, &PrefixBGroup, out_OpProt, Is64BitMode))
+                {
+                    if(DisasmState->CFilePtrByte && out_OpProt->ModRMPresent)
                     {
-                        PrefixBGroup = CreateBGroup(DisasmState);
-                        PrefixBGroup->MinFilePtr = Byte;
+                        DecodeExtraBytes(DisasmState, DisasmState->CFilePtrByte, out_OpProt);
                     }
                     
-                    Assert(PrefixBGroup->ByteCount < MAX_PREFIX_COUNT_64);
-                    ++PrefixBGroup->ByteCount;
+                    printf_s("0x%I64x\n", DisasmState->IP);
+                    PrintOpcodeBytes(DisasmState, &out_OpProt->IBGroup);
+                    PrintInstructionSymbols(DisasmState, BufferCount, Buffer);
+                    DisasmState->IP += out_OpProt->IBGroup.ByteCount;
+                    PrefixBGroup.MinFilePtr = 0;
                 }
                 else
                 {
-                    MainOpByte = PrefixBGroup->MinFilePtr + PrefixBGroup->ByteCount;
+                    //NOTE(Alex): Error loading tables
                     break;
                 }
             }
-            
-            Assert(MainOpByte);
-            TranslateMainOpcode(DisasmState, PrefixBGroup, MainOpByte, out_OpProt);
-            
-            if(out_OpProt->ModRMPresent)
-            {
-                DecodeExtraBytes(DisasmState, MainOpByte + 1, out_OpProt);
-            }
-            
-            printf_s("0x%I64x\n", DisasmState->IP);
-            
-            PrintOpcodeBytes(DisasmState, &out_OpProt->IBGroup);
-            PrintInstructionSymbols(DisasmState, out_OpProt->BufferCount, out_OpProt->Buffer);
-            
-            DisasmState->IP += out_OpProt->IBGroup.ByteCount;
-            DisasmState->CFilePtrByte = (out_OpProt->IBGroup.MinFilePtr + out_OpProt->IBGroup.ByteCount);
         }
-        
-        
-#define GET_H4BIT_WORD(...) 0
-#define GET_L4BIT_WORD(...) 0
-        
-#if 0                
-        for(uint32_t OperandIndex = 0;
-            OperandIndex < CMnemonic.OperandCount;
-            ++OperandIndex)
-        {
-            Assert(FilePtrIsInSegment(TextHeader, DisasmState.CFilePtrByte));
-            Assert(OperandIndex < ArrayCount(CMnemonic.Operands));
-            
-            efly_operand * Operand = CMnemonic.Operands + OperandIndex;
-            switch(Operand->AddrMode)
-            {
-                case AddressingMode_DirectAddress:
-                {
-                    Instruction.Size += Operand->Type;
-                }break;
-                case AddressingMode_VEX_GPR:
-                {
-                    //TODO(Alex): VEX Encoding
-                }break;
-                case AddressingMode_RegControl:
-                {
-                    uint32_t RegField = GetRegFieldFromModRM(*DisasmState.CFilePtrByte);
-                    char * RegName = RegNamesTable[RegField * REG_TABLE_DIM_X + RegType_Ctrl];
-                    //PushNameToBuffer(Instruction, RegName);
-                }break;
-                
-                case AddressingMode_RegDebug:
-                {
-                }break;
-                case AddressingMode_MODRM_GPR_Mem:
-                {
-                }break;
-                case AddressingMode_rFLAGS:
-                {
-                }break;
-                case AddressingMode_RegGPR:
-                {
-                }break;
-                case AddressingMode_VEX_yMM:
-                {
-                }break;
-                case AddressingMode_Immediate:
-                {
-                }break;
-                case AddressingMode_RIP_offset:
-                {
-                }break;
-                case AddressingMode_8b_imm_yMM:
-                {
-                }break;//NOTE(Alex): The upper 4 bits of the 8 bit immediate selects a XMM or YMM register
-                case AddressingMode_MODRM_Mem_only:
-                {
-                }break;
-                case AddressingMode_RM_MMX:
-                {
-                }break;
-                case AddressingMode_NO_MODRM:
-                {
-                }break;
-                case AddressingMode_RegMMX:
-                {
-                }break;
-                case AddressingMode_MODRM_MMX_Mem:
-                {
-                }break;
-                
-                case AddressingMode_RM_GPR_only:
-                {
-                }break;
-                case AddressingMode_Reg_Segment:
-                {
-                }break;
-                case AddressingMode_RM_yMM:
-                {
-                }break;
-                case AddressingMode_Reg_yMM:
-                {
-                }break;
-                case AddressingMode_MODRM_yMM_Mem:
-                {
-                }break;
-                case AddressingMode_DS_rSI_Mem:
-                {
-                }break;
-                case AddressingMode_ES_rDI_Mem:
-                {
-                }break;
-                case AddressingMode_Count:
-                {
-                }break;
-                default:
-                {
-                    InvalidCodePath;
-                }
-            }
-            
-            for(uint32_t ByteIndex = 0;
-                ByteIndex < Operand->Type;
-                ++ByteIndex)
-            {
-                Assert(IsValidFilePtr(ImmFilePtr));
-                printf_s("%x", *ImmFilePtr);
-            }
-            
-            
-            //Hints = PushArray(Arena, Count,eflype_opcode_size_hints);
-            eflype_opcode_bloc * Block = LexOpcodeBlock(PEManager);
-            ListInstructionrefixes(PEManager, Block);
-            FindInstructionMnemonic(PEManager, Block);
-            FindOperands(Block);
-            
-            if(InstructionFound)
-            {
-                DisasmState.OpcodeBase = DisasmState.CFilePtrByte;
-            }
-            
-        }
-#endif
     }
     else
     {

@@ -129,8 +129,10 @@ ELSEIFDEF OPCODE_ENCODING
 	.code
 	START PROC
 	XOR EAX, EAX
-	ADD EAX, Num0
+	jae L_End
 	MOV CX, AX
+
+	L_END:
 	call ExitProcess
 	START ENDP
 
