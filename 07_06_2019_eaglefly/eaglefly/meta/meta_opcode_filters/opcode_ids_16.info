@@ -1,0 +1,2698 @@
+one-byte
+pri_opcd = 00
+	entry = 0
+		opcode_id (8,0x00) mod reg rm 
+pri_opcd = 01
+	entry = 1
+		opcode_id (8,0x01) mod reg rm 
+pri_opcd = 02
+	entry = 2
+		opcode_id (8,0x02) mod reg rm 
+pri_opcd = 03
+	entry = 3
+		opcode_id (8,0x03) mod reg rm 
+pri_opcd = 04
+	entry = 4
+		opcode_id (8,0x04) 
+pri_opcd = 05
+	entry = 5
+		opcode_id (8,0x05) 
+pri_opcd = 06
+	entry = 6
+		opcode_id (3,0x00) sreg2 (3,0x06) 
+	exta_entry = 7
+pri_opcd = 07
+	entry = 8
+		opcode_id (3,0x00) sreg2 (3,0x07) 
+	exta_entry = 9
+pri_opcd = 08
+	entry = 10
+		opcode_id (8,0x08) mod reg rm 
+pri_opcd = 09
+	entry = 11
+		opcode_id (8,0x09) mod reg rm 
+pri_opcd = 0A
+	entry = 12
+		opcode_id (8,0x0A) mod reg rm 
+pri_opcd = 0B
+	entry = 13
+		opcode_id (8,0x0B) mod reg rm 
+pri_opcd = 0C
+	entry = 14
+		opcode_id (8,0x0C) 
+pri_opcd = 0D
+	entry = 15
+		opcode_id (8,0x0D) 
+pri_opcd = 0E
+	entry = 16
+		opcode_id (3,0x00) sreg2 (3,0x06) 
+	exta_entry = 17
+pri_opcd = 0F
+	entry = 18
+		opcode_id (3,0x00) sreg2 (3,0x07) 
+	exta_entry = 19
+	exta_entry = 20
+pri_opcd = 10
+	entry = 21
+		opcode_id (8,0x10) mod reg rm 
+pri_opcd = 11
+	entry = 22
+		opcode_id (8,0x11) mod reg rm 
+pri_opcd = 12
+	entry = 23
+		opcode_id (8,0x12) mod reg rm 
+pri_opcd = 13
+	entry = 24
+		opcode_id (8,0x13) mod reg rm 
+pri_opcd = 14
+	entry = 25
+		opcode_id (8,0x14) 
+pri_opcd = 15
+	entry = 26
+		opcode_id (8,0x15) 
+pri_opcd = 16
+	entry = 27
+		opcode_id (3,0x00) sreg2 (3,0x06) 
+	exta_entry = 28
+pri_opcd = 17
+	entry = 29
+		opcode_id (3,0x00) sreg2 (3,0x07) 
+	exta_entry = 30
+pri_opcd = 18
+	entry = 31
+		opcode_id (8,0x18) mod reg rm 
+pri_opcd = 19
+	entry = 32
+		opcode_id (8,0x19) mod reg rm 
+pri_opcd = 1A
+	entry = 33
+		opcode_id (8,0x1A) mod reg rm 
+pri_opcd = 1B
+	entry = 34
+		opcode_id (8,0x1B) mod reg rm 
+pri_opcd = 1C
+	entry = 35
+		opcode_id (8,0x1C) 
+pri_opcd = 1D
+	entry = 36
+		opcode_id (8,0x1D) 
+pri_opcd = 1E
+	entry = 37
+		opcode_id (3,0x00) sreg2 (3,0x06) 
+	exta_entry = 38
+pri_opcd = 1F
+	entry = 39
+		opcode_id (3,0x00) sreg2 (3,0x07) 
+	exta_entry = 40
+pri_opcd = 20
+	entry = 41
+		opcode_id (8,0x20) mod reg rm 
+pri_opcd = 21
+	entry = 42
+		opcode_id (8,0x21) mod reg rm 
+pri_opcd = 22
+	entry = 43
+		opcode_id (8,0x22) mod reg rm 
+pri_opcd = 23
+	entry = 44
+		opcode_id (8,0x23) mod reg rm 
+pri_opcd = 24
+	entry = 45
+		opcode_id (8,0x24) 
+pri_opcd = 25
+	entry = 46
+		opcode_id (8,0x25) 
+pri_opcd = 26
+	entry = 47
+		opcode_id (8,0x26) 
+	exta_entry = 48
+	exta_entry = 49
+pri_opcd = 27
+	entry = 50
+		opcode_id (8,0x27) 
+	exta_entry = 51
+pri_opcd = 28
+	entry = 52
+		opcode_id (8,0x28) mod reg rm 
+pri_opcd = 29
+	entry = 53
+		opcode_id (8,0x29) mod reg rm 
+pri_opcd = 2A
+	entry = 54
+		opcode_id (8,0x2A) mod reg rm 
+pri_opcd = 2B
+	entry = 55
+		opcode_id (8,0x2B) mod reg rm 
+pri_opcd = 2C
+	entry = 56
+		opcode_id (8,0x2C) 
+pri_opcd = 2D
+	entry = 57
+		opcode_id (8,0x2D) 
+pri_opcd = 2E
+	entry = 58
+		opcode_id (8,0x2E) 
+	exta_entry = 59
+		opcode_id (8,0x2E) 
+	exta_entry = 60
+pri_opcd = 2F
+	entry = 61
+		opcode_id (8,0x2F) 
+	exta_entry = 62
+pri_opcd = 30
+	entry = 63
+		opcode_id (8,0x30) mod reg rm 
+pri_opcd = 31
+	entry = 64
+		opcode_id (8,0x31) mod reg rm 
+pri_opcd = 32
+	entry = 65
+		opcode_id (8,0x32) mod reg rm 
+pri_opcd = 33
+	entry = 66
+		opcode_id (8,0x33) mod reg rm 
+pri_opcd = 34
+	entry = 67
+		opcode_id (8,0x34) 
+pri_opcd = 35
+	entry = 68
+		opcode_id (8,0x35) 
+pri_opcd = 36
+	entry = 69
+		opcode_id (8,0x36) 
+	exta_entry = 70
+	exta_entry = 71
+pri_opcd = 37
+	entry = 72
+		opcode_id (8,0x37) 
+	exta_entry = 73
+pri_opcd = 38
+	entry = 74
+		opcode_id (8,0x38) mod reg rm 
+pri_opcd = 39
+	entry = 75
+		opcode_id (8,0x39) mod reg rm 
+pri_opcd = 3A
+	entry = 76
+		opcode_id (8,0x3A) mod reg rm 
+pri_opcd = 3B
+	entry = 77
+		opcode_id (8,0x3B) mod reg rm 
+pri_opcd = 3C
+	entry = 78
+		opcode_id (8,0x3C) 
+pri_opcd = 3D
+	entry = 79
+		opcode_id (8,0x3D) 
+pri_opcd = 3E
+	entry = 80
+		opcode_id (8,0x3E) 
+	exta_entry = 81
+		opcode_id (8,0x3E) 
+	exta_entry = 82
+pri_opcd = 3F
+	entry = 83
+		opcode_id (8,0x3F) 
+	exta_entry = 84
+pri_opcd = 40
+	entry = 85
+		opcode_id (5,0x08) reg 
+	exta_entry = 86
+pri_opcd = 41
+	entry = 87
+pri_opcd = 42
+	entry = 88
+pri_opcd = 43
+	entry = 89
+pri_opcd = 44
+	entry = 90
+pri_opcd = 45
+	entry = 91
+pri_opcd = 46
+	entry = 92
+pri_opcd = 47
+	entry = 93
+pri_opcd = 48
+	entry = 94
+		opcode_id (5,0x09) reg 
+	exta_entry = 95
+pri_opcd = 49
+	entry = 96
+pri_opcd = 4A
+	entry = 97
+pri_opcd = 4B
+	entry = 98
+pri_opcd = 4C
+	entry = 99
+pri_opcd = 4D
+	entry = 100
+pri_opcd = 4E
+	entry = 101
+pri_opcd = 4F
+	entry = 102
+pri_opcd = 50
+	entry = 103
+		opcode_id (5,0x0A) reg 
+	exta_entry = 104
+pri_opcd = 58
+	entry = 105
+		opcode_id (5,0x0B) reg 
+	exta_entry = 106
+pri_opcd = 60
+	entry = 107
+		opcode_id (8,0x60) 
+	exta_entry = 108
+		opcode_id (8,0x60) 
+	exta_entry = 109
+pri_opcd = 61
+	entry = 110
+		opcode_id (8,0x61) 
+	exta_entry = 111
+		opcode_id (8,0x61) 
+	exta_entry = 112
+pri_opcd = 62
+	entry = 113
+		opcode_id (8,0x62) mod reg rm 
+	exta_entry = 114
+pri_opcd = 63
+	entry = 115
+		opcode_id (8,0x63) mod reg rm 
+	exta_entry = 116
+pri_opcd = 64
+	entry = 117
+		opcode_id (8,0x64) 
+	exta_entry = 118
+	exta_entry = 119
+		opcode_id (8,0x64) 
+pri_opcd = 65
+	entry = 120
+		opcode_id (8,0x65) 
+	exta_entry = 121
+pri_opcd = 66
+	entry = 122
+	exta_entry = 123
+pri_opcd = 67
+	entry = 124
+pri_opcd = 68
+	entry = 125
+		opcode_id (8,0x68) 
+pri_opcd = 69
+	entry = 126
+		opcode_id (8,0x69) mod reg rm 
+pri_opcd = 6A
+	entry = 127
+		opcode_id (8,0x6A) 
+pri_opcd = 6B
+	entry = 128
+		opcode_id (8,0x6B) mod reg rm 
+pri_opcd = 6C
+	entry = 129
+		opcode_id (8,0x6C) 
+		extra_opcode_id (8,0x6C) 
+pri_opcd = 6D
+	entry = 130
+		opcode_id (8,0x6D) 
+		extra_opcode_id (8,0x6D) 
+	exta_entry = 131
+		opcode_id (8,0x6D) 
+		extra_opcode_id (8,0x6D) 
+pri_opcd = 6E
+	entry = 132
+		opcode_id (8,0x6E) 
+		extra_opcode_id (8,0x6E) 
+pri_opcd = 6F
+	entry = 133
+		opcode_id (8,0x6F) 
+		extra_opcode_id (8,0x6F) 
+	exta_entry = 134
+		opcode_id (8,0x6F) 
+		extra_opcode_id (8,0x6F) 
+pri_opcd = 70
+	entry = 135
+		opcode_id (8,0x70) 
+pri_opcd = 71
+	entry = 136
+		opcode_id (8,0x71) 
+pri_opcd = 72
+	entry = 137
+		opcode_id (8,0x72) 
+		extra_opcode_id (8,0x72) 
+		extra_opcode_id (8,0x72) 
+pri_opcd = 73
+	entry = 138
+		opcode_id (8,0x73) 
+		extra_opcode_id (8,0x73) 
+		extra_opcode_id (8,0x73) 
+pri_opcd = 74
+	entry = 139
+		opcode_id (8,0x74) 
+		extra_opcode_id (8,0x74) 
+pri_opcd = 75
+	entry = 140
+		opcode_id (8,0x75) 
+		extra_opcode_id (8,0x75) 
+pri_opcd = 76
+	entry = 141
+		opcode_id (8,0x76) 
+		extra_opcode_id (8,0x76) 
+pri_opcd = 77
+	entry = 142
+		opcode_id (8,0x77) 
+		extra_opcode_id (8,0x77) 
+pri_opcd = 78
+	entry = 143
+		opcode_id (8,0x78) 
+pri_opcd = 79
+	entry = 144
+		opcode_id (8,0x79) 
+pri_opcd = 7A
+	entry = 145
+		opcode_id (8,0x7A) 
+		extra_opcode_id (8,0x7A) 
+pri_opcd = 7B
+	entry = 146
+		opcode_id (8,0x7B) 
+		extra_opcode_id (8,0x7B) 
+pri_opcd = 7C
+	entry = 147
+		opcode_id (8,0x7C) 
+		extra_opcode_id (8,0x7C) 
+pri_opcd = 7D
+	entry = 148
+		opcode_id (8,0x7D) 
+		extra_opcode_id (8,0x7D) 
+pri_opcd = 7E
+	entry = 149
+		opcode_id (8,0x7E) 
+		extra_opcode_id (8,0x7E) 
+pri_opcd = 7F
+	entry = 150
+		opcode_id (8,0x7F) 
+		extra_opcode_id (8,0x7F) 
+pri_opcd = 80
+	entry = 151
+		opcode_id (8,0x80) mod (3,0x0) rm 
+	exta_entry = 152
+		opcode_id (8,0x80) mod (3,0x1) rm 
+	exta_entry = 153
+		opcode_id (8,0x80) mod (3,0x2) rm 
+	exta_entry = 154
+		opcode_id (8,0x80) mod (3,0x3) rm 
+	exta_entry = 155
+		opcode_id (8,0x80) mod (3,0x4) rm 
+	exta_entry = 156
+		opcode_id (8,0x80) mod (3,0x5) rm 
+	exta_entry = 157
+		opcode_id (8,0x80) mod (3,0x6) rm 
+	exta_entry = 158
+		opcode_id (8,0x80) mod (3,0x7) rm 
+pri_opcd = 81
+	entry = 159
+		opcode_id (8,0x81) mod (3,0x0) rm 
+	exta_entry = 160
+		opcode_id (8,0x81) mod (3,0x1) rm 
+	exta_entry = 161
+		opcode_id (8,0x81) mod (3,0x2) rm 
+	exta_entry = 162
+		opcode_id (8,0x81) mod (3,0x3) rm 
+	exta_entry = 163
+		opcode_id (8,0x81) mod (3,0x4) rm 
+	exta_entry = 164
+		opcode_id (8,0x81) mod (3,0x5) rm 
+	exta_entry = 165
+		opcode_id (8,0x81) mod (3,0x6) rm 
+	exta_entry = 166
+		opcode_id (8,0x81) mod (3,0x7) rm 
+pri_opcd = 82
+	entry = 167
+		opcode_id (8,0x82) mod (3,0x0) rm 
+	exta_entry = 168
+		opcode_id (8,0x82) mod (3,0x1) rm 
+	exta_entry = 169
+		opcode_id (8,0x82) mod (3,0x2) rm 
+	exta_entry = 170
+		opcode_id (8,0x82) mod (3,0x3) rm 
+	exta_entry = 171
+		opcode_id (8,0x82) mod (3,0x4) rm 
+	exta_entry = 172
+		opcode_id (8,0x82) mod (3,0x5) rm 
+	exta_entry = 173
+		opcode_id (8,0x82) mod (3,0x6) rm 
+	exta_entry = 174
+		opcode_id (8,0x82) mod (3,0x7) rm 
+	exta_entry = 175
+pri_opcd = 83
+	entry = 176
+		opcode_id (8,0x83) mod (3,0x0) rm 
+	exta_entry = 177
+		opcode_id (8,0x83) mod (3,0x1) rm 
+	exta_entry = 178
+		opcode_id (8,0x83) mod (3,0x2) rm 
+	exta_entry = 179
+		opcode_id (8,0x83) mod (3,0x3) rm 
+	exta_entry = 180
+		opcode_id (8,0x83) mod (3,0x4) rm 
+	exta_entry = 181
+		opcode_id (8,0x83) mod (3,0x5) rm 
+	exta_entry = 182
+		opcode_id (8,0x83) mod (3,0x6) rm 
+	exta_entry = 183
+		opcode_id (8,0x83) mod (3,0x7) rm 
+pri_opcd = 84
+	entry = 184
+		opcode_id (8,0x84) mod reg rm 
+pri_opcd = 85
+	entry = 185
+		opcode_id (8,0x85) mod reg rm 
+pri_opcd = 86
+	entry = 186
+		opcode_id (8,0x86) mod reg rm 
+pri_opcd = 87
+	entry = 187
+		opcode_id (8,0x87) mod reg rm 
+pri_opcd = 88
+	entry = 188
+		opcode_id (8,0x88) mod reg rm 
+pri_opcd = 89
+	entry = 189
+		opcode_id (8,0x89) mod reg rm 
+pri_opcd = 8A
+	entry = 190
+		opcode_id (8,0x8A) mod reg rm 
+pri_opcd = 8B
+	entry = 191
+		opcode_id (8,0x8B) mod reg rm 
+pri_opcd = 8C
+	entry = 192
+		opcode_id (8,0x8C) mod reg rm 
+		extra_opcode_id (8,0x8C) (2, 3) reg rm 
+pri_opcd = 8D
+	entry = 193
+		opcode_id (8,0x8D) mod reg rm 
+pri_opcd = 8E
+	entry = 194
+		opcode_id (8,0x8E) mod reg rm 
+pri_opcd = 8F
+	entry = 195
+		opcode_id (8,0x8F) mod (3,0x0) rm 
+	exta_entry = 196
+pri_opcd = 90
+	entry = 197
+		opcode_id (5,0x12) reg 
+	exta_entry = 198
+		opcode_id (8,0x90) 
+	exta_entry = 199
+		opcode_id (8,0xF3) (8,0x90) 
+	exta_entry = 200
+		opcode_id (8,0xF3) (8,0x90) 
+pri_opcd = 98
+	entry = 201
+		opcode_id (8,0x98) 
+	exta_entry = 202
+		opcode_id (8,0x98) 
+	exta_entry = 203
+pri_opcd = 99
+	entry = 204
+		opcode_id (8,0x99) 
+	exta_entry = 205
+		opcode_id (8,0x99) 
+	exta_entry = 206
+pri_opcd = 9A
+	entry = 207
+		opcode_id (8,0x9A) 
+	exta_entry = 208
+pri_opcd = 9B
+	entry = 209
+		opcode_id (8,0x9B) 
+		extra_opcode_id (8,0x9B) 
+	exta_entry = 210
+pri_opcd = 9C
+	entry = 211
+		opcode_id (8,0x9C) 
+	exta_entry = 212
+		opcode_id (8,0x9C) 
+	exta_entry = 213
+pri_opcd = 9D
+	entry = 214
+		opcode_id (8,0x9D) 
+	exta_entry = 215
+		opcode_id (8,0x9D) 
+	exta_entry = 216
+pri_opcd = 9E
+	entry = 217
+		opcode_id (8,0x9E) 
+pri_opcd = 9F
+	entry = 218
+		opcode_id (8,0x9F) 
+pri_opcd = A0
+	entry = 219
+		opcode_id (8,0xA0) 
+pri_opcd = A1
+	entry = 220
+		opcode_id (8,0xA1) 
+pri_opcd = A2
+	entry = 221
+		opcode_id (8,0xA2) 
+pri_opcd = A3
+	entry = 222
+		opcode_id (8,0xA3) 
+pri_opcd = A4
+	entry = 223
+		opcode_id (8,0xA4) 
+		extra_opcode_id (8,0xA4) 
+pri_opcd = A5
+	entry = 224
+		opcode_id (8,0xA5) 
+		extra_opcode_id (8,0xA5) 
+	exta_entry = 225
+		opcode_id (8,0xA5) 
+		extra_opcode_id (8,0xA5) 
+	exta_entry = 226
+pri_opcd = A6
+	entry = 227
+		opcode_id (8,0xA6) 
+		extra_opcode_id (8,0xA6) 
+pri_opcd = A7
+	entry = 228
+		opcode_id (8,0xA7) 
+		extra_opcode_id (8,0xA7) 
+	exta_entry = 229
+		opcode_id (8,0xA7) 
+		extra_opcode_id (8,0xA7) 
+	exta_entry = 230
+pri_opcd = A8
+	entry = 231
+		opcode_id (8,0xA8) 
+pri_opcd = A9
+	entry = 232
+		opcode_id (8,0xA9) 
+pri_opcd = AA
+	entry = 233
+		opcode_id (8,0xAA) 
+		extra_opcode_id (8,0xAA) 
+pri_opcd = AB
+	entry = 234
+		opcode_id (8,0xAB) 
+		extra_opcode_id (8,0xAB) 
+	exta_entry = 235
+		opcode_id (8,0xAB) 
+		extra_opcode_id (8,0xAB) 
+	exta_entry = 236
+pri_opcd = AC
+	entry = 237
+		opcode_id (8,0xAC) 
+		extra_opcode_id (8,0xAC) 
+pri_opcd = AD
+	entry = 238
+		opcode_id (8,0xAD) 
+		extra_opcode_id (8,0xAD) 
+	exta_entry = 239
+		opcode_id (8,0xAD) 
+		extra_opcode_id (8,0xAD) 
+	exta_entry = 240
+pri_opcd = AE
+	entry = 241
+		opcode_id (8,0xAE) 
+		extra_opcode_id (8,0xAE) 
+pri_opcd = AF
+	entry = 242
+		opcode_id (8,0xAF) 
+		extra_opcode_id (8,0xAF) 
+	exta_entry = 243
+		opcode_id (8,0xAF) 
+		extra_opcode_id (8,0xAF) 
+	exta_entry = 244
+pri_opcd = B0
+	entry = 245
+		opcode_id (5,0x16) reg 
+pri_opcd = B8
+	entry = 246
+		opcode_id (5,0x17) reg 
+pri_opcd = C0
+	entry = 247
+		opcode_id (8,0xC0) mod (3,0x0) rm 
+	exta_entry = 248
+		opcode_id (8,0xC0) mod (3,0x1) rm 
+	exta_entry = 249
+		opcode_id (8,0xC0) mod (3,0x2) rm 
+	exta_entry = 250
+		opcode_id (8,0xC0) mod (3,0x3) rm 
+	exta_entry = 251
+		opcode_id (8,0xC0) mod (3,0x4) rm 
+		extra_opcode_id (8,0xC0) mod (3,0x4) rm 
+	exta_entry = 252
+		opcode_id (8,0xC0) mod (3,0x5) rm 
+	exta_entry = 253
+		opcode_id (8,0xC0) mod (3,0x6) rm 
+		extra_opcode_id (8,0xC0) mod (3,0x6) rm 
+	exta_entry = 254
+		opcode_id (8,0xC0) mod (3,0x7) rm 
+pri_opcd = C1
+	entry = 255
+		opcode_id (8,0xC1) mod (3,0x0) rm 
+	exta_entry = 256
+		opcode_id (8,0xC1) mod (3,0x1) rm 
+	exta_entry = 257
+		opcode_id (8,0xC1) mod (3,0x2) rm 
+	exta_entry = 258
+		opcode_id (8,0xC1) mod (3,0x3) rm 
+	exta_entry = 259
+		opcode_id (8,0xC1) mod (3,0x4) rm 
+		extra_opcode_id (8,0xC1) mod (3,0x4) rm 
+	exta_entry = 260
+		opcode_id (8,0xC1) mod (3,0x5) rm 
+	exta_entry = 261
+		opcode_id (8,0xC1) mod (3,0x6) rm 
+		extra_opcode_id (8,0xC1) mod (3,0x6) rm 
+	exta_entry = 262
+		opcode_id (8,0xC1) mod (3,0x7) rm 
+pri_opcd = C2
+	entry = 263
+		opcode_id (8,0xC2) 
+pri_opcd = C3
+	entry = 264
+		opcode_id (8,0xC3) 
+pri_opcd = C4
+	entry = 265
+		opcode_id (8,0xC4) mod reg rm 
+	exta_entry = 266
+pri_opcd = C5
+	entry = 267
+		opcode_id (8,0xC5) mod reg rm 
+	exta_entry = 268
+pri_opcd = C6
+	entry = 269
+		opcode_id (8,0xC6) mod (3,0x0) rm 
+pri_opcd = C7
+	entry = 270
+		opcode_id (8,0xC7) mod (3,0x0) rm 
+pri_opcd = C8
+	entry = 271
+		opcode_id (8,0xC8) 
+	exta_entry = 272
+pri_opcd = C9
+	entry = 273
+		opcode_id (8,0xC9) 
+	exta_entry = 274
+pri_opcd = CA
+	entry = 275
+		opcode_id (8,0xCA) 
+pri_opcd = CB
+	entry = 276
+		opcode_id (8,0xCB) 
+pri_opcd = CC
+	entry = 277
+		opcode_id (8,0xCC) 
+pri_opcd = CD
+	entry = 278
+		opcode_id (8,0xCD) 
+pri_opcd = CE
+	entry = 279
+		opcode_id (8,0xCE) 
+pri_opcd = CF
+	entry = 280
+		opcode_id (8,0xCF) 
+	exta_entry = 281
+		opcode_id (8,0xCF) 
+	exta_entry = 282
+pri_opcd = D0
+	entry = 283
+		opcode_id (8,0xD0) mod (3,0x0) rm 
+	exta_entry = 284
+		opcode_id (8,0xD0) mod (3,0x1) rm 
+	exta_entry = 285
+		opcode_id (8,0xD0) mod (3,0x2) rm 
+	exta_entry = 286
+		opcode_id (8,0xD0) mod (3,0x3) rm 
+	exta_entry = 287
+		opcode_id (8,0xD0) mod (3,0x4) rm 
+		extra_opcode_id (8,0xD0) mod (3,0x4) rm 
+	exta_entry = 288
+		opcode_id (8,0xD0) mod (3,0x5) rm 
+	exta_entry = 289
+		opcode_id (8,0xD0) mod (3,0x6) rm 
+		extra_opcode_id (8,0xD0) mod (3,0x6) rm 
+	exta_entry = 290
+		opcode_id (8,0xD0) mod (3,0x7) rm 
+pri_opcd = D1
+	entry = 291
+		opcode_id (8,0xD1) mod (3,0x0) rm 
+	exta_entry = 292
+		opcode_id (8,0xD1) mod (3,0x1) rm 
+	exta_entry = 293
+		opcode_id (8,0xD1) mod (3,0x2) rm 
+	exta_entry = 294
+		opcode_id (8,0xD1) mod (3,0x3) rm 
+	exta_entry = 295
+		opcode_id (8,0xD1) mod (3,0x4) rm 
+		extra_opcode_id (8,0xD1) mod (3,0x4) rm 
+	exta_entry = 296
+		opcode_id (8,0xD1) mod (3,0x5) rm 
+	exta_entry = 297
+		opcode_id (8,0xD1) mod (3,0x6) rm 
+		extra_opcode_id (8,0xD1) mod (3,0x6) rm 
+	exta_entry = 298
+		opcode_id (8,0xD1) mod (3,0x7) rm 
+pri_opcd = D2
+	entry = 299
+		opcode_id (8,0xD2) mod (3,0x0) rm 
+	exta_entry = 300
+		opcode_id (8,0xD2) mod (3,0x1) rm 
+	exta_entry = 301
+		opcode_id (8,0xD2) mod (3,0x2) rm 
+	exta_entry = 302
+		opcode_id (8,0xD2) mod (3,0x3) rm 
+	exta_entry = 303
+		opcode_id (8,0xD2) mod (3,0x4) rm 
+		extra_opcode_id (8,0xD2) mod (3,0x4) rm 
+	exta_entry = 304
+		opcode_id (8,0xD2) mod (3,0x5) rm 
+	exta_entry = 305
+		opcode_id (8,0xD2) mod (3,0x6) rm 
+		extra_opcode_id (8,0xD2) mod (3,0x6) rm 
+	exta_entry = 306
+		opcode_id (8,0xD2) mod (3,0x7) rm 
+pri_opcd = D3
+	entry = 307
+		opcode_id (8,0xD3) mod (3,0x0) rm 
+	exta_entry = 308
+		opcode_id (8,0xD3) mod (3,0x1) rm 
+	exta_entry = 309
+		opcode_id (8,0xD3) mod (3,0x2) rm 
+	exta_entry = 310
+		opcode_id (8,0xD3) mod (3,0x3) rm 
+	exta_entry = 311
+		opcode_id (8,0xD3) mod (3,0x4) rm 
+		extra_opcode_id (8,0xD3) mod (3,0x4) rm 
+	exta_entry = 312
+		opcode_id (8,0xD3) mod (3,0x5) rm 
+	exta_entry = 313
+		opcode_id (8,0xD3) mod (3,0x6) rm 
+		extra_opcode_id (8,0xD3) mod (3,0x6) rm 
+	exta_entry = 314
+		opcode_id (8,0xD3) mod (3,0x7) rm 
+pri_opcd = D4
+	entry = 315
+		opcode_id (8,0xD4) (8,0x0A) 
+	exta_entry = 316
+		opcode_id (8,0xD4) 
+	exta_entry = 317
+pri_opcd = D5
+	entry = 318
+		opcode_id (8,0xD5) (8,0x0A) 
+	exta_entry = 319
+		opcode_id (8,0xD5) 
+	exta_entry = 320
+pri_opcd = D6
+	entry = 321
+	exta_entry = 322
+		opcode_id (8,0xD6) 
+		extra_opcode_id (8,0xD6) 
+	exta_entry = 323
+pri_opcd = D7
+	entry = 324
+		opcode_id (8,0xD7) 
+		extra_opcode_id (8,0xD7) 
+pri_opcd = D8
+	entry = 325
+		opcode_id (8,0xD8) mod (3,0x0) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x0) rm 
+	exta_entry = 326
+		opcode_id (8,0xD8) mod (3,0x1) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x1) rm 
+	exta_entry = 327
+		opcode_id (8,0xD8) mod (3,0x2) rm 
+	exta_entry = 328
+		opcode_id (8,0xD8) (8,0xD1) mod (3,0x2) rm 
+	exta_entry = 329
+		opcode_id (8,0xD8) mod (3,0x3) rm 
+	exta_entry = 330
+		opcode_id (8,0xD8) (8,0xD9) mod (3,0x3) rm 
+	exta_entry = 331
+		opcode_id (8,0xD8) mod (3,0x4) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x4) rm 
+	exta_entry = 332
+		opcode_id (8,0xD8) mod (3,0x5) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x5) rm 
+	exta_entry = 333
+		opcode_id (8,0xD8) mod (3,0x6) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x6) rm 
+	exta_entry = 334
+		opcode_id (8,0xD8) mod (3,0x7) rm 
+		extra_opcode_id (8,0xD8) (2, 3) (3,0x7) rm 
+pri_opcd = D9
+	entry = 335
+		opcode_id (8,0xD9) mod (3,0x0) rm 
+	exta_entry = 336
+		opcode_id (8,0xD9) (2, 3) (3,0x1) rm 
+	exta_entry = 337
+		opcode_id (8,0xD9) (8,0xC9) mod (3,0x1) rm 
+	exta_entry = 338
+		opcode_id (8,0xD9) mod (3,0x2) rm 
+	exta_entry = 339
+		opcode_id (8,0xD9) (8,0xD0) mod (3,0x2) rm 
+	exta_entry = 340
+		opcode_id (8,0xD9) mod (3,0x3) rm 
+	exta_entry = 341
+		opcode_id (8,0xD9) (2, 3) (3,0x3) rm 
+	exta_entry = 342
+		opcode_id (8,0xD9) (2, 3) (3,0x3) rm 
+	exta_entry = 343
+		opcode_id (8,0xD9) mod (3,0x4) rm 
+	exta_entry = 344
+		opcode_id (8,0xD9) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 345
+		opcode_id (8,0xD9) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 346
+		opcode_id (8,0xD9) (8,0xE4) mod (3,0x4) rm 
+	exta_entry = 347
+		opcode_id (8,0xD9) (8,0xE5) mod (3,0x4) rm 
+	exta_entry = 348
+		opcode_id (8,0xD9) mod (3,0x5) rm 
+	exta_entry = 349
+		opcode_id (8,0xD9) (8,0xE8) mod (3,0x5) rm 
+	exta_entry = 350
+		opcode_id (8,0xD9) (8,0xE9) mod (3,0x5) rm 
+	exta_entry = 351
+		opcode_id (8,0xD9) (8,0xEA) mod (3,0x5) rm 
+	exta_entry = 352
+		opcode_id (8,0xD9) (8,0xEB) mod (3,0x5) rm 
+	exta_entry = 353
+		opcode_id (8,0xD9) (8,0xEC) mod (3,0x5) rm 
+	exta_entry = 354
+		opcode_id (8,0xD9) (8,0xED) mod (3,0x5) rm 
+	exta_entry = 355
+		opcode_id (8,0xD9) (8,0xEE) mod (3,0x5) rm 
+	exta_entry = 356
+		opcode_id (8,0xD9) mod (3,0x6) rm 
+	exta_entry = 357
+		opcode_id (8,0x9B) (8,0xD9) mod (3,0x6) rm 
+	exta_entry = 358
+		opcode_id (8,0xD9) (8,0xF0) mod (3,0x6) rm 
+	exta_entry = 359
+		opcode_id (8,0xD9) (8,0xF1) mod (3,0x6) rm 
+	exta_entry = 360
+		opcode_id (8,0xD9) (8,0xF2) mod (3,0x6) rm 
+	exta_entry = 361
+		opcode_id (8,0xD9) (8,0xF3) mod (3,0x6) rm 
+	exta_entry = 362
+		opcode_id (8,0xD9) (8,0xF4) mod (3,0x6) rm 
+	exta_entry = 363
+		opcode_id (8,0xD9) (8,0xF5) mod (3,0x6) rm 
+	exta_entry = 364
+		opcode_id (8,0xD9) (8,0xF6) mod (3,0x6) rm 
+	exta_entry = 365
+		opcode_id (8,0xD9) (8,0xF7) mod (3,0x6) rm 
+	exta_entry = 366
+		opcode_id (8,0xD9) mod (3,0x7) rm 
+	exta_entry = 367
+		opcode_id (8,0x9B) (8,0xD9) mod (3,0x7) rm 
+	exta_entry = 368
+		opcode_id (8,0xD9) (8,0xF8) mod (3,0x7) rm 
+	exta_entry = 369
+		opcode_id (8,0xD9) (8,0xF9) mod (3,0x7) rm 
+	exta_entry = 370
+		opcode_id (8,0xD9) (8,0xFA) mod (3,0x7) rm 
+	exta_entry = 371
+		opcode_id (8,0xD9) (8,0xFB) mod (3,0x7) rm 
+	exta_entry = 372
+		opcode_id (8,0xD9) (8,0xFC) mod (3,0x7) rm 
+	exta_entry = 373
+		opcode_id (8,0xD9) (8,0xFD) mod (3,0x7) rm 
+	exta_entry = 374
+		opcode_id (8,0xD9) (8,0xFE) mod (3,0x7) rm 
+	exta_entry = 375
+		opcode_id (8,0xD9) (8,0xFF) mod (3,0x7) rm 
+pri_opcd = DA
+	entry = 376
+		opcode_id (8,0xDA) mod (3,0x0) rm 
+	exta_entry = 377
+		opcode_id (8,0xDA) (2, 3) (3,0x0) rm 
+	exta_entry = 378
+		opcode_id (8,0xDA) mod (3,0x1) rm 
+	exta_entry = 379
+		opcode_id (8,0xDA) (2, 3) (3,0x1) rm 
+	exta_entry = 380
+		opcode_id (8,0xDA) mod (3,0x2) rm 
+	exta_entry = 381
+		opcode_id (8,0xDA) (2, 3) (3,0x2) rm 
+	exta_entry = 382
+		opcode_id (8,0xDA) mod (3,0x3) rm 
+	exta_entry = 383
+		opcode_id (8,0xDA) (2, 3) (3,0x3) rm 
+	exta_entry = 384
+		opcode_id (8,0xDA) mod (3,0x4) rm 
+	exta_entry = 385
+		opcode_id (8,0xDA) mod (3,0x5) rm 
+	exta_entry = 386
+		opcode_id (8,0xDA) (8,0xE9) mod (3,0x5) rm 
+	exta_entry = 387
+		opcode_id (8,0xDA) mod (3,0x6) rm 
+	exta_entry = 388
+		opcode_id (8,0xDA) mod (3,0x7) rm 
+pri_opcd = DB
+	entry = 389
+		opcode_id (8,0xDB) mod (3,0x0) rm 
+	exta_entry = 390
+		opcode_id (8,0xDB) (2, 3) (3,0x0) rm 
+	exta_entry = 391
+		opcode_id (8,0xDB) mod (3,0x1) rm 
+	exta_entry = 392
+		opcode_id (8,0xDB) (2, 3) (3,0x1) rm 
+	exta_entry = 393
+		opcode_id (8,0xDB) mod (3,0x2) rm 
+	exta_entry = 394
+		opcode_id (8,0xDB) (2, 3) (3,0x2) rm 
+	exta_entry = 395
+		opcode_id (8,0xDB) mod (3,0x3) rm 
+	exta_entry = 396
+		opcode_id (8,0xDB) (2, 3) (3,0x3) rm 
+	exta_entry = 397
+		opcode_id (8,0xDB) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 398
+		opcode_id (8,0x9B) (8,0xDB) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 399
+		opcode_id (8,0xDB) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 400
+		opcode_id (8,0xDB) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 401
+		opcode_id (8,0x9B) (8,0xDB) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 402
+		opcode_id (8,0xDB) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 403
+		opcode_id (8,0xDB) (8,0xE2) mod (3,0x4) rm 
+	exta_entry = 404
+		opcode_id (8,0x9B) (8,0xDB) (8,0xE2) mod (3,0x4) rm 
+	exta_entry = 405
+		opcode_id (8,0xDB) (8,0xE3) mod (3,0x4) rm 
+	exta_entry = 406
+		opcode_id (8,0x9B) (8,0xDB) (8,0xE3) mod (3,0x4) rm 
+	exta_entry = 407
+		opcode_id (8,0xDB) (8,0xE4) mod (3,0x4) rm 
+	exta_entry = 408
+		opcode_id (8,0x9B) (8,0xDB) (8,0xE4) mod (3,0x4) rm 
+	exta_entry = 409
+		opcode_id (8,0xDB) (8,0xE4) mod (3,0x4) rm 
+	exta_entry = 410
+		opcode_id (8,0xDB) mod (3,0x5) rm 
+	exta_entry = 411
+		opcode_id (8,0xDB) (2, 3) (3,0x5) rm 
+	exta_entry = 412
+		opcode_id (8,0xDB) (2, 3) (3,0x6) rm 
+	exta_entry = 413
+		opcode_id (8,0xDB) mod (3,0x7) rm 
+pri_opcd = DC
+	entry = 414
+		opcode_id (8,0xDC) mod (3,0x0) rm 
+	exta_entry = 415
+		opcode_id (8,0xDC) (2, 3) (3,0x0) rm 
+	exta_entry = 416
+		opcode_id (8,0xDC) mod (3,0x1) rm 
+	exta_entry = 417
+		opcode_id (8,0xDC) (2, 3) (3,0x1) rm 
+	exta_entry = 418
+		opcode_id (8,0xDC) mod (3,0x2) rm 
+	exta_entry = 419
+		opcode_id (8,0xDC) (2, 3) (3,0x2) rm 
+	exta_entry = 420
+		opcode_id (8,0xDC) (2, 3) (3,0x2) rm 
+	exta_entry = 421
+		opcode_id (8,0xDC) mod (3,0x3) rm 
+	exta_entry = 422
+		opcode_id (8,0xDC) (2, 3) (3,0x3) rm 
+	exta_entry = 423
+		opcode_id (8,0xDC) (2, 3) (3,0x3) rm 
+	exta_entry = 424
+		opcode_id (8,0xDC) mod (3,0x4) rm 
+	exta_entry = 425
+		opcode_id (8,0xDC) (2, 3) (3,0x4) rm 
+	exta_entry = 426
+		opcode_id (8,0xDC) mod (3,0x5) rm 
+	exta_entry = 427
+		opcode_id (8,0xDC) (2, 3) (3,0x5) rm 
+	exta_entry = 428
+		opcode_id (8,0xDC) mod (3,0x6) rm 
+	exta_entry = 429
+		opcode_id (8,0xDC) (2, 3) (3,0x6) rm 
+	exta_entry = 430
+		opcode_id (8,0xDC) mod (3,0x7) rm 
+	exta_entry = 431
+		opcode_id (8,0xDC) (2, 3) (3,0x7) rm 
+pri_opcd = DD
+	entry = 432
+		opcode_id (8,0xDD) mod (3,0x0) rm 
+	exta_entry = 433
+		opcode_id (8,0xDD) (2, 3) (3,0x0) rm 
+	exta_entry = 434
+		opcode_id (8,0xDD) mod (3,0x1) rm 
+	exta_entry = 435
+		opcode_id (8,0xDD) (2, 3) (3,0x1) rm 
+	exta_entry = 436
+		opcode_id (8,0xDD) (2, 3) (3,0x1) rm 
+	exta_entry = 437
+		opcode_id (8,0xDD) mod (3,0x2) rm 
+	exta_entry = 438
+		opcode_id (8,0xDD) (2, 3) (3,0x2) rm 
+	exta_entry = 439
+		opcode_id (8,0xDD) mod (3,0x3) rm 
+	exta_entry = 440
+		opcode_id (8,0xDD) (2, 3) (3,0x3) rm 
+	exta_entry = 441
+		opcode_id (8,0xDD) mod (3,0x4) rm 
+	exta_entry = 442
+		opcode_id (8,0xDD) (2, 3) (3,0x4) rm 
+	exta_entry = 443
+		opcode_id (8,0xDD) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 444
+		opcode_id (8,0xDD) (2, 3) (3,0x5) rm 
+	exta_entry = 445
+		opcode_id (8,0xDD) (8,0xE9) mod (3,0x5) rm 
+	exta_entry = 446
+		opcode_id (8,0xDD) mod (3,0x6) rm 
+	exta_entry = 447
+		opcode_id (8,0x9B) (8,0xDD) mod (3,0x6) rm 
+	exta_entry = 448
+		opcode_id (8,0xDD) mod (3,0x7) rm 
+	exta_entry = 449
+		opcode_id (8,0x9B) (8,0xDD) mod (3,0x7) rm 
+pri_opcd = DE
+	entry = 450
+		opcode_id (8,0xDE) mod (3,0x0) rm 
+	exta_entry = 451
+		opcode_id (8,0xDE) (2, 3) (3,0x0) rm 
+	exta_entry = 452
+		opcode_id (8,0xDE) (8,0xC1) mod (3,0x0) rm 
+	exta_entry = 453
+		opcode_id (8,0xDE) mod (3,0x1) rm 
+	exta_entry = 454
+		opcode_id (8,0xDE) (2, 3) (3,0x1) rm 
+	exta_entry = 455
+		opcode_id (8,0xDE) (8,0xC9) mod (3,0x1) rm 
+	exta_entry = 456
+		opcode_id (8,0xDE) mod (3,0x2) rm 
+	exta_entry = 457
+		opcode_id (8,0xDE) (2, 3) (3,0x2) rm 
+	exta_entry = 458
+		opcode_id (8,0xDE) (2, 3) (3,0x2) rm 
+	exta_entry = 459
+		opcode_id (8,0xDE) mod (3,0x3) rm 
+	exta_entry = 460
+		opcode_id (8,0xDE) (8,0xD9) mod (3,0x3) rm 
+	exta_entry = 461
+		opcode_id (8,0xDE) mod (3,0x4) rm 
+	exta_entry = 462
+		opcode_id (8,0xDE) (2, 3) (3,0x4) rm 
+	exta_entry = 463
+		opcode_id (8,0xDE) (8,0xE1) mod (3,0x4) rm 
+	exta_entry = 464
+		opcode_id (8,0xDE) mod (3,0x5) rm 
+	exta_entry = 465
+		opcode_id (8,0xDE) (2, 3) (3,0x5) rm 
+	exta_entry = 466
+		opcode_id (8,0xDE) (8,0xE9) mod (3,0x5) rm 
+	exta_entry = 467
+		opcode_id (8,0xDE) mod (3,0x6) rm 
+	exta_entry = 468
+		opcode_id (8,0xDE) (2, 3) (3,0x6) rm 
+	exta_entry = 469
+		opcode_id (8,0xDE) (8,0xF1) mod (3,0x6) rm 
+	exta_entry = 470
+		opcode_id (8,0xDE) mod (3,0x7) rm 
+	exta_entry = 471
+		opcode_id (8,0xDE) (2, 3) (3,0x7) rm 
+	exta_entry = 472
+		opcode_id (8,0xDE) (8,0xF9) mod (3,0x7) rm 
+pri_opcd = DF
+	entry = 473
+		opcode_id (8,0xDF) mod (3,0x0) rm 
+	exta_entry = 474
+		opcode_id (8,0xDF) (2, 3) (3,0x0) rm 
+	exta_entry = 475
+		opcode_id (8,0xDF) mod (3,0x1) rm 
+	exta_entry = 476
+		opcode_id (8,0xDF) (2, 3) (3,0x1) rm 
+	exta_entry = 477
+		opcode_id (8,0xDF) (2, 3) (3,0x1) rm 
+	exta_entry = 478
+		opcode_id (8,0xDF) mod (3,0x2) rm 
+	exta_entry = 479
+		opcode_id (8,0xDF) (2, 3) (3,0x2) rm 
+	exta_entry = 480
+		opcode_id (8,0xDF) (2, 3) (3,0x2) rm 
+	exta_entry = 481
+		opcode_id (8,0xDF) mod (3,0x3) rm 
+	exta_entry = 482
+		opcode_id (8,0xDF) (2, 3) (3,0x3) rm 
+	exta_entry = 483
+		opcode_id (8,0xDF) (2, 3) (3,0x3) rm 
+	exta_entry = 484
+		opcode_id (8,0xDF) mod (3,0x4) rm 
+	exta_entry = 485
+		opcode_id (8,0xDF) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 486
+		opcode_id (8,0x9B) (8,0xDF) (8,0xE0) mod (3,0x4) rm 
+	exta_entry = 487
+		opcode_id (8,0xDF) mod (3,0x5) rm 
+	exta_entry = 488
+		opcode_id (8,0xDF) (2, 3) (3,0x5) rm 
+	exta_entry = 489
+		opcode_id (8,0xDF) mod (3,0x6) rm 
+	exta_entry = 490
+		opcode_id (8,0xDF) (2, 3) (3,0x6) rm 
+	exta_entry = 491
+		opcode_id (8,0xDF) mod (3,0x7) rm 
+pri_opcd = E0
+	entry = 492
+		opcode_id (8,0xE0) 
+		extra_opcode_id (8,0xE0) 
+	exta_entry = 493
+pri_opcd = E1
+	entry = 494
+		opcode_id (8,0xE1) 
+		extra_opcode_id (8,0xE1) 
+	exta_entry = 495
+pri_opcd = E2
+	entry = 496
+		opcode_id (8,0xE2) 
+	exta_entry = 497
+pri_opcd = E3
+	entry = 498
+		opcode_id (8,0xE3) 
+		extra_opcode_id (8,0xE3) 
+	exta_entry = 499
+pri_opcd = E4
+	entry = 500
+		opcode_id (8,0xE4) 
+pri_opcd = E5
+	entry = 501
+		opcode_id (8,0xE5) 
+pri_opcd = E6
+	entry = 502
+		opcode_id (8,0xE6) 
+pri_opcd = E7
+	entry = 503
+		opcode_id (8,0xE7) 
+pri_opcd = E8
+	entry = 504
+		opcode_id (8,0xE8) 
+pri_opcd = E9
+	entry = 505
+		opcode_id (8,0xE9) 
+pri_opcd = EA
+	entry = 506
+		opcode_id (8,0xEA) 
+	exta_entry = 507
+pri_opcd = EB
+	entry = 508
+		opcode_id (8,0xEB) 
+pri_opcd = EC
+	entry = 509
+		opcode_id (8,0xEC) 
+pri_opcd = ED
+	entry = 510
+		opcode_id (8,0xED) 
+pri_opcd = EE
+	entry = 511
+		opcode_id (8,0xEE) 
+pri_opcd = EF
+	entry = 512
+		opcode_id (8,0xEF) 
+pri_opcd = F0
+	entry = 513
+		opcode_id (8,0xF0) 
+pri_opcd = F1
+	entry = 514
+	exta_entry = 515
+		opcode_id (8,0xF1) 
+		extra_opcode_id (8,0xF1) 
+pri_opcd = F2
+	entry = 516
+		opcode_id (8,0xF2) 
+		extra_opcode_id (8,0xF2) 
+	exta_entry = 517
+		opcode_id (8,0xF2) 
+	exta_entry = 518
+	exta_entry = 519
+	exta_entry = 520
+pri_opcd = F3
+	entry = 521
+		opcode_id (8,0xF3) 
+		extra_opcode_id (8,0xF3) 
+	exta_entry = 522
+		opcode_id (8,0xF3) 
+	exta_entry = 523
+	exta_entry = 524
+	exta_entry = 525
+pri_opcd = F4
+	entry = 526
+		opcode_id (8,0xF4) 
+pri_opcd = F5
+	entry = 527
+		opcode_id (8,0xF5) 
+pri_opcd = F6
+	entry = 528
+		opcode_id (8,0xF6) mod (3,0x0) rm 
+	exta_entry = 529
+		opcode_id (8,0xF6) mod (3,0x1) rm 
+	exta_entry = 530
+		opcode_id (8,0xF6) mod (3,0x2) rm 
+	exta_entry = 531
+		opcode_id (8,0xF6) mod (3,0x3) rm 
+	exta_entry = 532
+		opcode_id (8,0xF6) mod (3,0x4) rm 
+	exta_entry = 533
+		opcode_id (8,0xF6) mod (3,0x5) rm 
+	exta_entry = 534
+		opcode_id (8,0xF6) mod (3,0x6) rm 
+	exta_entry = 535
+		opcode_id (8,0xF6) mod (3,0x7) rm 
+pri_opcd = F7
+	entry = 536
+		opcode_id (8,0xF7) mod (3,0x0) rm 
+	exta_entry = 537
+		opcode_id (8,0xF7) mod (3,0x1) rm 
+	exta_entry = 538
+		opcode_id (8,0xF7) mod (3,0x2) rm 
+	exta_entry = 539
+		opcode_id (8,0xF7) mod (3,0x3) rm 
+	exta_entry = 540
+		opcode_id (8,0xF7) mod (3,0x4) rm 
+	exta_entry = 541
+		opcode_id (8,0xF7) mod (3,0x5) rm 
+	exta_entry = 542
+		opcode_id (8,0xF7) mod (3,0x6) rm 
+	exta_entry = 543
+		opcode_id (8,0xF7) mod (3,0x7) rm 
+pri_opcd = F8
+	entry = 544
+		opcode_id (8,0xF8) 
+pri_opcd = F9
+	entry = 545
+		opcode_id (8,0xF9) 
+pri_opcd = FA
+	entry = 546
+		opcode_id (8,0xFA) 
+pri_opcd = FB
+	entry = 547
+		opcode_id (8,0xFB) 
+pri_opcd = FC
+	entry = 548
+		opcode_id (8,0xFC) 
+pri_opcd = FD
+	entry = 549
+		opcode_id (8,0xFD) 
+pri_opcd = FE
+	entry = 550
+		opcode_id (8,0xFE) mod (3,0x0) rm 
+	exta_entry = 551
+		opcode_id (8,0xFE) mod (3,0x1) rm 
+pri_opcd = FF
+	entry = 552
+		opcode_id (8,0xFF) mod (3,0x0) rm 
+	exta_entry = 553
+		opcode_id (8,0xFF) mod (3,0x1) rm 
+	exta_entry = 554
+		opcode_id (8,0xFF) mod (3,0x2) rm 
+	exta_entry = 555
+	exta_entry = 556
+		opcode_id (8,0xFF) mod (3,0x3) rm 
+	exta_entry = 557
+		opcode_id (8,0xFF) mod (3,0x4) rm 
+	exta_entry = 558
+	exta_entry = 559
+		opcode_id (8,0xFF) mod (3,0x5) rm 
+	exta_entry = 560
+		opcode_id (8,0xFF) mod (3,0x6) rm 
+	exta_entry = 561
+two-byte
+pri_opcd = 00
+	entry = 562
+	exta_entry = 563
+	exta_entry = 564
+	exta_entry = 565
+	exta_entry = 566
+	exta_entry = 567
+	exta_entry = 568
+		opcode_id (8,0x0F) (8,0x00) mod (3,0x6) rm 
+pri_opcd = 01
+	entry = 569
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x0) rm 
+	exta_entry = 570
+	exta_entry = 571
+	exta_entry = 572
+	exta_entry = 573
+	exta_entry = 574
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x1) rm 
+	exta_entry = 575
+		opcode_id (8,0x0F) (8,0x01) (8,0xC8) mod (3,0x1) rm 
+	exta_entry = 576
+		opcode_id (8,0x0F) (8,0x01) (8,0xC9) mod (3,0x1) rm 
+	exta_entry = 577
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x2) rm 
+	exta_entry = 578
+		opcode_id (8,0x0F) (8,0x01) (8,0xD0) mod (3,0x2) rm 
+	exta_entry = 579
+		opcode_id (8,0x0F) (8,0x01) (8,0xD1) mod (3,0x2) rm 
+	exta_entry = 580
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x3) rm 
+	exta_entry = 581
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x4) rm 
+		extra_opcode_id (8,0x0F) (8,0x01) (2, 3) (3,0x4) rm 
+	exta_entry = 582
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x6) rm 
+	exta_entry = 583
+		opcode_id (8,0x0F) (8,0x01) mod (3,0x7) rm 
+	exta_entry = 584
+	exta_entry = 585
+		opcode_id (8,0x0F) (8,0x01) (8,0xF9) mod (3,0x7) rm 
+pri_opcd = 02
+	entry = 586
+pri_opcd = 03
+	entry = 587
+pri_opcd = 05
+	entry = 588
+	exta_entry = 589
+pri_opcd = 06
+	entry = 590
+		opcode_id (8,0x0F) (8,0x06) 
+pri_opcd = 07
+	entry = 591
+	exta_entry = 592
+pri_opcd = 08
+	entry = 593
+		opcode_id (8,0x0F) (8,0x08) 
+pri_opcd = 09
+	entry = 594
+		opcode_id (8,0x0F) (8,0x09) 
+pri_opcd = 0B
+	entry = 595
+		opcode_id (8,0x0F) (8,0x0B) 
+pri_opcd = 0D
+	entry = 596
+		opcode_id (8,0x0F) (8,0x0D) mod reg rm 
+pri_opcd = 10
+	entry = 597
+		opcode_id (8,0x0F) (8,0x10) mod reg rm 
+	exta_entry = 598
+		opcode_id (8,0xF3) (8,0x0F) (8,0x10) mod reg rm 
+	exta_entry = 599
+		opcode_id (8,0x66) (8,0x0F) (8,0x10) mod reg rm 
+	exta_entry = 600
+		opcode_id (8,0xF2) (8,0x0F) (8,0x10) mod reg rm 
+pri_opcd = 11
+	entry = 601
+		opcode_id (8,0x0F) (8,0x11) mod reg rm 
+	exta_entry = 602
+		opcode_id (8,0xF3) (8,0x0F) (8,0x11) mod reg rm 
+	exta_entry = 603
+		opcode_id (8,0x66) (8,0x0F) (8,0x11) mod reg rm 
+	exta_entry = 604
+		opcode_id (8,0xF2) (8,0x0F) (8,0x11) mod reg rm 
+pri_opcd = 12
+	entry = 605
+		opcode_id (8,0x0F) (8,0x12) mod reg rm 
+	exta_entry = 606
+		opcode_id (8,0x0F) (8,0x12) mod reg rm 
+	exta_entry = 607
+		opcode_id (8,0x66) (8,0x0F) (8,0x12) mod reg rm 
+	exta_entry = 608
+		opcode_id (8,0xF2) (8,0x0F) (8,0x12) mod reg rm 
+	exta_entry = 609
+		opcode_id (8,0xF3) (8,0x0F) (8,0x12) mod reg rm 
+pri_opcd = 13
+	entry = 610
+		opcode_id (8,0x0F) (8,0x13) mod reg rm 
+	exta_entry = 611
+		opcode_id (8,0x66) (8,0x0F) (8,0x13) mod reg rm 
+pri_opcd = 14
+	entry = 612
+		opcode_id (8,0x0F) (8,0x14) mod reg rm 
+	exta_entry = 613
+		opcode_id (8,0x66) (8,0x0F) (8,0x14) mod reg rm 
+pri_opcd = 15
+	entry = 614
+		opcode_id (8,0x0F) (8,0x15) mod reg rm 
+	exta_entry = 615
+		opcode_id (8,0x66) (8,0x0F) (8,0x15) mod reg rm 
+pri_opcd = 16
+	entry = 616
+		opcode_id (8,0x0F) (8,0x16) mod reg rm 
+	exta_entry = 617
+		opcode_id (8,0x0F) (8,0x16) mod reg rm 
+	exta_entry = 618
+		opcode_id (8,0x66) (8,0x0F) (8,0x16) mod reg rm 
+	exta_entry = 619
+		opcode_id (8,0xF3) (8,0x0F) (8,0x16) mod reg rm 
+pri_opcd = 17
+	entry = 620
+		opcode_id (8,0x0F) (8,0x17) mod reg rm 
+	exta_entry = 621
+		opcode_id (8,0x66) (8,0x0F) (8,0x17) mod reg rm 
+pri_opcd = 18
+	entry = 622
+		opcode_id (8,0x0F) (8,0x18) mod reg rm 
+	exta_entry = 623
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x0) rm 
+	exta_entry = 624
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x1) rm 
+	exta_entry = 625
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x2) rm 
+	exta_entry = 626
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x3) rm 
+	exta_entry = 627
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x4) rm 
+	exta_entry = 628
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x5) rm 
+	exta_entry = 629
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x6) rm 
+	exta_entry = 630
+		opcode_id (8,0x0F) (8,0x18) mod (3,0x7) rm 
+pri_opcd = 19
+	entry = 631
+		opcode_id (8,0x0F) (8,0x19) mod reg rm 
+pri_opcd = 1A
+	entry = 632
+		opcode_id (8,0x0F) (8,0x1A) mod reg rm 
+pri_opcd = 1B
+	entry = 633
+		opcode_id (8,0x0F) (8,0x1B) mod reg rm 
+pri_opcd = 1C
+	entry = 634
+		opcode_id (8,0x0F) (8,0x1C) mod reg rm 
+pri_opcd = 1D
+	entry = 635
+		opcode_id (8,0x0F) (8,0x1D) mod reg rm 
+pri_opcd = 1E
+	entry = 636
+		opcode_id (8,0x0F) (8,0x1E) mod reg rm 
+pri_opcd = 1F
+	entry = 637
+		opcode_id (8,0x0F) (8,0x1F) mod reg rm 
+	exta_entry = 638
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x0) rm 
+	exta_entry = 639
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x1) rm 
+	exta_entry = 640
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x2) rm 
+	exta_entry = 641
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x3) rm 
+	exta_entry = 642
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x4) rm 
+	exta_entry = 643
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x5) rm 
+	exta_entry = 644
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x6) rm 
+	exta_entry = 645
+		opcode_id (8,0x0F) (8,0x1F) mod (3,0x7) rm 
+pri_opcd = 20
+	entry = 646
+		opcode_id (8,0x0F) (8,0x20) (2, 3) reg rm 
+	exta_entry = 647
+		opcode_id (8,0x0F) (8,0x20) (2, 3) reg rm 
+	exta_entry = 648
+	exta_entry = 649
+pri_opcd = 21
+	entry = 650
+		opcode_id (8,0x0F) (8,0x21) (2, 3) reg rm 
+	exta_entry = 651
+		opcode_id (8,0x0F) (8,0x21) (2, 3) reg rm 
+	exta_entry = 652
+	exta_entry = 653
+pri_opcd = 22
+	entry = 654
+		opcode_id (8,0x0F) (8,0x22) (2, 3) reg rm 
+	exta_entry = 655
+		opcode_id (8,0x0F) (8,0x22) (2, 3) reg rm 
+	exta_entry = 656
+	exta_entry = 657
+pri_opcd = 23
+	entry = 658
+		opcode_id (8,0x0F) (8,0x23) (2, 3) reg rm 
+	exta_entry = 659
+		opcode_id (8,0x0F) (8,0x23) (2, 3) reg rm 
+	exta_entry = 660
+	exta_entry = 661
+pri_opcd = 24
+	entry = 662
+		opcode_id (8,0x0F) (8,0x24) (2, 3) reg rm 
+	exta_entry = 663
+		opcode_id (8,0x0F) (8,0x24) (2, 3) reg rm 
+pri_opcd = 26
+	entry = 664
+		opcode_id (8,0x0F) (8,0x26) (2, 3) reg rm 
+	exta_entry = 665
+		opcode_id (8,0x0F) (8,0x26) (2, 3) reg rm 
+pri_opcd = 28
+	entry = 666
+		opcode_id (8,0x0F) (8,0x28) mod reg rm 
+	exta_entry = 667
+		opcode_id (8,0x66) (8,0x0F) (8,0x28) mod reg rm 
+pri_opcd = 29
+	entry = 668
+		opcode_id (8,0x0F) (8,0x29) mod reg rm 
+	exta_entry = 669
+		opcode_id (8,0x66) (8,0x0F) (8,0x29) mod reg rm 
+pri_opcd = 2A
+	entry = 670
+		opcode_id (8,0x0F) (8,0x2A) mod reg rm 
+	exta_entry = 671
+		opcode_id (8,0xF3) (8,0x0F) (8,0x2A) mod reg rm 
+	exta_entry = 672
+		opcode_id (8,0x66) (8,0x0F) (8,0x2A) mod reg rm 
+	exta_entry = 673
+		opcode_id (8,0xF2) (8,0x0F) (8,0x2A) mod reg rm 
+pri_opcd = 2B
+	entry = 674
+		opcode_id (8,0x0F) (8,0x2B) mod reg rm 
+	exta_entry = 675
+		opcode_id (8,0x66) (8,0x0F) (8,0x2B) mod reg rm 
+pri_opcd = 2C
+	entry = 676
+		opcode_id (8,0x0F) (8,0x2C) mod reg rm 
+	exta_entry = 677
+		opcode_id (8,0xF3) (8,0x0F) (8,0x2C) mod reg rm 
+	exta_entry = 678
+		opcode_id (8,0x66) (8,0x0F) (8,0x2C) mod reg rm 
+	exta_entry = 679
+		opcode_id (8,0xF2) (8,0x0F) (8,0x2C) mod reg rm 
+pri_opcd = 2D
+	entry = 680
+		opcode_id (8,0x0F) (8,0x2D) mod reg rm 
+	exta_entry = 681
+		opcode_id (8,0xF3) (8,0x0F) (8,0x2D) mod reg rm 
+	exta_entry = 682
+		opcode_id (8,0x66) (8,0x0F) (8,0x2D) mod reg rm 
+	exta_entry = 683
+		opcode_id (8,0xF2) (8,0x0F) (8,0x2D) mod reg rm 
+pri_opcd = 2E
+	entry = 684
+		opcode_id (8,0x0F) (8,0x2E) mod reg rm 
+	exta_entry = 685
+		opcode_id (8,0x66) (8,0x0F) (8,0x2E) mod reg rm 
+pri_opcd = 2F
+	entry = 686
+		opcode_id (8,0x0F) (8,0x2F) mod reg rm 
+	exta_entry = 687
+		opcode_id (8,0x66) (8,0x0F) (8,0x2F) mod reg rm 
+pri_opcd = 30
+	entry = 688
+		opcode_id (8,0x0F) (8,0x30) 
+pri_opcd = 31
+	entry = 689
+		opcode_id (8,0x0F) (8,0x31) 
+pri_opcd = 32
+	entry = 690
+		opcode_id (8,0x0F) (8,0x32) 
+pri_opcd = 33
+	entry = 691
+		opcode_id (8,0x0F) (8,0x33) 
+pri_opcd = 34
+	entry = 692
+	exta_entry = 693
+pri_opcd = 35
+	entry = 694
+pri_opcd = 37
+	entry = 695
+		opcode_id (8,0x0F) (8,0x37) 
+pri_opcd = 38
+	entry = 696
+		opcode_id (8,0x0F) (8,0x38) (8,0x00) mod reg rm 
+	exta_entry = 697
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x00) mod reg rm 
+	exta_entry = 698
+		opcode_id (8,0x0F) (8,0x38) (8,0x01) mod reg rm 
+	exta_entry = 699
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x01) mod reg rm 
+	exta_entry = 700
+		opcode_id (8,0x0F) (8,0x38) (8,0x02) mod reg rm 
+	exta_entry = 701
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x02) mod reg rm 
+	exta_entry = 702
+		opcode_id (8,0x0F) (8,0x38) (8,0x03) mod reg rm 
+	exta_entry = 703
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x03) mod reg rm 
+	exta_entry = 704
+		opcode_id (8,0x0F) (8,0x38) (8,0x04) mod reg rm 
+	exta_entry = 705
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x04) mod reg rm 
+	exta_entry = 706
+		opcode_id (8,0x0F) (8,0x38) (8,0x05) mod reg rm 
+	exta_entry = 707
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x05) mod reg rm 
+	exta_entry = 708
+		opcode_id (8,0x0F) (8,0x38) (8,0x06) mod reg rm 
+	exta_entry = 709
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x06) mod reg rm 
+	exta_entry = 710
+		opcode_id (8,0x0F) (8,0x38) (8,0x07) mod reg rm 
+	exta_entry = 711
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x07) mod reg rm 
+	exta_entry = 712
+		opcode_id (8,0x0F) (8,0x38) (8,0x08) mod reg rm 
+	exta_entry = 713
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x08) mod reg rm 
+	exta_entry = 714
+		opcode_id (8,0x0F) (8,0x38) (8,0x09) mod reg rm 
+	exta_entry = 715
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x09) mod reg rm 
+	exta_entry = 716
+		opcode_id (8,0x0F) (8,0x38) (8,0x0A) mod reg rm 
+	exta_entry = 717
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x0A) mod reg rm 
+	exta_entry = 718
+		opcode_id (8,0x0F) (8,0x38) (8,0x0B) mod reg rm 
+	exta_entry = 719
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x0B) mod reg rm 
+	exta_entry = 720
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x10) mod reg rm 
+	exta_entry = 721
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x14) mod reg rm 
+	exta_entry = 722
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x15) mod reg rm 
+	exta_entry = 723
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x17) mod reg rm 
+	exta_entry = 724
+		opcode_id (8,0x0F) (8,0x38) (8,0x1C) mod reg rm 
+	exta_entry = 725
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x1C) mod reg rm 
+	exta_entry = 726
+		opcode_id (8,0x0F) (8,0x38) (8,0x1D) mod reg rm 
+	exta_entry = 727
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x1D) mod reg rm 
+	exta_entry = 728
+		opcode_id (8,0x0F) (8,0x38) (8,0x1E) mod reg rm 
+	exta_entry = 729
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x1E) mod reg rm 
+	exta_entry = 730
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x20) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x20) mod reg rm 
+	exta_entry = 731
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x21) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x21) mod reg rm 
+	exta_entry = 732
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x22) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x22) mod reg rm 
+	exta_entry = 733
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x23) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x23) mod reg rm 
+	exta_entry = 734
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x24) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x24) mod reg rm 
+	exta_entry = 735
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x25) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x25) mod reg rm 
+	exta_entry = 736
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x28) mod reg rm 
+	exta_entry = 737
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x29) mod reg rm 
+	exta_entry = 738
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x2A) mod reg rm 
+	exta_entry = 739
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x2B) mod reg rm 
+	exta_entry = 740
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x30) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x30) mod reg rm 
+	exta_entry = 741
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x31) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x31) mod reg rm 
+	exta_entry = 742
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x32) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x32) mod reg rm 
+	exta_entry = 743
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x33) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x33) mod reg rm 
+	exta_entry = 744
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x34) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x34) mod reg rm 
+	exta_entry = 745
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x35) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x35) mod reg rm 
+	exta_entry = 746
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x37) mod reg rm 
+	exta_entry = 747
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x38) mod reg rm 
+	exta_entry = 748
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x39) mod reg rm 
+	exta_entry = 749
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3A) mod reg rm 
+	exta_entry = 750
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3B) mod reg rm 
+	exta_entry = 751
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3C) mod reg rm 
+	exta_entry = 752
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3D) mod reg rm 
+	exta_entry = 753
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3E) mod reg rm 
+	exta_entry = 754
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x3F) mod reg rm 
+	exta_entry = 755
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x40) mod reg rm 
+	exta_entry = 756
+		opcode_id (8,0x66) (8,0x0F) (8,0x38) (8,0x41) mod reg rm 
+	exta_entry = 757
+	exta_entry = 758
+	exta_entry = 759
+	exta_entry = 760
+	exta_entry = 761
+		opcode_id (8,0x0F) (8,0x38) (8,0xF0) mod reg rm 
+	exta_entry = 762
+		opcode_id (8,0xF2) (8,0x0F) (8,0x38) (8,0xF0) mod reg rm 
+	exta_entry = 763
+		opcode_id (8,0x0F) (8,0x38) (8,0xF1) mod reg rm 
+	exta_entry = 764
+		opcode_id (8,0xF2) (8,0x0F) (8,0x38) (8,0xF1) mod reg rm 
+pri_opcd = 3A
+	entry = 765
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x08) mod reg rm 
+	exta_entry = 766
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x09) mod reg rm 
+	exta_entry = 767
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0A) mod reg rm 
+	exta_entry = 768
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0B) mod reg rm 
+	exta_entry = 769
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0C) mod reg rm 
+	exta_entry = 770
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0D) mod reg rm 
+	exta_entry = 771
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0E) mod reg rm 
+	exta_entry = 772
+		opcode_id (8,0x0F) (8,0x3A) (8,0x0F) mod reg rm 
+	exta_entry = 773
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x0F) mod reg rm 
+	exta_entry = 774
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x14) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x14) (2, 3) reg rm 
+	exta_entry = 775
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x15) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x15) (2, 3) reg rm 
+	exta_entry = 776
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x16) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x16) mod reg rm 
+	exta_entry = 777
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x17) mod reg rm 
+	exta_entry = 778
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x20) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x20) (2, 3) reg rm 
+	exta_entry = 779
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x21) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x21) mod reg rm 
+	exta_entry = 780
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x22) mod reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x22) mod reg rm 
+	exta_entry = 781
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x40) mod reg rm 
+	exta_entry = 782
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x41) mod reg rm 
+	exta_entry = 783
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x42) mod reg rm 
+	exta_entry = 784
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x60) mod reg rm 
+	exta_entry = 785
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x61) mod reg rm 
+	exta_entry = 786
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x62) mod reg rm 
+	exta_entry = 787
+		opcode_id (8,0x66) (8,0x0F) (8,0x3A) (8,0x63) mod reg rm 
+pri_opcd = 40
+	entry = 788
+		opcode_id (8,0x0F) (8,0x40) mod reg rm 
+pri_opcd = 41
+	entry = 789
+		opcode_id (8,0x0F) (8,0x41) mod reg rm 
+pri_opcd = 42
+	entry = 790
+		opcode_id (8,0x0F) (8,0x42) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x42) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x42) mod reg rm 
+pri_opcd = 43
+	entry = 791
+		opcode_id (8,0x0F) (8,0x43) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x43) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x43) mod reg rm 
+pri_opcd = 44
+	entry = 792
+		opcode_id (8,0x0F) (8,0x44) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x44) mod reg rm 
+pri_opcd = 45
+	entry = 793
+		opcode_id (8,0x0F) (8,0x45) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x45) mod reg rm 
+pri_opcd = 46
+	entry = 794
+		opcode_id (8,0x0F) (8,0x46) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x46) mod reg rm 
+pri_opcd = 47
+	entry = 795
+		opcode_id (8,0x0F) (8,0x47) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x47) mod reg rm 
+pri_opcd = 48
+	entry = 796
+		opcode_id (8,0x0F) (8,0x48) mod reg rm 
+pri_opcd = 49
+	entry = 797
+		opcode_id (8,0x0F) (8,0x49) mod reg rm 
+pri_opcd = 4A
+	entry = 798
+		opcode_id (8,0x0F) (8,0x4A) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4A) mod reg rm 
+pri_opcd = 4B
+	entry = 799
+		opcode_id (8,0x0F) (8,0x4B) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4B) mod reg rm 
+pri_opcd = 4C
+	entry = 800
+		opcode_id (8,0x0F) (8,0x4C) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4C) mod reg rm 
+pri_opcd = 4D
+	entry = 801
+		opcode_id (8,0x0F) (8,0x4D) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4D) mod reg rm 
+pri_opcd = 4E
+	entry = 802
+		opcode_id (8,0x0F) (8,0x4E) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4E) mod reg rm 
+pri_opcd = 4F
+	entry = 803
+		opcode_id (8,0x0F) (8,0x4F) mod reg rm 
+		extra_opcode_id (8,0x0F) (8,0x4F) mod reg rm 
+pri_opcd = 50
+	entry = 804
+		opcode_id (8,0x0F) (8,0x50) mod reg rm 
+	exta_entry = 805
+		opcode_id (8,0x66) (8,0x0F) (8,0x50) mod reg rm 
+pri_opcd = 51
+	entry = 806
+		opcode_id (8,0x0F) (8,0x51) mod reg rm 
+	exta_entry = 807
+		opcode_id (8,0xF3) (8,0x0F) (8,0x51) mod reg rm 
+	exta_entry = 808
+		opcode_id (8,0x66) (8,0x0F) (8,0x51) mod reg rm 
+	exta_entry = 809
+		opcode_id (8,0xF2) (8,0x0F) (8,0x51) mod reg rm 
+pri_opcd = 52
+	entry = 810
+		opcode_id (8,0x0F) (8,0x52) mod reg rm 
+	exta_entry = 811
+		opcode_id (8,0xF3) (8,0x0F) (8,0x52) mod reg rm 
+pri_opcd = 53
+	entry = 812
+		opcode_id (8,0x0F) (8,0x53) mod reg rm 
+	exta_entry = 813
+		opcode_id (8,0xF3) (8,0x0F) (8,0x53) mod reg rm 
+pri_opcd = 54
+	entry = 814
+		opcode_id (8,0x0F) (8,0x54) mod reg rm 
+	exta_entry = 815
+		opcode_id (8,0x66) (8,0x0F) (8,0x54) mod reg rm 
+pri_opcd = 55
+	entry = 816
+		opcode_id (8,0x0F) (8,0x55) mod reg rm 
+	exta_entry = 817
+		opcode_id (8,0x66) (8,0x0F) (8,0x55) mod reg rm 
+pri_opcd = 56
+	entry = 818
+		opcode_id (8,0x0F) (8,0x56) mod reg rm 
+	exta_entry = 819
+		opcode_id (8,0x66) (8,0x0F) (8,0x56) mod reg rm 
+pri_opcd = 57
+	entry = 820
+		opcode_id (8,0x0F) (8,0x57) mod reg rm 
+	exta_entry = 821
+		opcode_id (8,0x66) (8,0x0F) (8,0x57) mod reg rm 
+pri_opcd = 58
+	entry = 822
+		opcode_id (8,0x0F) (8,0x58) mod reg rm 
+	exta_entry = 823
+		opcode_id (8,0xF3) (8,0x0F) (8,0x58) mod reg rm 
+	exta_entry = 824
+		opcode_id (8,0x66) (8,0x0F) (8,0x58) mod reg rm 
+	exta_entry = 825
+		opcode_id (8,0xF2) (8,0x0F) (8,0x58) mod reg rm 
+pri_opcd = 59
+	entry = 826
+		opcode_id (8,0x0F) (8,0x59) mod reg rm 
+	exta_entry = 827
+		opcode_id (8,0xF3) (8,0x0F) (8,0x59) mod reg rm 
+	exta_entry = 828
+		opcode_id (8,0x66) (8,0x0F) (8,0x59) mod reg rm 
+	exta_entry = 829
+		opcode_id (8,0xF2) (8,0x0F) (8,0x59) mod reg rm 
+pri_opcd = 5A
+	entry = 830
+		opcode_id (8,0x0F) (8,0x5A) mod reg rm 
+	exta_entry = 831
+		opcode_id (8,0x66) (8,0x0F) (8,0x5A) mod reg rm 
+	exta_entry = 832
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5A) mod reg rm 
+	exta_entry = 833
+		opcode_id (8,0xF2) (8,0x0F) (8,0x5A) mod reg rm 
+pri_opcd = 5B
+	entry = 834
+		opcode_id (8,0x0F) (8,0x5B) mod reg rm 
+	exta_entry = 835
+		opcode_id (8,0x66) (8,0x0F) (8,0x5B) mod reg rm 
+	exta_entry = 836
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5B) mod reg rm 
+pri_opcd = 5C
+	entry = 837
+		opcode_id (8,0x0F) (8,0x5C) mod reg rm 
+	exta_entry = 838
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5C) mod reg rm 
+	exta_entry = 839
+		opcode_id (8,0x66) (8,0x0F) (8,0x5C) mod reg rm 
+	exta_entry = 840
+		opcode_id (8,0xF2) (8,0x0F) (8,0x5C) mod reg rm 
+pri_opcd = 5D
+	entry = 841
+		opcode_id (8,0x0F) (8,0x5D) mod reg rm 
+	exta_entry = 842
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5D) mod reg rm 
+	exta_entry = 843
+		opcode_id (8,0x66) (8,0x0F) (8,0x5D) mod reg rm 
+	exta_entry = 844
+		opcode_id (8,0xF2) (8,0x0F) (8,0x5D) mod reg rm 
+pri_opcd = 5E
+	entry = 845
+		opcode_id (8,0x0F) (8,0x5E) mod reg rm 
+	exta_entry = 846
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5E) mod reg rm 
+	exta_entry = 847
+		opcode_id (8,0x66) (8,0x0F) (8,0x5E) mod reg rm 
+	exta_entry = 848
+		opcode_id (8,0xF2) (8,0x0F) (8,0x5E) mod reg rm 
+pri_opcd = 5F
+	entry = 849
+		opcode_id (8,0x0F) (8,0x5F) mod reg rm 
+	exta_entry = 850
+		opcode_id (8,0xF3) (8,0x0F) (8,0x5F) mod reg rm 
+	exta_entry = 851
+		opcode_id (8,0x66) (8,0x0F) (8,0x5F) mod reg rm 
+	exta_entry = 852
+		opcode_id (8,0xF2) (8,0x0F) (8,0x5F) mod reg rm 
+pri_opcd = 60
+	entry = 853
+		opcode_id (8,0x0F) (8,0x60) mod reg rm 
+	exta_entry = 854
+		opcode_id (8,0x66) (8,0x0F) (8,0x60) mod reg rm 
+pri_opcd = 61
+	entry = 855
+		opcode_id (8,0x0F) (8,0x61) mod reg rm 
+	exta_entry = 856
+		opcode_id (8,0x66) (8,0x0F) (8,0x61) mod reg rm 
+pri_opcd = 62
+	entry = 857
+		opcode_id (8,0x0F) (8,0x62) mod reg rm 
+	exta_entry = 858
+		opcode_id (8,0x66) (8,0x0F) (8,0x62) mod reg rm 
+pri_opcd = 63
+	entry = 859
+		opcode_id (8,0x0F) (8,0x63) mod reg rm 
+	exta_entry = 860
+		opcode_id (8,0x66) (8,0x0F) (8,0x63) mod reg rm 
+pri_opcd = 64
+	entry = 861
+		opcode_id (8,0x0F) (8,0x64) mod reg rm 
+	exta_entry = 862
+		opcode_id (8,0x66) (8,0x0F) (8,0x64) mod reg rm 
+pri_opcd = 65
+	entry = 863
+		opcode_id (8,0x0F) (8,0x65) mod reg rm 
+	exta_entry = 864
+		opcode_id (8,0x66) (8,0x0F) (8,0x65) mod reg rm 
+pri_opcd = 66
+	entry = 865
+		opcode_id (8,0x0F) (8,0x66) mod reg rm 
+	exta_entry = 866
+		opcode_id (8,0x66) (8,0x0F) (8,0x66) mod reg rm 
+pri_opcd = 67
+	entry = 867
+		opcode_id (8,0x0F) (8,0x67) mod reg rm 
+	exta_entry = 868
+		opcode_id (8,0x66) (8,0x0F) (8,0x67) mod reg rm 
+pri_opcd = 68
+	entry = 869
+		opcode_id (8,0x0F) (8,0x68) mod reg rm 
+	exta_entry = 870
+		opcode_id (8,0x66) (8,0x0F) (8,0x68) mod reg rm 
+pri_opcd = 69
+	entry = 871
+		opcode_id (8,0x0F) (8,0x69) mod reg rm 
+	exta_entry = 872
+		opcode_id (8,0x66) (8,0x0F) (8,0x69) mod reg rm 
+pri_opcd = 6A
+	entry = 873
+		opcode_id (8,0x0F) (8,0x6A) mod reg rm 
+	exta_entry = 874
+		opcode_id (8,0x66) (8,0x0F) (8,0x6A) mod reg rm 
+pri_opcd = 6B
+	entry = 875
+		opcode_id (8,0x0F) (8,0x6B) mod reg rm 
+	exta_entry = 876
+		opcode_id (8,0x66) (8,0x0F) (8,0x6B) mod reg rm 
+pri_opcd = 6C
+	entry = 877
+		opcode_id (8,0x66) (8,0x0F) (8,0x6C) mod reg rm 
+pri_opcd = 6D
+	entry = 878
+		opcode_id (8,0x66) (8,0x0F) (8,0x6D) mod reg rm 
+pri_opcd = 6E
+	entry = 879
+		opcode_id (8,0x0F) (8,0x6E) mod reg rm 
+	exta_entry = 880
+	exta_entry = 881
+		opcode_id (8,0x66) (8,0x0F) (8,0x6E) mod reg rm 
+	exta_entry = 882
+pri_opcd = 6F
+	entry = 883
+		opcode_id (8,0x0F) (8,0x6F) mod reg rm 
+	exta_entry = 884
+		opcode_id (8,0x66) (8,0x0F) (8,0x6F) mod reg rm 
+	exta_entry = 885
+		opcode_id (8,0xF3) (8,0x0F) (8,0x6F) mod reg rm 
+pri_opcd = 70
+	entry = 886
+		opcode_id (8,0x0F) (8,0x70) mod reg rm 
+	exta_entry = 887
+		opcode_id (8,0xF2) (8,0x0F) (8,0x70) mod reg rm 
+	exta_entry = 888
+		opcode_id (8,0xF3) (8,0x0F) (8,0x70) mod reg rm 
+	exta_entry = 889
+		opcode_id (8,0x66) (8,0x0F) (8,0x70) mod reg rm 
+pri_opcd = 71
+	entry = 890
+		opcode_id (8,0x0F) (8,0x71) (2, 3) (3,0x2) rm 
+	exta_entry = 891
+		opcode_id (8,0x66) (8,0x0F) (8,0x71) mod (3,0x2) rm 
+	exta_entry = 892
+		opcode_id (8,0x0F) (8,0x71) (2, 3) (3,0x4) rm 
+	exta_entry = 893
+		opcode_id (8,0x66) (8,0x0F) (8,0x71) mod (3,0x4) rm 
+	exta_entry = 894
+		opcode_id (8,0x0F) (8,0x71) (2, 3) (3,0x6) rm 
+	exta_entry = 895
+		opcode_id (8,0x66) (8,0x0F) (8,0x71) mod (3,0x6) rm 
+pri_opcd = 72
+	entry = 896
+		opcode_id (8,0x0F) (8,0x72) (2, 3) (3,0x2) rm 
+	exta_entry = 897
+		opcode_id (8,0x66) (8,0x0F) (8,0x72) mod (3,0x2) rm 
+	exta_entry = 898
+		opcode_id (8,0x0F) (8,0x72) (2, 3) (3,0x4) rm 
+	exta_entry = 899
+		opcode_id (8,0x66) (8,0x0F) (8,0x72) mod (3,0x4) rm 
+	exta_entry = 900
+		opcode_id (8,0x0F) (8,0x72) (2, 3) (3,0x6) rm 
+	exta_entry = 901
+		opcode_id (8,0x66) (8,0x0F) (8,0x72) mod (3,0x6) rm 
+pri_opcd = 73
+	entry = 902
+		opcode_id (8,0x0F) (8,0x73) (2, 3) (3,0x2) rm 
+	exta_entry = 903
+		opcode_id (8,0x66) (8,0x0F) (8,0x73) mod (3,0x2) rm 
+	exta_entry = 904
+		opcode_id (8,0x66) (8,0x0F) (8,0x73) mod (3,0x3) rm 
+	exta_entry = 905
+		opcode_id (8,0x0F) (8,0x73) (2, 3) (3,0x6) rm 
+	exta_entry = 906
+		opcode_id (8,0x66) (8,0x0F) (8,0x73) mod (3,0x6) rm 
+	exta_entry = 907
+		opcode_id (8,0x66) (8,0x0F) (8,0x73) mod (3,0x7) rm 
+pri_opcd = 74
+	entry = 908
+		opcode_id (8,0x0F) (8,0x74) mod reg rm 
+	exta_entry = 909
+		opcode_id (8,0x66) (8,0x0F) (8,0x74) mod reg rm 
+pri_opcd = 75
+	entry = 910
+		opcode_id (8,0x0F) (8,0x75) mod reg rm 
+	exta_entry = 911
+		opcode_id (8,0x66) (8,0x0F) (8,0x75) mod reg rm 
+pri_opcd = 76
+	entry = 912
+		opcode_id (8,0x0F) (8,0x76) mod reg rm 
+	exta_entry = 913
+		opcode_id (8,0x66) (8,0x0F) (8,0x76) mod reg rm 
+pri_opcd = 77
+	entry = 914
+		opcode_id (8,0x0F) (8,0x77) 
+pri_opcd = 78
+	entry = 915
+	exta_entry = 916
+pri_opcd = 79
+	entry = 917
+	exta_entry = 918
+pri_opcd = 7C
+	entry = 919
+		opcode_id (8,0x66) (8,0x0F) (8,0x7C) mod reg rm 
+	exta_entry = 920
+		opcode_id (8,0xF2) (8,0x0F) (8,0x7C) mod reg rm 
+pri_opcd = 7D
+	entry = 921
+		opcode_id (8,0x66) (8,0x0F) (8,0x7D) mod reg rm 
+	exta_entry = 922
+		opcode_id (8,0xF2) (8,0x0F) (8,0x7D) mod reg rm 
+pri_opcd = 7E
+	entry = 923
+		opcode_id (8,0x0F) (8,0x7E) mod reg rm 
+	exta_entry = 924
+	exta_entry = 925
+		opcode_id (8,0x66) (8,0x0F) (8,0x7E) mod reg rm 
+	exta_entry = 926
+	exta_entry = 927
+		opcode_id (8,0xF3) (8,0x0F) (8,0x7E) mod reg rm 
+pri_opcd = 7F
+	entry = 928
+		opcode_id (8,0x0F) (8,0x7F) mod reg rm 
+	exta_entry = 929
+		opcode_id (8,0x66) (8,0x0F) (8,0x7F) mod reg rm 
+	exta_entry = 930
+		opcode_id (8,0xF3) (8,0x0F) (8,0x7F) mod reg rm 
+pri_opcd = 80
+	entry = 931
+		opcode_id (8,0x0F) (8,0x80) 
+pri_opcd = 81
+	entry = 932
+		opcode_id (8,0x0F) (8,0x81) 
+pri_opcd = 82
+	entry = 933
+		opcode_id (8,0x0F) (8,0x82) 
+		extra_opcode_id (8,0x0F) (8,0x82) 
+		extra_opcode_id (8,0x0F) (8,0x82) 
+pri_opcd = 83
+	entry = 934
+		opcode_id (8,0x0F) (8,0x83) 
+		extra_opcode_id (8,0x0F) (8,0x83) 
+		extra_opcode_id (8,0x0F) (8,0x83) 
+pri_opcd = 84
+	entry = 935
+		opcode_id (8,0x0F) (8,0x84) 
+		extra_opcode_id (8,0x0F) (8,0x84) 
+pri_opcd = 85
+	entry = 936
+		opcode_id (8,0x0F) (8,0x85) 
+		extra_opcode_id (8,0x0F) (8,0x85) 
+pri_opcd = 86
+	entry = 937
+		opcode_id (8,0x0F) (8,0x86) 
+		extra_opcode_id (8,0x0F) (8,0x86) 
+pri_opcd = 87
+	entry = 938
+		opcode_id (8,0x0F) (8,0x87) 
+		extra_opcode_id (8,0x0F) (8,0x87) 
+pri_opcd = 88
+	entry = 939
+		opcode_id (8,0x0F) (8,0x88) 
+pri_opcd = 89
+	entry = 940
+		opcode_id (8,0x0F) (8,0x89) 
+pri_opcd = 8A
+	entry = 941
+		opcode_id (8,0x0F) (8,0x8A) 
+		extra_opcode_id (8,0x0F) (8,0x8A) 
+pri_opcd = 8B
+	entry = 942
+		opcode_id (8,0x0F) (8,0x8B) 
+		extra_opcode_id (8,0x0F) (8,0x8B) 
+pri_opcd = 8C
+	entry = 943
+		opcode_id (8,0x0F) (8,0x8C) 
+		extra_opcode_id (8,0x0F) (8,0x8C) 
+pri_opcd = 8D
+	entry = 944
+		opcode_id (8,0x0F) (8,0x8D) 
+		extra_opcode_id (8,0x0F) (8,0x8D) 
+pri_opcd = 8E
+	entry = 945
+		opcode_id (8,0x0F) (8,0x8E) 
+		extra_opcode_id (8,0x0F) (8,0x8E) 
+pri_opcd = 8F
+	entry = 946
+		opcode_id (8,0x0F) (8,0x8F) 
+		extra_opcode_id (8,0x0F) (8,0x8F) 
+pri_opcd = 90
+	entry = 947
+		opcode_id (8,0x0F) (8,0x90) mod (3,0x0) rm 
+pri_opcd = 91
+	entry = 948
+		opcode_id (8,0x0F) (8,0x91) mod (3,0x0) rm 
+pri_opcd = 92
+	entry = 949
+		opcode_id (8,0x0F) (8,0x92) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x92) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x92) mod (3,0x0) rm 
+pri_opcd = 93
+	entry = 950
+		opcode_id (8,0x0F) (8,0x93) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x93) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x93) mod (3,0x0) rm 
+pri_opcd = 94
+	entry = 951
+		opcode_id (8,0x0F) (8,0x94) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x94) mod (3,0x0) rm 
+pri_opcd = 95
+	entry = 952
+		opcode_id (8,0x0F) (8,0x95) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x95) mod (3,0x0) rm 
+pri_opcd = 96
+	entry = 953
+		opcode_id (8,0x0F) (8,0x96) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x96) mod (3,0x0) rm 
+pri_opcd = 97
+	entry = 954
+		opcode_id (8,0x0F) (8,0x97) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x97) mod (3,0x0) rm 
+pri_opcd = 98
+	entry = 955
+		opcode_id (8,0x0F) (8,0x98) mod (3,0x0) rm 
+pri_opcd = 99
+	entry = 956
+		opcode_id (8,0x0F) (8,0x99) mod (3,0x0) rm 
+pri_opcd = 9A
+	entry = 957
+		opcode_id (8,0x0F) (8,0x9A) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9A) mod (3,0x0) rm 
+pri_opcd = 9B
+	entry = 958
+		opcode_id (8,0x0F) (8,0x9B) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9B) mod (3,0x0) rm 
+pri_opcd = 9C
+	entry = 959
+		opcode_id (8,0x0F) (8,0x9C) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9C) mod (3,0x0) rm 
+pri_opcd = 9D
+	entry = 960
+		opcode_id (8,0x0F) (8,0x9D) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9D) mod (3,0x0) rm 
+pri_opcd = 9E
+	entry = 961
+		opcode_id (8,0x0F) (8,0x9E) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9E) mod (3,0x0) rm 
+pri_opcd = 9F
+	entry = 962
+		opcode_id (8,0x0F) (8,0x9F) mod (3,0x0) rm 
+		extra_opcode_id (8,0x0F) (8,0x9F) mod (3,0x0) rm 
+pri_opcd = A0
+	entry = 963
+		opcode_id (8,0x0F) (2,0x02) sreg3 (3,0x00) 
+pri_opcd = A1
+	entry = 964
+		opcode_id (8,0x0F) (2,0x02) sreg3 (3,0x01) 
+pri_opcd = A2
+	entry = 965
+		opcode_id (8,0x0F) (8,0xA2) 
+pri_opcd = A3
+	entry = 966
+		opcode_id (8,0x0F) (8,0xA3) mod reg rm 
+pri_opcd = A4
+	entry = 967
+		opcode_id (8,0x0F) (8,0xA4) mod reg rm 
+pri_opcd = A5
+	entry = 968
+		opcode_id (8,0x0F) (8,0xA5) mod reg rm 
+pri_opcd = A8
+	entry = 969
+		opcode_id (8,0x0F) (2,0x02) sreg3 (3,0x00) 
+pri_opcd = A9
+	entry = 970
+		opcode_id (8,0x0F) (2,0x02) sreg3 (3,0x01) 
+pri_opcd = AA
+	entry = 971
+		opcode_id (8,0x0F) (8,0xAA) 
+pri_opcd = AB
+	entry = 972
+		opcode_id (8,0x0F) (8,0xAB) mod reg rm 
+pri_opcd = AC
+	entry = 973
+		opcode_id (8,0x0F) (8,0xAC) mod reg rm 
+pri_opcd = AD
+	entry = 974
+		opcode_id (8,0x0F) (8,0xAD) mod reg rm 
+pri_opcd = AE
+	entry = 975
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x0) rm 
+	exta_entry = 976
+	exta_entry = 977
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x1) rm 
+	exta_entry = 978
+	exta_entry = 979
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x2) rm 
+	exta_entry = 980
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x3) rm 
+	exta_entry = 981
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x4) rm 
+	exta_entry = 982
+	exta_entry = 983
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x5) rm 
+	exta_entry = 984
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x5) rm 
+	exta_entry = 985
+	exta_entry = 986
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x6) rm 
+	exta_entry = 987
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x7) rm 
+	exta_entry = 988
+		opcode_id (8,0x0F) (8,0xAE) mod (3,0x7) rm 
+pri_opcd = AF
+	entry = 989
+		opcode_id (8,0x0F) (8,0xAF) mod reg rm 
+pri_opcd = B0
+	entry = 990
+		opcode_id (8,0x0F) (8,0xB0) mod reg rm 
+pri_opcd = B1
+	entry = 991
+		opcode_id (8,0x0F) (8,0xB1) mod reg rm 
+pri_opcd = B2
+	entry = 992
+		opcode_id (8,0x0F) (8,0xB2) mod reg rm 
+pri_opcd = B3
+	entry = 993
+		opcode_id (8,0x0F) (8,0xB3) mod reg rm 
+pri_opcd = B4
+	entry = 994
+		opcode_id (8,0x0F) (8,0xB4) mod reg rm 
+pri_opcd = B5
+	entry = 995
+		opcode_id (8,0x0F) (8,0xB5) mod reg rm 
+pri_opcd = B6
+	entry = 996
+		opcode_id (8,0x0F) (8,0xB6) mod reg rm 
+pri_opcd = B7
+	entry = 997
+		opcode_id (8,0x0F) (8,0xB7) mod reg rm 
+pri_opcd = B8
+	entry = 998
+		opcode_id (8,0x0F) (8,0xB8) 
+	exta_entry = 999
+		opcode_id (8,0xF3) (8,0x0F) (8,0xB8) mod reg rm 
+pri_opcd = B9
+	entry = 1000
+		opcode_id (8,0x0F) (8,0xB9) mod reg rm 
+pri_opcd = BA
+	entry = 1001
+		opcode_id (8,0x0F) (8,0xBA) mod (3,0x4) rm 
+	exta_entry = 1002
+		opcode_id (8,0x0F) (8,0xBA) mod (3,0x5) rm 
+	exta_entry = 1003
+		opcode_id (8,0x0F) (8,0xBA) mod (3,0x6) rm 
+	exta_entry = 1004
+		opcode_id (8,0x0F) (8,0xBA) mod (3,0x7) rm 
+pri_opcd = BB
+	entry = 1005
+		opcode_id (8,0x0F) (8,0xBB) mod reg rm 
+pri_opcd = BC
+	entry = 1006
+		opcode_id (8,0x0F) (8,0xBC) mod reg rm 
+pri_opcd = BD
+	entry = 1007
+		opcode_id (8,0x0F) (8,0xBD) mod reg rm 
+pri_opcd = BE
+	entry = 1008
+		opcode_id (8,0x0F) (8,0xBE) mod reg rm 
+pri_opcd = BF
+	entry = 1009
+		opcode_id (8,0x0F) (8,0xBF) mod reg rm 
+pri_opcd = C0
+	entry = 1010
+		opcode_id (8,0x0F) (8,0xC0) mod reg rm 
+pri_opcd = C1
+	entry = 1011
+		opcode_id (8,0x0F) (8,0xC1) mod reg rm 
+pri_opcd = C2
+	entry = 1012
+		opcode_id (8,0x0F) (8,0xC2) mod reg rm 
+	exta_entry = 1013
+		opcode_id (8,0xF3) (8,0x0F) (8,0xC2) mod reg rm 
+	exta_entry = 1014
+		opcode_id (8,0x66) (8,0x0F) (8,0xC2) mod reg rm 
+	exta_entry = 1015
+		opcode_id (8,0xF2) (8,0x0F) (8,0xC2) mod reg rm 
+pri_opcd = C3
+	entry = 1016
+		opcode_id (8,0x0F) (8,0xC3) mod reg rm 
+pri_opcd = C4
+	entry = 1017
+		opcode_id (8,0x0F) (8,0xC4) (2, 3) reg rm 
+		extra_opcode_id (8,0x0F) (8,0xC4) mod reg rm 
+	exta_entry = 1018
+		opcode_id (8,0x66) (8,0x0F) (8,0xC4) (2, 3) reg rm 
+		extra_opcode_id (8,0x66) (8,0x0F) (8,0xC4) mod reg rm 
+pri_opcd = C5
+	entry = 1019
+		opcode_id (8,0x0F) (8,0xC5) (2, 3) reg rm 
+	exta_entry = 1020
+		opcode_id (8,0x66) (8,0x0F) (8,0xC5) mod reg rm 
+pri_opcd = C6
+	entry = 1021
+		opcode_id (8,0x0F) (8,0xC6) mod reg rm 
+	exta_entry = 1022
+		opcode_id (8,0x66) (8,0x0F) (8,0xC6) mod reg rm 
+pri_opcd = C7
+	entry = 1023
+		opcode_id (8,0x0F) (8,0xC7) mod (3,0x1) rm 
+	exta_entry = 1024
+	exta_entry = 1025
+	exta_entry = 1026
+	exta_entry = 1027
+	exta_entry = 1028
+pri_opcd = C8
+	entry = 1029
+		opcode_id (8,0x0F) (5,0x19) reg 
+pri_opcd = D0
+	entry = 1030
+		opcode_id (8,0x66) (8,0x0F) (8,0xD0) mod reg rm 
+	exta_entry = 1031
+		opcode_id (8,0xF2) (8,0x0F) (8,0xD0) mod reg rm 
+pri_opcd = D1
+	entry = 1032
+		opcode_id (8,0x0F) (8,0xD1) mod reg rm 
+	exta_entry = 1033
+		opcode_id (8,0x66) (8,0x0F) (8,0xD1) mod reg rm 
+pri_opcd = D2
+	entry = 1034
+		opcode_id (8,0x0F) (8,0xD2) mod reg rm 
+	exta_entry = 1035
+		opcode_id (8,0x66) (8,0x0F) (8,0xD2) mod reg rm 
+pri_opcd = D3
+	entry = 1036
+		opcode_id (8,0x0F) (8,0xD3) mod reg rm 
+	exta_entry = 1037
+		opcode_id (8,0x66) (8,0x0F) (8,0xD3) mod reg rm 
+pri_opcd = D4
+	entry = 1038
+		opcode_id (8,0x0F) (8,0xD4) mod reg rm 
+	exta_entry = 1039
+		opcode_id (8,0x66) (8,0x0F) (8,0xD4) mod reg rm 
+pri_opcd = D5
+	entry = 1040
+		opcode_id (8,0x0F) (8,0xD5) mod reg rm 
+	exta_entry = 1041
+		opcode_id (8,0x66) (8,0x0F) (8,0xD5) mod reg rm 
+pri_opcd = D6
+	entry = 1042
+		opcode_id (8,0x66) (8,0x0F) (8,0xD6) mod reg rm 
+	exta_entry = 1043
+		opcode_id (8,0xF3) (8,0x0F) (8,0xD6) (2, 3) reg rm 
+	exta_entry = 1044
+		opcode_id (8,0xF2) (8,0x0F) (8,0xD6) mod reg rm 
+pri_opcd = D7
+	entry = 1045
+		opcode_id (8,0x0F) (8,0xD7) (2, 3) reg rm 
+	exta_entry = 1046
+		opcode_id (8,0x66) (8,0x0F) (8,0xD7) mod reg rm 
+pri_opcd = D8
+	entry = 1047
+		opcode_id (8,0x0F) (8,0xD8) mod reg rm 
+	exta_entry = 1048
+		opcode_id (8,0x66) (8,0x0F) (8,0xD8) mod reg rm 
+pri_opcd = D9
+	entry = 1049
+		opcode_id (8,0x0F) (8,0xD9) mod reg rm 
+	exta_entry = 1050
+		opcode_id (8,0x66) (8,0x0F) (8,0xD9) mod reg rm 
+pri_opcd = DA
+	entry = 1051
+		opcode_id (8,0x0F) (8,0xDA) mod reg rm 
+	exta_entry = 1052
+		opcode_id (8,0x66) (8,0x0F) (8,0xDA) mod reg rm 
+pri_opcd = DB
+	entry = 1053
+		opcode_id (8,0x0F) (8,0xDB) mod reg rm 
+	exta_entry = 1054
+		opcode_id (8,0x66) (8,0x0F) (8,0xDB) mod reg rm 
+pri_opcd = DC
+	entry = 1055
+		opcode_id (8,0x0F) (8,0xDC) mod reg rm 
+	exta_entry = 1056
+		opcode_id (8,0x66) (8,0x0F) (8,0xDC) mod reg rm 
+pri_opcd = DD
+	entry = 1057
+		opcode_id (8,0x0F) (8,0xDD) mod reg rm 
+	exta_entry = 1058
+		opcode_id (8,0x66) (8,0x0F) (8,0xDD) mod reg rm 
+pri_opcd = DE
+	entry = 1059
+		opcode_id (8,0x0F) (8,0xDE) mod reg rm 
+	exta_entry = 1060
+		opcode_id (8,0x66) (8,0x0F) (8,0xDE) mod reg rm 
+pri_opcd = DF
+	entry = 1061
+		opcode_id (8,0x0F) (8,0xDF) mod reg rm 
+	exta_entry = 1062
+		opcode_id (8,0x66) (8,0x0F) (8,0xDF) mod reg rm 
+pri_opcd = E0
+	entry = 1063
+		opcode_id (8,0x0F) (8,0xE0) mod reg rm 
+	exta_entry = 1064
+		opcode_id (8,0x66) (8,0x0F) (8,0xE0) mod reg rm 
+pri_opcd = E1
+	entry = 1065
+		opcode_id (8,0x0F) (8,0xE1) mod reg rm 
+	exta_entry = 1066
+		opcode_id (8,0x66) (8,0x0F) (8,0xE1) mod reg rm 
+pri_opcd = E2
+	entry = 1067
+		opcode_id (8,0x0F) (8,0xE2) mod reg rm 
+	exta_entry = 1068
+		opcode_id (8,0x66) (8,0x0F) (8,0xE2) mod reg rm 
+pri_opcd = E3
+	entry = 1069
+		opcode_id (8,0x0F) (8,0xE3) mod reg rm 
+	exta_entry = 1070
+		opcode_id (8,0x66) (8,0x0F) (8,0xE3) mod reg rm 
+pri_opcd = E4
+	entry = 1071
+		opcode_id (8,0x0F) (8,0xE4) mod reg rm 
+	exta_entry = 1072
+		opcode_id (8,0x66) (8,0x0F) (8,0xE4) mod reg rm 
+pri_opcd = E5
+	entry = 1073
+		opcode_id (8,0x0F) (8,0xE5) mod reg rm 
+	exta_entry = 1074
+		opcode_id (8,0x66) (8,0x0F) (8,0xE5) mod reg rm 
+pri_opcd = E6
+	entry = 1075
+		opcode_id (8,0xF2) (8,0x0F) (8,0xE6) mod reg rm 
+	exta_entry = 1076
+		opcode_id (8,0x66) (8,0x0F) (8,0xE6) mod reg rm 
+	exta_entry = 1077
+		opcode_id (8,0xF3) (8,0x0F) (8,0xE6) mod reg rm 
+pri_opcd = E7
+	entry = 1078
+		opcode_id (8,0x0F) (8,0xE7) mod reg rm 
+	exta_entry = 1079
+		opcode_id (8,0x66) (8,0x0F) (8,0xE7) mod reg rm 
+pri_opcd = E8
+	entry = 1080
+		opcode_id (8,0x0F) (8,0xE8) mod reg rm 
+	exta_entry = 1081
+		opcode_id (8,0x66) (8,0x0F) (8,0xE8) mod reg rm 
+pri_opcd = E9
+	entry = 1082
+		opcode_id (8,0x0F) (8,0xE9) mod reg rm 
+	exta_entry = 1083
+		opcode_id (8,0x66) (8,0x0F) (8,0xE9) mod reg rm 
+pri_opcd = EA
+	entry = 1084
+		opcode_id (8,0x0F) (8,0xEA) mod reg rm 
+	exta_entry = 1085
+		opcode_id (8,0x66) (8,0x0F) (8,0xEA) mod reg rm 
+pri_opcd = EB
+	entry = 1086
+		opcode_id (8,0x0F) (8,0xEB) mod reg rm 
+	exta_entry = 1087
+		opcode_id (8,0x66) (8,0x0F) (8,0xEB) mod reg rm 
+pri_opcd = EC
+	entry = 1088
+		opcode_id (8,0x0F) (8,0xEC) mod reg rm 
+	exta_entry = 1089
+		opcode_id (8,0x66) (8,0x0F) (8,0xEC) mod reg rm 
+pri_opcd = ED
+	entry = 1090
+		opcode_id (8,0x0F) (8,0xED) mod reg rm 
+	exta_entry = 1091
+		opcode_id (8,0x66) (8,0x0F) (8,0xED) mod reg rm 
+pri_opcd = EE
+	entry = 1092
+		opcode_id (8,0x0F) (8,0xEE) mod reg rm 
+	exta_entry = 1093
+		opcode_id (8,0x66) (8,0x0F) (8,0xEE) mod reg rm 
+pri_opcd = EF
+	entry = 1094
+		opcode_id (8,0x0F) (8,0xEF) mod reg rm 
+	exta_entry = 1095
+		opcode_id (8,0x66) (8,0x0F) (8,0xEF) mod reg rm 
+pri_opcd = F0
+	entry = 1096
+		opcode_id (8,0xF2) (8,0x0F) (8,0xF0) mod reg rm 
+pri_opcd = F1
+	entry = 1097
+		opcode_id (8,0x0F) (8,0xF1) mod reg rm 
+	exta_entry = 1098
+		opcode_id (8,0x66) (8,0x0F) (8,0xF1) mod reg rm 
+pri_opcd = F2
+	entry = 1099
+		opcode_id (8,0x0F) (8,0xF2) mod reg rm 
+	exta_entry = 1100
+		opcode_id (8,0x66) (8,0x0F) (8,0xF2) mod reg rm 
+pri_opcd = F3
+	entry = 1101
+		opcode_id (8,0x0F) (8,0xF3) mod reg rm 
+	exta_entry = 1102
+		opcode_id (8,0x66) (8,0x0F) (8,0xF3) mod reg rm 
+pri_opcd = F4
+	entry = 1103
+		opcode_id (8,0x0F) (8,0xF4) mod reg rm 
+	exta_entry = 1104
+		opcode_id (8,0x66) (8,0x0F) (8,0xF4) mod reg rm 
+pri_opcd = F5
+	entry = 1105
+		opcode_id (8,0x0F) (8,0xF5) mod reg rm 
+	exta_entry = 1106
+		opcode_id (8,0x66) (8,0x0F) (8,0xF5) mod reg rm 
+pri_opcd = F6
+	entry = 1107
+		opcode_id (8,0x0F) (8,0xF6) mod reg rm 
+	exta_entry = 1108
+		opcode_id (8,0x66) (8,0x0F) (8,0xF6) mod reg rm 
+pri_opcd = F7
+	entry = 1109
+		opcode_id (8,0x0F) (8,0xF7) (2, 3) reg rm 
+	exta_entry = 1110
+		opcode_id (8,0x66) (8,0x0F) (8,0xF7) mod reg rm 
+pri_opcd = F8
+	entry = 1111
+		opcode_id (8,0x0F) (8,0xF8) mod reg rm 
+	exta_entry = 1112
+		opcode_id (8,0x66) (8,0x0F) (8,0xF8) mod reg rm 
+pri_opcd = F9
+	entry = 1113
+		opcode_id (8,0x0F) (8,0xF9) mod reg rm 
+	exta_entry = 1114
+		opcode_id (8,0x66) (8,0x0F) (8,0xF9) mod reg rm 
+pri_opcd = FA
+	entry = 1115
+		opcode_id (8,0x0F) (8,0xFA) mod reg rm 
+	exta_entry = 1116
+		opcode_id (8,0x66) (8,0x0F) (8,0xFA) mod reg rm 
+pri_opcd = FB
+	entry = 1117
+		opcode_id (8,0x0F) (8,0xFB) mod reg rm 
+	exta_entry = 1118
+		opcode_id (8,0x66) (8,0x0F) (8,0xFB) mod reg rm 
+pri_opcd = FC
+	entry = 1119
+		opcode_id (8,0x0F) (8,0xFC) mod reg rm 
+	exta_entry = 1120
+		opcode_id (8,0x66) (8,0x0F) (8,0xFC) mod reg rm 
+pri_opcd = FD
+	entry = 1121
+		opcode_id (8,0x0F) (8,0xFD) mod reg rm 
+	exta_entry = 1122
+		opcode_id (8,0x66) (8,0x0F) (8,0xFD) mod reg rm 
+pri_opcd = FE
+	entry = 1123
+		opcode_id (8,0x0F) (8,0xFE) mod reg rm 
+	exta_entry = 1124
+		opcode_id (8,0x66) (8,0x0F) (8,0xFE) mod reg rm 
+1125

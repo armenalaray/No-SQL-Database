@@ -1,0 +1,3008 @@
+//TODO(Alex): Change (2, 3) for (2,3)
+one-byte
+pri_opcd = 00
+	entry = 0
+		grammar ADD <Eb>,<Gb>
+pri_opcd = 01
+	entry = 1
+		grammar ADD <Evqp>,<Gvqp>
+pri_opcd = 02
+	entry = 2
+		grammar ADD <Gb>,<Eb>
+pri_opcd = 03
+	entry = 3
+		grammar ADD <Gvqp>,<Evqp>
+pri_opcd = 04
+	entry = 4
+		grammar ADD <AL>,<Ib>
+pri_opcd = 05
+	entry = 5
+		grammar ADD <rAX>,<Ivds>
+pri_opcd = 06
+	entry = 6
+		grammar PUSH <ESEG>
+	exta_entry = 7
+pri_opcd = 07
+	entry = 8
+		grammar POP <ESEG>
+	exta_entry = 9
+pri_opcd = 08
+	entry = 10
+		grammar OR <Eb>,<Gb>
+pri_opcd = 09
+	entry = 11
+		grammar OR <Evqp>,<Gvqp>
+pri_opcd = 0A
+	entry = 12
+		grammar OR <Gb>,<Eb>
+pri_opcd = 0B
+	entry = 13
+		grammar OR <Gvqp>,<Evqp>
+pri_opcd = 0C
+	entry = 14
+		grammar OR <AL>,<Ib>
+pri_opcd = 0D
+	entry = 15
+		grammar OR <rAX>,<Ivds>
+pri_opcd = 0E
+	entry = 16
+		grammar PUSH <CSEG>
+	exta_entry = 17
+pri_opcd = 0F
+	entry = 18
+		//grammar POP <CSEG>
+	exta_entry = 19
+	exta_entry = 20
+pri_opcd = 10
+	entry = 21
+		grammar ADC <Eb>,<Gb>
+pri_opcd = 11
+	entry = 22
+		grammar ADC <Evqp>,<Gvqp>
+pri_opcd = 12
+	entry = 23
+		grammar ADC <Gb>,<Eb>
+pri_opcd = 13
+	entry = 24
+		grammar ADC <Gvqp>,<Evqp>
+pri_opcd = 14
+	entry = 25
+		grammar ADC <AL>,<Ib>
+pri_opcd = 15
+	entry = 26
+		grammar ADC <rAX>,<Ivds>
+pri_opcd = 16
+	entry = 27
+		grammar PUSH <SSEG>
+	exta_entry = 28
+pri_opcd = 17
+	entry = 29
+		grammar POP <SSEG>
+	exta_entry = 30
+pri_opcd = 18
+	entry = 31
+		grammar SBB <Eb>,<Gb>
+pri_opcd = 19
+	entry = 32
+		grammar SBB <Evqp>,<Gvqp>
+pri_opcd = 1A
+	entry = 33
+		grammar SBB <Gb>,<Eb>
+pri_opcd = 1B
+	entry = 34
+		grammar SBB <Gvqp>,<Evqp>
+pri_opcd = 1C
+	entry = 35
+		grammar SBB <AL>,<Ib>
+pri_opcd = 1D
+	entry = 36
+		grammar SBB <rAX>,<Ivds>
+pri_opcd = 1E
+	entry = 37
+		grammar PUSH <DSEG>
+	exta_entry = 38
+pri_opcd = 1F
+	entry = 39
+		grammar POP <DSEG>
+	exta_entry = 40
+pri_opcd = 20
+	entry = 41
+		grammar AND <Eb>,<Gb>
+pri_opcd = 21
+	entry = 42
+		grammar AND <Evqp>,<Gvqp>
+pri_opcd = 22
+	entry = 43
+		grammar AND <Gb>,<Eb>
+pri_opcd = 23
+	entry = 44
+		grammar AND <Gvqp>,<Evqp>
+pri_opcd = 24
+	entry = 45
+		grammar AND <AL>,<Ib>
+pri_opcd = 25
+	entry = 46
+		grammar AND <rAX>,<Ivds>
+pri_opcd = 26
+	entry = 47
+		//grammar ES 
+	exta_entry = 48
+	exta_entry = 49
+pri_opcd = 27
+	entry = 50
+		grammar DAA 
+	exta_entry = 51
+pri_opcd = 28
+	entry = 52
+		grammar SUB <Eb>,<Gb>
+pri_opcd = 29
+	entry = 53
+		grammar SUB <Evqp>,<Gvqp>
+pri_opcd = 2A
+	entry = 54
+		grammar SUB <Gb>,<Eb>
+pri_opcd = 2B
+	entry = 55
+		grammar SUB <Gvqp>,<Evqp>
+pri_opcd = 2C
+	entry = 56
+		grammar SUB <AL>,<Ib>
+pri_opcd = 2D
+	entry = 57
+		grammar SUB <rAX>,<Ivds>
+pri_opcd = 2E
+	entry = 58
+		//grammar CS 
+	exta_entry = 59
+		grammar NTAKEN 
+	exta_entry = 60
+pri_opcd = 2F
+	entry = 61
+		grammar DAS 
+	exta_entry = 62
+pri_opcd = 30
+	entry = 63
+		grammar XOR <Eb>,<Gb>
+pri_opcd = 31
+	entry = 64
+		grammar XOR <Evqp>,<Gvqp>
+pri_opcd = 32
+	entry = 65
+		grammar XOR <Gb>,<Eb>
+pri_opcd = 33
+	entry = 66
+		grammar XOR <Gvqp>,<Evqp>
+pri_opcd = 34
+	entry = 67
+		grammar XOR <AL>,<Ib>
+pri_opcd = 35
+	entry = 68
+		grammar XOR <rAX>,<Ivds>
+pri_opcd = 36
+	entry = 69
+		//grammar SS 
+	exta_entry = 70
+	exta_entry = 71
+pri_opcd = 37
+	entry = 72
+		grammar AAA 
+	exta_entry = 73
+pri_opcd = 38
+	entry = 74
+		grammar CMP <Eb>,<Gb>
+pri_opcd = 39
+	entry = 75
+		grammar CMP <Evqp>,<Gvqp>
+pri_opcd = 3A
+	entry = 76
+		grammar CMP <Gb>,<Eb>
+pri_opcd = 3B
+	entry = 77
+		grammar CMP <Gvqp>,<Evqp>
+pri_opcd = 3C
+	entry = 78
+		grammar CMP <AL>,<Ib>
+pri_opcd = 3D
+	entry = 79
+		grammar CMP <rAX>,<Ivds>
+pri_opcd = 3E
+	entry = 80
+		//grammar DS 
+	exta_entry = 81
+		grammar TAKEN 
+	exta_entry = 82
+pri_opcd = 3F
+	entry = 83
+		grammar AAS 
+	exta_entry = 84
+pri_opcd = 40
+	entry = 85
+		grammar INC <Zv>
+	exta_entry = 86
+
+pri_opcd = 41
+	entry = 87
+
+pri_opcd = 42
+	entry = 88
+
+pri_opcd = 43
+	entry = 89
+
+pri_opcd = 44
+	entry = 90
+
+pri_opcd = 45
+	entry = 91
+
+pri_opcd = 46
+	entry = 92
+
+pri_opcd = 47
+	entry = 93
+
+pri_opcd = 48
+	entry = 94
+		grammar DEC <Zv>
+	exta_entry = 95
+
+pri_opcd = 49
+	entry = 96
+
+pri_opcd = 4A
+	entry = 97
+
+pri_opcd = 4B
+	entry = 98
+
+pri_opcd = 4C
+	entry = 99
+
+pri_opcd = 4D
+	entry = 100
+
+pri_opcd = 4E
+	entry = 101
+
+pri_opcd = 4F
+	entry = 102
+
+pri_opcd = 50
+	entry = 103
+		grammar PUSH <Zv>
+	exta_entry = 104
+
+pri_opcd = 58
+	entry = 105
+		grammar POP <Zv>
+	exta_entry = 106
+
+pri_opcd = 60
+	entry = 107
+		//grammar PUSHA 
+	exta_entry = 108
+		//grammar PUSHAD 
+		grammar_group PUSHA <Yv>
+			grammar_entry #16 PUSHA
+			grammar_entry #32 PUSHAD
+	exta_entry = 109
+pri_opcd = 61
+	entry = 110
+		//grammar POPA 
+	exta_entry = 111
+		//grammar POPAD 
+		grammar_group POPA <Yv>
+			grammar_entry #16 POPA 
+			grammar_entry #32 POPAD
+	exta_entry = 112
+pri_opcd = 62
+	entry = 113
+		grammar BOUND <Gv>,<Ma>
+	exta_entry = 114
+pri_opcd = 63
+	entry = 115
+		grammar ARPL <Ew>,<Gw>
+	exta_entry = 116
+
+pri_opcd = 64
+	entry = 117
+		//grammar FS 
+	exta_entry = 118
+	exta_entry = 119
+		grammar ALTER 
+pri_opcd = 65
+	entry = 120
+		//grammar GS 
+	exta_entry = 121
+pri_opcd = 66
+	entry = 122
+	exta_entry = 123
+pri_opcd = 67
+	entry = 124
+pri_opcd = 68
+	entry = 125
+		grammar PUSH <Ivs>
+pri_opcd = 69
+	entry = 126
+		grammar IMUL <Gvqp>,<Evqp>,<Ivds>
+pri_opcd = 6A
+	entry = 127
+		grammar PUSH <Ibss>
+pri_opcd = 6B
+	entry = 128
+		grammar IMUL <Gvqp>,<Evqp>,<Ibs>
+pri_opcd = 6C
+	entry = 129
+		//grammar INS <Yb>/<(ES:)[rDI]>,<DX>
+		extra_grammar INSB 
+pri_opcd = 6D
+	entry = 130
+		//grammar INS <Ywo>/<ES:[DI]>,<DX>
+		//extra_grammar INSW 
+	exta_entry = 131
+		//grammar INS <Yv>/<(ES:)[rDI]>,<DX>
+		//extra_grammar INSD 
+		grammar_group INSGR <Yv>
+			grammar_entry #16 INSW
+			grammar_entry #32 INSD
+pri_opcd = 6E
+	entry = 132
+		//grammar OUTS <DX>,<Xb>/<(DS):[rSI]>
+		extra_grammar OUTSB 
+pri_opcd = 6F
+	entry = 133
+		//grammar OUTS <DX>,<Xwo>/<DS:[SI]>
+		//extra_grammar OUTSW 
+	exta_entry = 134
+		//grammar OUTS <DX>,<Xv>/<(DS:)[rSI]>
+		//extra_grammar OUTSD 
+		grammar_group OUTSGR <Xv>
+			grammar_entry #16 OUTSW
+			grammar_entry #32 OUTSD
+		
+pri_opcd = 70
+	entry = 135
+		grammar JO <Jbs>
+pri_opcd = 71
+	entry = 136
+		grammar JNO <Jbs>
+pri_opcd = 72
+	entry = 137
+		grammar JB <Jbs>
+		//extra_grammar JNAE <Jbs>
+		//extra_grammar JC <Jbs>
+pri_opcd = 73
+	entry = 138
+		//grammar JNB <Jbs>
+		extra_grammar JAE <Jbs>
+		//extra_grammar JNC <Jbs>
+pri_opcd = 74
+	entry = 139
+		grammar JZ <Jbs>
+		//extra_grammar JE <Jbs>
+pri_opcd = 75
+	entry = 140
+		grammar JNZ <Jbs>
+		//extra_grammar JNE <Jbs>
+pri_opcd = 76
+	entry = 141
+		grammar JBE <Jbs>
+		//extra_grammar JNA <Jbs>
+pri_opcd = 77
+	entry = 142
+		//grammar JNBE <Jbs>
+		extra_grammar JA <Jbs>
+pri_opcd = 78
+	entry = 143
+		grammar JS <Jbs>
+pri_opcd = 79
+	entry = 144
+		grammar JNS <Jbs>
+pri_opcd = 7A
+	entry = 145
+		//grammar JP <Jbs>
+		extra_grammar JPE <Jbs>
+pri_opcd = 7B
+	entry = 146
+		//grammar JNP <Jbs>
+		extra_grammar JPO <Jbs>
+pri_opcd = 7C
+	entry = 147
+		grammar JL <Jbs>
+		//extra_grammar JNGE <Jbs>
+pri_opcd = 7D
+	entry = 148
+		//grammar JNL <Jbs>
+		extra_grammar JGE <Jbs>
+pri_opcd = 7E
+	entry = 149
+		grammar JLE <Jbs>
+		//extra_grammar JNG <Jbs>
+pri_opcd = 7F
+	entry = 150
+		//grammar JNLE <Jbs>
+		extra_grammar JG <Jbs>
+pri_opcd = 80
+	entry = 151
+		grammar ADD <Eb>,<Ib>
+	exta_entry = 152
+		grammar OR <Eb>,<Ib>
+	exta_entry = 153
+		grammar ADC <Eb>,<Ib>
+	exta_entry = 154
+		grammar SBB <Eb>,<Ib>
+	exta_entry = 155
+		grammar AND <Eb>,<Ib>
+	exta_entry = 156
+		grammar SUB <Eb>,<Ib>
+	exta_entry = 157
+		grammar XOR <Eb>,<Ib>
+	exta_entry = 158
+		grammar CMP <Eb>,<Ib>
+pri_opcd = 81
+	entry = 159
+		grammar ADD <Evqp>,<Ivds>
+	exta_entry = 160
+		grammar OR <Evqp>,<Ivds>
+	exta_entry = 161
+		grammar ADC <Evqp>,<Ivds>
+	exta_entry = 162
+		grammar SBB <Evqp>,<Ivds>
+	exta_entry = 163
+		grammar AND <Evqp>,<Ivds>
+	exta_entry = 164
+		grammar SUB <Evqp>,<Ivds>
+	exta_entry = 165
+		grammar XOR <Evqp>,<Ivds>
+	exta_entry = 166
+		grammar CMP <Evqp>,<Ivds>
+pri_opcd = 82
+	entry = 167
+		grammar ADD <Eb>,<Ib>
+	exta_entry = 168
+		grammar OR <Eb>,<Ib>
+	exta_entry = 169
+		grammar ADC <Eb>,<Ib>
+	exta_entry = 170
+		grammar SBB <Eb>,<Ib>
+	exta_entry = 171
+		grammar AND <Eb>,<Ib>
+	exta_entry = 172
+		grammar SUB <Eb>,<Ib>
+	exta_entry = 173
+		grammar XOR <Eb>,<Ib>
+	exta_entry = 174
+		grammar CMP <Eb>,<Ib>
+	exta_entry = 175
+pri_opcd = 83
+	entry = 176
+		grammar ADD <Evqp>,<Ibs>
+	exta_entry = 177
+		grammar OR <Evqp>,<Ibs>
+	exta_entry = 178
+		grammar ADC <Evqp>,<Ibs>
+	exta_entry = 179
+		grammar SBB <Evqp>,<Ibs>
+	exta_entry = 180
+		grammar AND <Evqp>,<Ibs>
+	exta_entry = 181
+		grammar SUB <Evqp>,<Ibs>
+	exta_entry = 182
+		grammar XOR <Evqp>,<Ibs>
+	exta_entry = 183
+		grammar CMP <Evqp>,<Ibs>
+pri_opcd = 84
+	entry = 184
+		grammar TEST <Eb>,<Gb>
+pri_opcd = 85
+	entry = 185
+		grammar TEST <Evqp>,<Gvqp>
+pri_opcd = 86
+	entry = 186
+		grammar XCHG <Gb>,<Eb>
+pri_opcd = 87
+	entry = 187
+		grammar XCHG <Gvqp>,<Evqp>
+pri_opcd = 88
+	entry = 188
+		grammar MOV <Eb>,<Gb>
+pri_opcd = 89
+	entry = 189
+		grammar MOV <Evqp>,<Gvqp>
+pri_opcd = 8A
+	entry = 190
+		grammar MOV <Gb>,<Eb>
+pri_opcd = 8B
+	entry = 191
+		grammar MOV <Gvqp>,<Evqp>
+		
+pri_opcd = 8C
+	entry = 192
+		extra_grammar MOV <Rvqp>,<Sw>
+		grammar MOV <Mw>,<Sw>
+		
+pri_opcd = 8D
+	entry = 193
+		grammar LEA <Gvqp>,<M>
+pri_opcd = 8E
+	entry = 194
+		grammar MOV <Sw>,<Ew>
+pri_opcd = 8F
+	entry = 195
+		grammar POP <Ev>
+	exta_entry = 196
+
+pri_opcd = 90
+	entry = 197
+		grammar NOP 
+		grammar XCHG <Zvqp>,<rAX>
+	exta_entry = 198
+		
+	exta_entry = 199
+		//grammar NOP 
+	exta_entry = 200
+		grammar PAUSE 
+pri_opcd = 98
+	entry = 201
+		//grammar CBW 
+	exta_entry = 202
+		//grammar CWDE 
+		grammar_group CBWGGR <GRvqp>
+			grammar_entry #16 CBW 
+			grammar_entry #32 CWDE 
+			grammar_entry #64 CDQE 
+	exta_entry = 203
+
+
+
+pri_opcd = 99
+	entry = 204
+		//grammar CWD 
+	exta_entry = 205
+		//grammar CDQ 
+		grammar_group CWDGR <GRvqp>
+			grammar_entry #16 CWD 
+			grammar_entry #32 CDQ 
+			grammar_entry #64 CQO 
+	exta_entry = 206
+
+
+
+pri_opcd = 9A
+	entry = 207
+		grammar CALLF <Ap>
+	exta_entry = 208
+pri_opcd = 9B
+	entry = 209
+		grammar FWAIT 
+		//extra_grammar WAIT 
+	exta_entry = 210
+pri_opcd = 9C
+	entry = 211
+		//grammar PUSHF 
+	exta_entry = 212
+		//grammar PUSHFD 
+		grammar_group PUSHFGR <GRf>
+			grammar_entry #16 PUSHF
+			grammar_entry #32 PUSHFD
+			grammar_entry #64 PUSHFQ
+	exta_entry = 213
+
+
+pri_opcd = 9D
+	entry = 214
+		//grammar POPF 
+	exta_entry = 215
+		//grammar POPFD 
+		grammar_group POPFGR <GRf>
+			grammar_entry #16 POPF
+			grammar_entry #32 POPFD
+			grammar_entry #64 POPFQ
+	exta_entry = 216
+
+
+pri_opcd = 9E
+	entry = 217
+		grammar SAHF 
+pri_opcd = 9F
+	entry = 218
+		grammar LAHF 
+pri_opcd = A0
+	entry = 219
+		grammar MOV <AL>,<Ob>
+pri_opcd = A1
+	entry = 220
+		grammar MOV <rAX>,<Ovqp>
+pri_opcd = A2
+	entry = 221
+		grammar MOV <Ob>,<AL>
+pri_opcd = A3
+	entry = 222
+		grammar MOV <Ovqp>,<rAX>
+pri_opcd = A4
+	entry = 223
+		//grammar MOVS <Yb>/<(ES:)[rDI]>,<Xb>/<(DS:)[rSI]>
+		extra_grammar MOVSB 
+pri_opcd = A5
+	entry = 224
+		//grammar MOVS <Ywo>/<ES:[DI]>,<Xwo>/<DS:[SI]>
+		//extra_grammar MOVSW 
+	exta_entry = 225
+		//grammar MOVS <Yv>/<(ES:)[rDI]>,<Xv>/<(DS:)[rSI]>
+		//extra_grammar MOVSD 
+		grammar_group MOVSGR <Yvqp>
+			grammar_entry #16 MOVSW 
+			grammar_entry #32 MOVSD 
+			grammar_entry #64 MOVSQ 
+	exta_entry = 226
+
+
+
+
+pri_opcd = A6
+	entry = 227
+		//grammar CMPS <Yb>/<(ES:)[rDI]>,<Xb>/<(DS:)[rSI]>
+		extra_grammar CMPSB 
+pri_opcd = A7
+	entry = 228
+		//grammar CMPS <Ywo>/<ES:[DI]>,<Xwo>/<DS:[SI]>
+		//extra_grammar CMPSW 
+	exta_entry = 229
+		//grammar CMPS <Yv>/<(ES:)[rDI]>,<Xv>/<(DS:)[rSI]>
+		//extra_grammar CMPSD 
+		grammar_group CMPSGR <Yvqp>
+			grammar_entry #16 CMPSW 
+			grammar_entry #32 CMPSD 
+			grammar_entry #64 CMPSQ 
+	exta_entry = 230
+
+
+
+
+pri_opcd = A8
+	entry = 231
+		grammar TEST <AL>,<Ib>
+pri_opcd = A9
+	entry = 232
+		grammar TEST <rAX>,<Ivds>
+pri_opcd = AA
+	entry = 233
+		//grammar STOS <Yb>/<(ES:)[rDI]>
+		extra_grammar STOSB 
+pri_opcd = AB
+	entry = 234
+		//grammar STOS <Ywo>/<ES:[DI]>
+		//extra_grammar STOSW 
+	exta_entry = 235
+		//grammar STOS <Yv>/<(ES:)[rDI]>
+		//extra_grammar STOSD 
+		grammar_group STOSGR <Yvqp>
+			grammar_entry #16 STOSW 
+			grammar_entry #32 STOSD 
+			grammar_entry #64 STOSQ 
+	exta_entry = 236
+
+
+
+
+pri_opcd = AC
+	entry = 237
+		//grammar LODS <Xb>/<(DS:)[rSI]>
+		extra_grammar LODSB 
+pri_opcd = AD
+	entry = 238
+		//grammar LODS <Xwo>/<DS:[SI]>
+		//extra_grammar LODSW 
+	exta_entry = 239
+		//grammar LODS <Xv>/<(DS:)[rSI]>
+		//extra_grammar LODSD 
+		grammar_group LODSGR <Xvqp>
+			grammar_entry #16 LODSW 
+			grammar_entry #32 LODSD 
+			grammar_entry #64 LODSQ 
+	exta_entry = 240
+
+
+
+
+pri_opcd = AE
+	entry = 241
+		//grammar SCAS <Yb>/<(ES:)[rDI]>
+		extra_grammar SCASB 
+pri_opcd = AF
+	entry = 242
+		//grammar SCAS <Ywo>/<ES:[DI]>
+		//extra_grammar SCASW 
+	exta_entry = 243
+		//grammar SCAS <Yv>/<(ES:)[rDI]>
+		//extra_grammar SCASD 
+		grammar_group SCASGR <Yvqp>
+			grammar_entry #16 SCASW 
+			grammar_entry #32 SCASD 
+			grammar_entry #64 SCASQ 
+	exta_entry = 244
+
+
+
+
+pri_opcd = B0
+	entry = 245
+		grammar MOV <Zb>,<Ib>
+pri_opcd = B8
+	entry = 246
+		grammar MOV <Zvqp>,<Ivqp>
+pri_opcd = C0
+	entry = 247
+		grammar ROL <Eb>,<Ib>
+	exta_entry = 248
+		grammar ROR <Eb>,<Ib>
+	exta_entry = 249
+		grammar RCL <Eb>,<Ib>
+	exta_entry = 250
+		grammar RCR <Eb>,<Ib>
+	exta_entry = 251
+		//grammar SHL <Eb>,<Ib>
+		extra_grammar SAL <Eb>,<Ib>
+	exta_entry = 252
+		grammar SHR <Eb>,<Ib>
+	exta_entry = 253
+		grammar SAL <Eb>,<Ib>
+		//extra_grammar SHL <Eb>,<Ib>
+	exta_entry = 254
+		grammar SAR <Eb>,<Ib>
+pri_opcd = C1
+	entry = 255
+		grammar ROL <Evqp>,<Ib>
+	exta_entry = 256
+		grammar ROR <Evqp>,<Ib>
+	exta_entry = 257
+		grammar RCL <Evqp>,<Ib>
+	exta_entry = 258
+		grammar RCR <Evqp>,<Ib>
+	exta_entry = 259
+		//grammar SHL <Evqp>,<Ib>
+		extra_grammar SAL <Evqp>,<Ib>
+	exta_entry = 260
+		grammar SHR <Evqp>,<Ib>
+	exta_entry = 261
+		grammar SAL <Evqp>,<Ib>
+		//extra_grammar SHL <Evqp>,<Ib>
+	exta_entry = 262
+		grammar SAR <Evqp>,<Ib>
+pri_opcd = C2
+	entry = 263
+		grammar RETN <Iw>
+pri_opcd = C3
+	entry = 264
+		grammar RETN 
+pri_opcd = C4
+	entry = 265
+		grammar LES <Gv>,<Mp>
+	exta_entry = 266
+pri_opcd = C5
+	entry = 267
+		grammar LDS <Gv>,<Mp>
+	exta_entry = 268
+pri_opcd = C6
+	entry = 269
+		grammar MOV <Eb>,<Ib>
+pri_opcd = C7
+	entry = 270
+		grammar MOV <Evqp>,<Ivds>
+pri_opcd = C8
+	entry = 271
+		grammar ENTER <Iw>,<Ib>
+	exta_entry = 272
+
+pri_opcd = C9
+	entry = 273
+		grammar LEAVE 
+	exta_entry = 274
+
+pri_opcd = CA
+	entry = 275
+		grammar RETF <Iw>
+pri_opcd = CB
+	entry = 276
+		grammar RETF 
+pri_opcd = CC
+	entry = 277
+		grammar INT <3>
+pri_opcd = CD
+	entry = 278
+		grammar INT <Ib>
+pri_opcd = CE
+	entry = 279
+		grammar INTO 
+pri_opcd = CF
+	entry = 280
+		//grammar IRET 
+	exta_entry = 281
+		//grammar IRETD 
+		grammar_group IRETGR <GRvqp>
+			grammar_entry #16 IRET 
+			grammar_entry #32 IRETD 
+			grammar_entry #64 IRETQ 
+	exta_entry = 282
+
+
+
+pri_opcd = D0
+	entry = 283
+		grammar ROL <Eb>,<1>
+	exta_entry = 284
+		grammar ROR <Eb>,<1>
+	exta_entry = 285
+		grammar RCL <Eb>,<1>
+	exta_entry = 286
+		grammar RCR <Eb>,<1>
+	exta_entry = 287
+		//grammar SHL <Eb>,<1>
+		extra_grammar SAL <Eb>,<1>
+	exta_entry = 288
+		grammar SHR <Eb>,<1>
+	exta_entry = 289
+		grammar SAL <Eb>,<1>
+		//extra_grammar SHL <Eb>,<1>
+	exta_entry = 290
+		grammar SAR <Eb>,<1>
+pri_opcd = D1
+	entry = 291
+		grammar ROL <Evqp>,<1>
+	exta_entry = 292
+		grammar ROR <Evqp>,<1>
+	exta_entry = 293
+		grammar RCL <Evqp>,<1>
+	exta_entry = 294
+		grammar RCR <Evqp>,<1>
+	exta_entry = 295
+		//grammar SHL <Evqp>,<1>
+		extra_grammar SAL <Evqp>,<1>
+	exta_entry = 296
+		grammar SHR <Evqp>,<1>
+	exta_entry = 297
+		grammar SAL <Evqp>,<1>
+		//extra_grammar SHL <Evqp>,<1>
+	exta_entry = 298
+		grammar SAR <Evqp>,<1>
+pri_opcd = D2
+	entry = 299
+		grammar ROL <Eb>,<CL>
+	exta_entry = 300
+		grammar ROR <Eb>,<CL>
+	exta_entry = 301
+		grammar RCL <Eb>,<CL>
+	exta_entry = 302
+		grammar RCR <Eb>,<CL>
+	exta_entry = 303
+		//grammar SHL <Eb>,<CL>
+		extra_grammar SAL <Eb>,<CL>
+	exta_entry = 304
+		grammar SHR <Eb>,<CL>
+	exta_entry = 305
+		grammar SAL <Eb>,<CL>
+		//extra_grammar SHL <Eb>,<CL>
+	exta_entry = 306
+		grammar SAR <Eb>,<CL>
+pri_opcd = D3
+	entry = 307
+		grammar ROL <Evqp>,<CL>
+	exta_entry = 308
+		grammar ROR <Evqp>,<CL>
+	exta_entry = 309
+		grammar RCL <Evqp>,<CL>
+	exta_entry = 310
+		grammar RCR <Evqp>,<CL>
+	exta_entry = 311
+		//grammar SHL <Evqp>,<CL>
+		extra_grammar SAL <Evqp>,<CL>
+	exta_entry = 312
+		grammar SHR <Evqp>,<CL>
+	exta_entry = 313
+		grammar SAL <Evqp>,<CL>
+		//extra_grammar SHL <Evqp>,<CL>
+	exta_entry = 314
+		grammar SAR <Evqp>,<CL>
+pri_opcd = D4
+	entry = 315
+		grammar AAM 
+	exta_entry = 316
+		grammar AMX <Ib>
+	exta_entry = 317
+pri_opcd = D5
+	entry = 318
+		grammar AAD 
+	exta_entry = 319
+		grammar ADX <Ib>
+	exta_entry = 320
+pri_opcd = D6
+	entry = 321
+	exta_entry = 322
+		//grammar SALC 
+		extra_grammar SETALC 
+	exta_entry = 323
+pri_opcd = D7
+	entry = 324
+		//grammar XLAT <BBb>/<(DS:)[rBX+AL]>
+		extra_grammar XLATB 
+pri_opcd = D8
+	entry = 325
+		extra_grammar FADD <ST>,<EST>
+		grammar FADD <Msr>
+		
+	exta_entry = 326
+		extra_grammar FMUL <ST>,<EST>
+		grammar FMUL <Msr>
+		
+	exta_entry = 327
+		grammar FCOM 
+		grammar FCOM <ESsr>
+	exta_entry = 328
+		
+	exta_entry = 329
+		grammar FCOMP 
+		grammar FCOMP <ESsr>
+	exta_entry = 330
+		
+	exta_entry = 331
+		extra_grammar FSUB <ST>,<EST>
+		grammar FSUB <Msr>
+		
+	exta_entry = 332
+		extra_grammar FSUBR <ST>,<EST>
+		grammar FSUBR <Msr>
+		
+	exta_entry = 333
+		extra_grammar FDIV <ST>,<EST>
+		grammar FDIV <Msr>
+		
+	exta_entry = 334
+		extra_grammar FDIVR <ST>,<EST>
+		grammar FDIVR <Msr>
+		
+pri_opcd = D9
+	entry = 335
+		grammar FLD <ESsr>
+	exta_entry = 336
+		grammar FXCH 
+		grammar FXCH <EST>
+	exta_entry = 337
+		
+	exta_entry = 338
+		grammar FNOP 
+		grammar FST <Msr>
+	exta_entry = 339
+		
+	exta_entry = 340
+		grammar FSTP1 <EST>
+		grammar FSTP <Msr>
+	exta_entry = 341
+		//grammar FSTP1 <EST>
+	exta_entry = 342
+		//grammar FSTP1 <EST>
+	exta_entry = 343
+		grammar FCHS 
+		grammar FABS 
+		grammar FTST 
+		grammar FXAM 
+		grammar FLDENV <Me>
+	exta_entry = 344
+		
+	exta_entry = 345
+		
+	exta_entry = 346
+		
+	exta_entry = 347
+		
+	exta_entry = 348
+		grammar FLD1 
+		grammar FLDL2T 
+		grammar FLDL2E 
+		grammar FLDPI 
+		grammar FLDLG2
+		grammar FLDLN2
+		grammar FLDZ 
+		grammar FLDCW <Mw>
+	exta_entry = 349
+		
+	exta_entry = 350
+		
+	exta_entry = 351
+		
+	exta_entry = 352
+		
+	exta_entry = 353
+		 
+	exta_entry = 354
+		 
+	exta_entry = 355
+		
+	exta_entry = 356
+		
+		grammar F2XM1 
+		grammar FYL2X 
+		grammar FPTAN 
+		grammar FPATAN
+		grammar FXTRACT 
+		grammar FPREM1 
+		grammar FDECSTP
+		grammar FINCSTP
+		grammar FNSTENV <Me>
+		grammar FSTENV <Me>
+	exta_entry = 357
+		
+	exta_entry = 358
+		
+	exta_entry = 359
+		
+	exta_entry = 360
+		
+	exta_entry = 361
+		 
+	exta_entry = 362
+		
+	exta_entry = 363
+		
+	exta_entry = 364
+		 
+	exta_entry = 365
+		 
+	exta_entry = 366
+		grammar FPREM 
+		grammar FYL2XP1 
+		grammar FSQRT 
+		grammar FSINCOS 
+		grammar FRNDINT 
+		grammar FSCALE 
+		grammar FSIN 
+		grammar FCOS 
+		grammar FNSTCW <Mw>
+		grammar FSTCW <Mw>
+	exta_entry = 367
+		
+	exta_entry = 368
+		
+	exta_entry = 369
+		
+	exta_entry = 370
+		
+	exta_entry = 371
+		
+	exta_entry = 372
+		
+	exta_entry = 373
+		
+	exta_entry = 374
+		
+	exta_entry = 375
+		
+pri_opcd = DA
+	entry = 376
+		grammar FCMOVB <ST>,<EST>
+		grammar FIADD <Mdi>
+	exta_entry = 377
+		
+	exta_entry = 378
+		grammar FCMOVE <ST>,<EST>
+		grammar FIMUL <Mdi>
+	exta_entry = 379
+		
+	exta_entry = 380
+		grammar FCMOVBE <ST>,<EST>
+		grammar FICOM <Mdi>
+	exta_entry = 381
+		
+	exta_entry = 382
+		grammar FCMOVU <ST>,<EST>
+		grammar FICOMP <Mdi>
+	exta_entry = 383
+		
+	exta_entry = 384
+		grammar FISUB <Mdi>
+	exta_entry = 385
+		grammar FUCOMPP 
+		grammar FISUBR <Mdi>
+	exta_entry = 386
+		
+	exta_entry = 387
+		grammar FIDIV <Mdi>
+	exta_entry = 388
+		grammar FIDIVR <Mdi>
+		
+
+pri_opcd = DB
+	entry = 389
+		grammar FCMOVNB <ST>,<EST>
+		grammar FILD <Mdi>
+	exta_entry = 390
+
+	exta_entry = 391
+		grammar FCMOVNE <ST>,<EST>
+		grammar FISTTP <Mdi>
+	exta_entry = 392
+		
+	exta_entry = 393
+		grammar FCMOVNBE <ST>,<EST>
+		grammar FIST <Mdi>
+	exta_entry = 394
+		
+	exta_entry = 395
+		grammar FCMOVNU <ST>,<EST>
+		grammar FISTP <Mdi>
+	exta_entry = 396
+		
+	exta_entry = 397
+		grammar FNENI 
+	exta_entry = 398
+		grammar FENI 
+	exta_entry = 399
+		grammar FNENI 
+	exta_entry = 400
+		grammar FNDISI 
+	exta_entry = 401
+		grammar FDISI 
+	exta_entry = 402
+		grammar FNDISI 
+	exta_entry = 403
+		grammar FNCLEX 
+	exta_entry = 404
+		grammar FCLEX 
+	exta_entry = 405
+		grammar FNINIT 
+	exta_entry = 406
+		grammar FINIT 
+	exta_entry = 407
+		grammar FNSETPM 
+	exta_entry = 408
+		grammar FSETPM 
+	exta_entry = 409
+		grammar FNSETPM 
+	exta_entry = 410
+		grammar FUCOMI <ST>,<EST>
+		grammar FLD <Mer>
+	exta_entry = 411
+		
+	exta_entry = 412
+		grammar FCOMI <ST>,<EST>
+	exta_entry = 413
+		grammar FSTP <Mer>
+pri_opcd = DC
+	entry = 414
+		grammar FADD <EST>,<ST>
+		grammar FADD <Mdr>
+	exta_entry = 415
+		
+	exta_entry = 416
+		grammar FMUL <EST>,<ST>
+		grammar FMUL <Mdr>
+	exta_entry = 417
+		
+	exta_entry = 418
+		grammar FCOM2 <EST>
+		grammar FCOM <Mdr>
+	exta_entry = 419
+		//grammar FCOM2 <EST>
+	exta_entry = 420
+		//grammar FCOM2 <EST>
+	exta_entry = 421
+		grammar FCOMP3 <EST>
+		grammar FCOMP <Mdr>
+	exta_entry = 422
+		//grammar FCOMP3 <EST>
+	exta_entry = 423
+		//grammar FCOMP3 <EST>
+	exta_entry = 424
+		grammar FSUBR <EST>,<ST>
+		grammar FSUB <Mdr>
+	exta_entry = 425
+		
+	exta_entry = 426
+		grammar FSUB <EST>,<ST>
+		grammar FSUBR <Mdr>
+	exta_entry = 427
+		
+	exta_entry = 428
+		grammar FDIVR <EST>,<ST>
+		grammar FDIV <Mdr>
+	exta_entry = 429
+		
+	exta_entry = 430
+		grammar FDIV <EST>,<ST>
+		grammar FDIVR <Mdr>
+	exta_entry = 431
+		
+pri_opcd = DD
+	entry = 432
+		grammar FFREE <EST>
+		grammar FLD <Mdr>
+	exta_entry = 433
+		
+	exta_entry = 434
+		grammar FXCH4 <EST>
+		grammar FISTTP <Mqi>
+	exta_entry = 435
+		//grammar FXCH4 <EST>
+	exta_entry = 436
+		//grammar FXCH4 <EST>
+	exta_entry = 437
+		grammar FST <EST>
+		grammar FST <Mdr>
+	exta_entry = 438
+		
+	exta_entry = 439
+		grammar FSTP <EST>
+		grammar FSTP <Mdr>
+	exta_entry = 440
+		
+	exta_entry = 441
+		grammar FUCOM <EST>
+		grammar FRSTOR <Mst>
+	exta_entry = 442
+		
+	exta_entry = 443
+		grammar FUCOM 
+	exta_entry = 444
+		grammar FUCOMP <EST>
+	exta_entry = 445
+		grammar FUCOMP 
+	exta_entry = 446
+		grammar FNSAVE <Mst>
+	exta_entry = 447
+		grammar FSAVE <Mst>
+	exta_entry = 448
+		grammar FNSTSW <Mw>
+	exta_entry = 449
+		grammar FSTSW <Mw>
+pri_opcd = DE
+	entry = 450
+		grammar FADDP 
+		grammar FADDP <EST>,<ST>
+		grammar FIADD <Mwi>
+	exta_entry = 451
+		
+	exta_entry = 452
+		
+	exta_entry = 453
+		grammar FMULP 
+		grammar FMULP <EST>,<ST>
+		grammar FIMUL <Mwi>
+	exta_entry = 454
+		
+	exta_entry = 455
+		
+	exta_entry = 456
+		grammar FCOMP5 <EST>
+		grammar FICOM <Mwi>
+	exta_entry = 457
+		//grammar FCOMP5 <EST>
+	exta_entry = 458
+		//grammar FCOMP5 <EST>
+	exta_entry = 459
+		grammar FCOMPP 
+		grammar FICOMP <Mwi>
+	exta_entry = 460
+		
+	exta_entry = 461
+		grammar FSUBRP 
+		grammar FSUBRP <EST>,<ST>
+		grammar FISUB <Mwi>
+	exta_entry = 462
+		
+	exta_entry = 463
+		
+	exta_entry = 464
+		grammar FSUBP 
+		grammar FSUBP <EST>,<ST>
+		grammar FISUBR <Mwi>
+	exta_entry = 465
+		
+	exta_entry = 466
+		
+	exta_entry = 467
+		grammar FDIVRP 
+		grammar FDIVRP <EST>,<ST>
+		grammar FIDIV <Mwi>
+	exta_entry = 468
+		
+	exta_entry = 469
+		
+	exta_entry = 470
+		grammar FDIVP 
+		grammar FDIVP <EST>,<ST>
+		grammar FIDIVR <Mwi>
+	exta_entry = 471
+		
+	exta_entry = 472
+		
+pri_opcd = DF
+	entry = 473
+		grammar FFREEP <EST>
+		grammar FILD <Mwi>
+	exta_entry = 474
+		
+	exta_entry = 475
+		grammar FXCH7 <EST>
+		grammar FISTTP <Mwi>
+	exta_entry = 476
+		//grammar FXCH7 <EST>
+	exta_entry = 477
+		//grammar FXCH7 <EST>
+	exta_entry = 478
+		grammar FSTP8 <EST>
+		grammar FIST <Mwi>
+	exta_entry = 479
+		//grammar FSTP8 <EST>
+	exta_entry = 480
+		//grammar FSTP8 <EST>
+	exta_entry = 481
+		grammar FSTP9 <EST>
+		grammar FISTP <Mwi>
+	exta_entry = 482
+		//grammar FSTP9 <EST>
+	exta_entry = 483
+		//grammar FSTP9 <EST>
+	exta_entry = 484
+		grammar FNSTSW <AX>
+		grammar FBLD <Mbcd>
+	exta_entry = 485
+		
+	exta_entry = 486
+		grammar FSTSW <AX>
+	exta_entry = 487
+		grammar FUCOMIP <ST>,<EST>
+		grammar FILD <Mqi>
+	exta_entry = 488
+		
+	exta_entry = 489
+		grammar FCOMIP <ST>,<EST>
+		grammar FBSTP <Mbcd>
+	exta_entry = 490
+		
+	exta_entry = 491
+		grammar FISTP <Mqi>
+pri_opcd = E0
+	entry = 492
+		grammar LOOPNZ <Jbs>
+		//extra_grammar LOOPNE <Jbs>
+	exta_entry = 493
+
+
+pri_opcd = E1
+	entry = 494
+		grammar LOOPZ <Jbs>
+		//extra_grammar LOOPE <Jbs>
+	exta_entry = 495
+
+
+pri_opcd = E2
+	entry = 496
+		grammar LOOP <Jbs>
+	exta_entry = 497
+
+pri_opcd = E3
+	entry = 498
+		//grammar JCXZ <Jbs>
+		//extra_grammar JECXZ <Jbs>
+		grammar_group JCXZGR <GRcxz>
+			grammar_entry #16 JCXZ <Jbs>
+			grammar_entry #32 JECXZ <Jbs>
+			grammar_entry #64 JRCXZ <Jbs>
+	exta_entry = 499
+
+
+pri_opcd = E4
+	entry = 500
+		grammar IN <AL>,<Ib>
+pri_opcd = E5
+	entry = 501
+		grammar IN <eAX>,<Ib>
+pri_opcd = E6
+	entry = 502
+		grammar OUT <Ib>,<AL>
+pri_opcd = E7
+	entry = 503
+		grammar OUT <Ib>,<eAX>
+pri_opcd = E8
+	entry = 504
+		grammar CALL <Jvds>
+pri_opcd = E9
+	entry = 505
+		grammar JMP <Jvds>
+pri_opcd = EA
+	entry = 506
+		grammar JMPF <Ap>
+	exta_entry = 507
+pri_opcd = EB
+	entry = 508
+		grammar JMP <Jbs>
+pri_opcd = EC
+	entry = 509
+		grammar IN <AL>,<DX>
+pri_opcd = ED
+	entry = 510
+		grammar IN <eAX>,<DX>
+pri_opcd = EE
+	entry = 511
+		grammar OUT <DX>,<AL>
+pri_opcd = EF
+	entry = 512
+		grammar OUT <DX>,<eAX>
+pri_opcd = F0
+	entry = 513
+		//grammar LOCK 
+pri_opcd = F1
+	entry = 514
+	exta_entry = 515
+		//grammar INT1 
+		extra_grammar ICEBP 
+pri_opcd = F2
+	entry = 516
+		//grammar REPNZ 
+		//extra_grammar REPNE 
+	exta_entry = 517
+		//grammar REP 
+	exta_entry = 518
+
+
+	exta_entry = 519
+
+	exta_entry = 520
+pri_opcd = F3
+	entry = 521
+		//grammar REPZ 
+		//extra_grammar REPE 
+	exta_entry = 522
+		//grammar REP 
+	exta_entry = 523
+
+
+	exta_entry = 524
+
+	exta_entry = 525
+pri_opcd = F4
+	entry = 526
+		grammar HLT 
+pri_opcd = F5
+	entry = 527
+		grammar CMC 
+pri_opcd = F6
+	entry = 528
+		grammar TEST <Eb>,<Ib>
+	exta_entry = 529
+		grammar TEST <Eb>,<Ib>
+	exta_entry = 530
+		grammar NOT <Eb>
+	exta_entry = 531
+		grammar NEG <Eb>
+	exta_entry = 532
+		grammar MUL <Eb>
+	exta_entry = 533
+		grammar IMUL <Eb>
+	exta_entry = 534
+		grammar DIV <Eb>
+	exta_entry = 535
+		grammar IDIV <Eb>
+pri_opcd = F7
+	entry = 536
+		grammar TEST <Evqp>,<Ivqp>
+	exta_entry = 537
+		grammar TEST <Evqp>,<Ivqp>
+	exta_entry = 538
+		grammar NOT <Evqp>
+	exta_entry = 539
+		grammar NEG <Evqp>
+	exta_entry = 540
+		grammar MUL <Evqp>
+	exta_entry = 541
+		grammar IMUL <Evqp>
+	exta_entry = 542
+		grammar DIV <Evqp>
+	exta_entry = 543
+		grammar IDIV <Evqp>
+pri_opcd = F8
+	entry = 544
+		grammar CLC 
+pri_opcd = F9
+	entry = 545
+		grammar STC 
+pri_opcd = FA
+	entry = 546
+		grammar CLI 
+pri_opcd = FB
+	entry = 547
+		grammar STI 
+pri_opcd = FC
+	entry = 548
+		grammar CLD 
+pri_opcd = FD
+	entry = 549
+		grammar STD 
+pri_opcd = FE
+	entry = 550
+		grammar INC <Eb>
+	exta_entry = 551
+		grammar DEC <Eb>
+pri_opcd = FF
+	entry = 552
+		grammar INC <Evqp>
+	exta_entry = 553
+		grammar DEC <Evqp>
+	exta_entry = 554
+		grammar CALL <Ev>
+	exta_entry = 555
+
+	exta_entry = 556
+		grammar CALLF <Mptp>
+	exta_entry = 557
+		grammar JMP <Ev>
+	exta_entry = 558
+
+	exta_entry = 559
+		grammar JMPF <Mptp>
+	exta_entry = 560
+		grammar PUSH <Ev>
+	exta_entry = 561
+
+two-byte
+pri_opcd = 00
+	entry = 562
+		extra_grammar SLDT <Rvqp>
+		grammar SLDT <Mw>
+		
+	exta_entry = 563
+		extra_grammar STR <Rvqp>
+		grammar STR <Mw>
+		
+	exta_entry = 564
+		grammar LLDT <Ew>
+	exta_entry = 565
+		grammar LTR <Ew>
+	exta_entry = 566
+		grammar VERR <Ew>
+	exta_entry = 567
+		grammar VERW <Ew>
+	exta_entry = 568
+		grammar JMPE 
+pri_opcd = 01
+	entry = 569
+		grammar VMCALL 
+		grammar VMLAUNCH 
+		grammar VMRESUME 
+		grammar VMXOFF 
+		grammar SGDT <Ms>
+	exta_entry = 570
+		
+	exta_entry = 571
+		
+	exta_entry = 572
+		
+	exta_entry = 573
+		
+	exta_entry = 574
+		grammar MONITOR 
+		grammar MWAIT 
+		grammar SIDT <Ms>
+	exta_entry = 575
+		
+	exta_entry = 576
+		
+	exta_entry = 577
+		grammar XGETBV 
+		grammar XSETBV 
+		grammar LGDT <Ms>
+	exta_entry = 578
+		
+	exta_entry = 579
+		
+	exta_entry = 580
+		grammar LIDT <Ms>
+	exta_entry = 581
+		extra_grammar SMSW <Rvqp>
+		grammar SMSW <Mw>
+		
+	exta_entry = 582
+		grammar LMSW <Ew>
+	exta_entry = 583
+		grammar RDTSCP 
+		grammar INVLPG <M>
+	exta_entry = 584
+
+	exta_entry = 585
+		
+pri_opcd = 02
+	entry = 586
+		extra_grammar LAR <Gvqp>,<Rv>
+		grammar LAR <Gvqp>,<Mw>
+		
+pri_opcd = 03
+	entry = 587
+		extra_grammar LSL <Gvqp>,<Rv>
+		grammar LSL <Gvqp>,<Mw>
+		
+pri_opcd = 05
+	entry = 588
+		grammar LOADALL 
+	exta_entry = 589
+
+pri_opcd = 06
+	entry = 590
+		grammar CLTS 
+pri_opcd = 07
+	entry = 591
+		grammar LOADALL 
+	exta_entry = 592
+
+pri_opcd = 08
+	entry = 593
+		grammar INVD 
+pri_opcd = 09
+	entry = 594
+		grammar WBINVD 
+pri_opcd = 0B
+	entry = 595
+		grammar UD2 
+pri_opcd = 0D
+	entry = 596
+		grammar NOP <Ev>
+pri_opcd = 10
+	entry = 597
+		grammar MOVUPS <Vps>,<Wps>
+	exta_entry = 598
+		grammar MOVSS <Vss>,<Wss>
+	exta_entry = 599
+		grammar MOVUPD <Vpd>,<Wpd>
+	exta_entry = 600
+		grammar MOVSD <Vsd>,<Wsd>
+pri_opcd = 11
+	entry = 601
+		grammar MOVUPS <Wps>,<Vps>
+	exta_entry = 602
+		grammar MOVSS <Wss>,<Vss>
+	exta_entry = 603
+		grammar MOVUPD <Wpd>,<Vpd>
+	exta_entry = 604
+		grammar MOVSD <Wsd>,<Vsd>
+pri_opcd = 12
+	entry = 605
+		grammar MOVHLPS <Vq>,<Uq>
+	exta_entry = 606
+		grammar MOVLPS <Vq>,<Mq>
+	exta_entry = 607
+		grammar MOVLPD <Vq>,<Mq>
+	exta_entry = 608
+		grammar MOVDDUP <Vq>,<Wq>
+	exta_entry = 609
+		grammar MOVSLDUP <Vq>,<Wq>
+pri_opcd = 13
+	entry = 610
+		grammar MOVLPS <Mq>,<Vq>
+	exta_entry = 611
+		grammar MOVLPD <Mq>,<Vq>
+pri_opcd = 14
+	entry = 612
+		grammar UNPCKLPS <Vps>,<Wq>
+	exta_entry = 613
+		grammar UNPCKLPD <Vpd>,<Wpd>
+pri_opcd = 15
+	entry = 614
+		grammar UNPCKHPS <Vps>,<Wq>
+	exta_entry = 615
+		grammar UNPCKHPD <Vpd>,<Wpd>
+pri_opcd = 16
+	entry = 616
+		grammar MOVLHPS <Vq>,<Uq>
+	exta_entry = 617
+		grammar MOVHPS <Vq>,<Mq>
+	exta_entry = 618
+		grammar MOVHPD <Vq>,<Mq>
+	exta_entry = 619
+		grammar MOVSHDUP <Vq>,<Wq>
+pri_opcd = 17
+	entry = 620
+		grammar MOVHPS <Mq>,<Vq>
+	exta_entry = 621
+		grammar MOVHPD <Mq>,<Vq>
+pri_opcd = 18
+	entry = 622
+		
+	exta_entry = 623
+		grammar PREFETCHNTA <Mb>
+	exta_entry = 624
+		grammar PREFETCHT0 <Mb>
+	exta_entry = 625
+		grammar PREFETCHT1 <Mb>
+	exta_entry = 626
+		grammar PREFETCHT2 <Mb>
+	exta_entry = 627
+		grammar HINT_NOP <Ev>
+	exta_entry = 628
+		grammar HINT_NOP <Ev>
+	exta_entry = 629
+		grammar HINT_NOP <Ev>
+	exta_entry = 630
+		grammar HINT_NOP <Ev>
+		grammar HINT_NOP <Ev>
+pri_opcd = 19
+	entry = 631
+		grammar HINT_NOP <Ev>
+pri_opcd = 1A
+	entry = 632
+		grammar HINT_NOP <Ev>
+pri_opcd = 1B
+	entry = 633
+		grammar HINT_NOP <Ev>
+pri_opcd = 1C
+	entry = 634
+		grammar HINT_NOP <Ev>
+pri_opcd = 1D
+	entry = 635
+		grammar HINT_NOP <Ev>
+pri_opcd = 1E
+	entry = 636
+		grammar HINT_NOP <Ev>
+pri_opcd = 1F
+	entry = 637
+		
+	exta_entry = 638
+		grammar NOP <Ev>
+	exta_entry = 639
+		grammar HINT_NOP <Ev>
+	exta_entry = 640
+		grammar HINT_NOP <Ev>
+	exta_entry = 641
+		grammar HINT_NOP <Ev>
+	exta_entry = 642
+		grammar HINT_NOP <Ev>
+	exta_entry = 643
+		grammar HINT_NOP <Ev>
+	exta_entry = 644
+		grammar HINT_NOP <Ev>
+	exta_entry = 645
+		grammar HINT_NOP <Ev>
+		grammar HINT_NOP <Ev>
+pri_opcd = 20
+	entry = 646
+		//grammar MOV <Rd>,<Cd>
+	exta_entry = 647
+		grammar MOV <Hd>,<Cd>
+	exta_entry = 648
+
+	exta_entry = 649
+
+pri_opcd = 21
+	entry = 650
+		//grammar MOV <Rd>,<Dd>
+	exta_entry = 651
+		grammar MOV <Hd>,<Dd>
+	exta_entry = 652
+
+	exta_entry = 653
+
+pri_opcd = 22
+	entry = 654
+		//grammar MOV <Cd>,<Rd>
+	exta_entry = 655
+		grammar MOV <Cd>,<Hd>
+	exta_entry = 656
+
+	exta_entry = 657
+
+pri_opcd = 23
+	entry = 658
+		//grammar MOV <Dd>,<Rd>
+	exta_entry = 659
+		grammar MOV <Dd>,<Hd>
+	exta_entry = 660
+
+	exta_entry = 661
+
+pri_opcd = 24
+	entry = 662
+		//grammar MOV <Rd>,<Td>
+	exta_entry = 663
+		grammar MOV <Hd>,<Td>
+pri_opcd = 26
+	entry = 664
+		//grammar MOV <Td>,<Rd>
+	exta_entry = 665
+		grammar MOV <Td>,<Hd>
+pri_opcd = 28
+	entry = 666
+		grammar MOVAPS <Vps>,<Wps>
+	exta_entry = 667
+		grammar MOVAPD <Vpd>,<Wpd>
+pri_opcd = 29
+	entry = 668
+		grammar MOVAPS <Wps>,<Vps>
+	exta_entry = 669
+		grammar MOVAPD <Wpd>,<Vpd>
+pri_opcd = 2A
+	entry = 670
+		grammar CVTPI2PS <Vps>,<Qpi>
+	exta_entry = 671
+		grammar CVTSI2SS <Vss>,<Edqp>
+	exta_entry = 672
+		grammar CVTPI2PD <Vpd>,<Qpi>
+	exta_entry = 673
+		grammar CVTSI2SD <Vsd>,<Edqp>
+pri_opcd = 2B
+	entry = 674
+		grammar MOVNTPS <Mps>,<Vps>
+	exta_entry = 675
+		grammar MOVNTPD <Mpd>,<Vpd>
+pri_opcd = 2C
+	entry = 676
+		grammar CVTTPS2PI <Ppi>,<Wpsq>
+	exta_entry = 677
+		grammar CVTTSS2SI <Gdqp>,<Wss>
+	exta_entry = 678
+		grammar CVTTPD2PI <Ppi>,<Wpd>
+	exta_entry = 679
+		grammar CVTTSD2SI <Gdqp>,<Wsd>
+pri_opcd = 2D
+	entry = 680
+		grammar CVTPS2PI <Ppi>,<Wpsq>
+	exta_entry = 681
+		grammar CVTSS2SI <Gdqp>,<Wss>
+	exta_entry = 682
+		grammar CVTPD2PI <Ppi>,<Wpd>
+	exta_entry = 683
+		grammar CVTSD2SI <Gdqp>,<Wsd>
+pri_opcd = 2E
+	entry = 684
+		grammar UCOMISS <Vss>,<Wss>
+	exta_entry = 685
+		grammar UCOMISD <Vsd>,<Wsd>
+pri_opcd = 2F
+	entry = 686
+		grammar COMISS <Vss>,<Wss>
+	exta_entry = 687
+		grammar COMISD <Vsd>,<Wsd>
+pri_opcd = 30
+	entry = 688
+		grammar WRMSR 
+pri_opcd = 31
+	entry = 689
+		grammar RDTSC 
+pri_opcd = 32
+	entry = 690
+		grammar RDMSR 
+pri_opcd = 33
+	entry = 691
+		grammar RDPMC 
+pri_opcd = 34
+	entry = 692
+		grammar SYSENTER 
+	exta_entry = 693
+
+pri_opcd = 35
+	entry = 694
+		grammar SYSEXIT 
+pri_opcd = 37
+	entry = 695
+		grammar GETSEC 
+pri_opcd = 38
+	entry = 696
+		grammar PSHUFB <Pq>,<Qq>
+	exta_entry = 697
+		grammar PSHUFB <Vdq>,<Wdq>
+	exta_entry = 698
+		grammar PHADDW <Pq>,<Qq>
+	exta_entry = 699
+		grammar PHADDW <Vdq>,<Wdq>
+	exta_entry = 700
+		grammar PHADDD <Pq>,<Qq>
+	exta_entry = 701
+		grammar PHADDD <Vdq>,<Wdq>
+	exta_entry = 702
+		grammar PHADDSW <Pq>,<Qq>
+	exta_entry = 703
+		grammar PHADDSW <Vdq>,<Wdq>
+	exta_entry = 704
+		grammar PMADDUBSW <Pq>,<Qq>
+	exta_entry = 705
+		grammar PMADDUBSW <Vdq>,<Wdq>
+	exta_entry = 706
+		grammar PHSUBW <Pq>,<Qq>
+	exta_entry = 707
+		grammar PHSUBW <Vdq>,<Wdq>
+	exta_entry = 708
+		grammar PHSUBD <Pq>,<Qq>
+	exta_entry = 709
+		grammar PHSUBD <Vdq>,<Wdq>
+	exta_entry = 710
+		grammar PHSUBSW <Pq>,<Qq>
+	exta_entry = 711
+		grammar PHSUBSW <Vdq>,<Wdq>
+	exta_entry = 712
+		grammar PSIGNB <Pq>,<Qq>
+	exta_entry = 713
+		grammar PSIGNB <Vdq>,<Wdq>
+	exta_entry = 714
+		grammar PSIGNW <Pq>,<Qq>
+	exta_entry = 715
+		grammar PSIGNW <Vdq>,<Wdq>
+	exta_entry = 716
+		grammar PSIGND <Pq>,<Qq>
+	exta_entry = 717
+		grammar PSIGND <Vdq>,<Wdq>
+	exta_entry = 718
+		grammar PMULHRSW <Pq>,<Qq>
+	exta_entry = 719
+		grammar PMULHRSW <Vdq>,<Wdq>
+	exta_entry = 720
+		grammar PBLENDVB <Vdq>,<Wdq>
+	exta_entry = 721
+		grammar BLENDVPS <Vps>,<Wps>
+	exta_entry = 722
+		grammar BLENDVPD <Vpd>,<Wpd>
+	exta_entry = 723
+		grammar PTEST <Vdq>,<Wdq>
+	exta_entry = 724
+		grammar PABSB <Pq>,<Qq>
+	exta_entry = 725
+		grammar PABSB <Vdq>,<Wdq>
+	exta_entry = 726
+		grammar PABSW <Pq>,<Qq>
+	exta_entry = 727
+		grammar PABSW <Vdq>,<Wdq>
+	exta_entry = 728
+		grammar PABSD <Pq>,<Qq>
+	exta_entry = 729
+		grammar PABSD <Vdq>,<Wdq>
+	exta_entry = 730
+		extra_grammar PMOVSXBW <Vdq>,<Udq>
+		grammar PMOVSXBW <Vdq>,<Mq>
+		
+	exta_entry = 731
+		extra_grammar PMOVSXBD <Vdq>,<Udq>
+		grammar PMOVSXBD <Vdq>,<Md>
+		
+	exta_entry = 732
+		extra_grammar PMOVSXBQ <Vdq>,<Udq>
+		grammar PMOVSXBQ <Vdq>,<Mw>
+		
+	exta_entry = 733
+		extra_grammar PMOVSXWD <Vdq>,<Udq>
+		grammar PMOVSXWD <Vdq>,<Mq>
+		
+	exta_entry = 734
+		extra_grammar PMOVSXWQ <Vdq>,<Udq>
+		grammar PMOVSXWQ <Vdq>,<Md>
+		
+	exta_entry = 735
+		extra_grammar PMOVSXDQ <Vdq>,<Udq>
+		grammar PMOVSXDQ <Vdq>,<Mq>
+		
+	exta_entry = 736
+		grammar PMULDQ <Vdq>,<Wdq>
+	exta_entry = 737
+		grammar PCMPEQQ <Vdq>,<Wdq>
+	exta_entry = 738
+		grammar MOVNTDQA <Vdq>,<Mdq>
+	exta_entry = 739
+		grammar PACKUSDW <Vdq>,<Wdq>
+	exta_entry = 740
+		extra_grammar PMOVZXBW <Vdq>,<Udq>
+		grammar PMOVZXBW <Vdq>,<Mq>
+		
+	exta_entry = 741
+		extra_grammar PMOVZXBD <Vdq>,<Udq>
+		grammar PMOVZXBD <Vdq>,<Md>
+		
+	exta_entry = 742
+		extra_grammar PMOVZXBQ <Vdq>,<Udq>
+		grammar PMOVZXBQ <Vdq>,<Mw>
+		
+	exta_entry = 743
+		extra_grammar PMOVZXWD <Vdq>,<Udq>
+		grammar PMOVZXWD <Vdq>,<Mq>
+		
+	exta_entry = 744
+		extra_grammar PMOVZXWQ <Vdq>,<Udq>
+		grammar PMOVZXWQ <Vdq>,<Md>
+			
+	exta_entry = 745
+		extra_grammar PMOVZXDQ <Vdq>,<Udq>
+		grammar PMOVZXDQ <Vdq>,<Mq>
+		
+	exta_entry = 746
+		grammar PCMPGTQ <Vdq>,<Wdq>
+	exta_entry = 747
+		grammar PMINSB <Vdq>,<Wdq>
+	exta_entry = 748
+		grammar PMINSD <Vdq>,<Wdq>
+	exta_entry = 749
+		grammar PMINUW <Vdq>,<Wdq>
+	exta_entry = 750
+		grammar PMINUD <Vdq>,<Wdq>
+	exta_entry = 751
+		grammar PMAXSB <Vdq>,<Wdq>
+	exta_entry = 752
+		grammar PMAXSD <Vdq>,<Wdq>
+	exta_entry = 753
+		grammar PMAXUW <Vdq>,<Wdq>
+	exta_entry = 754
+		grammar PMAXUD <Vdq>,<Wdq>
+	exta_entry = 755
+		grammar PMULLD <Vdq>,<Wdq>
+	exta_entry = 756
+		grammar PHMINPOSUW <Vdq>,<Wdq>
+	exta_entry = 757
+		grammar INVEPT <Gd>,<Mdq>
+	exta_entry = 758
+
+	exta_entry = 759
+		grammar INVVPID <Gd>,<Mdq>
+	exta_entry = 760
+
+	exta_entry = 761
+		grammar MOVBE <Gvqp>,<Mvqp>
+	exta_entry = 762
+		grammar CRC32 <Gdqp>,<Eb>
+	exta_entry = 763
+		grammar MOVBE <Mvqp>,<Gvqp>
+	exta_entry = 764
+		grammar CRC32 <Gdqp>,<Evqp>
+pri_opcd = 3A
+	entry = 765
+		grammar ROUNDPS <Vps>,<Wps>,<Ib>
+	exta_entry = 766
+		grammar ROUNDPD <Vps>,<Wpd>,<Ib>
+	exta_entry = 767
+		grammar ROUNDSS <Vss>,<Wss>,<Ib>
+	exta_entry = 768
+		grammar ROUNDSD <Vsd>,<Wsd>,<Ib>
+	exta_entry = 769
+		grammar BLENDPS <Vps>,<Wps>,<Ib>
+	exta_entry = 770
+		grammar BLENDPD <Vpd>,<Wpd>,<Ib>
+	exta_entry = 771
+		grammar PBLENDW <Vdq>,<Wdq>,<Ib>
+	exta_entry = 772
+		grammar PALIGNR <Pq>,<Qq>
+	exta_entry = 773
+		grammar PALIGNR <Vdq>,<Wdq>
+	exta_entry = 774
+		extra_grammar PEXTRB <Rdqp>,<Vdq>,<Ib>
+		grammar PEXTRB <Mb>,<Vdq>,<Ib>
+		
+	exta_entry = 775
+		extra_grammar PEXTRW <Rdqp>,<Vdq>,<Ib>
+		grammar PEXTRW <Mw>,<Vdq>,<Ib>
+		
+	exta_entry = 776
+		grammar PEXTRD <Ed>,<Vdq>,<Ib>
+		//NOTE(Alex):Needs rex prefix to operate
+		//extra_grammar PEXTRQ <Eqp>,<Vdq>,<Ib>
+	exta_entry = 777
+		grammar EXTRACTPS <Ed>,<Vdq>,<Ib>
+	exta_entry = 778
+		extra_grammar PINSRB <Vdq>,<Rdqp>,<Ib>
+		grammar PINSRB <Vdq>,<Mb>,<Ib>
+		
+	exta_entry = 779
+		grammar INSERTPS <Vps>,<Ups>,<Ib>
+		extra_grammar INSERTPS <Vps>,<Md>,<Ib>
+	exta_entry = 780
+		grammar PINSRD <Vdq>,<Ed>,<Ib>
+		//NOTE(Alex):Needs rex prefix to operate
+		//extra_grammar PINSRQ <Vdq>,<Eqp>,<Ib>
+	exta_entry = 781
+		grammar DPPS <Vps>,<Wps>
+	exta_entry = 782
+		grammar DPPD <Vpd>,<Wpd>
+	exta_entry = 783
+		grammar MPSADBW <Vdq>,<Wdq>,<Ib>
+	exta_entry = 784
+		grammar PCMPESTRM <Vdq>,<Wdq>,<Ib>
+	exta_entry = 785
+		grammar PCMPESTRI <Vdq>,<Wdq>,<Ib>
+	exta_entry = 786
+		grammar PCMPISTRM <Vdq>,<Wdq>,<Ib>
+	exta_entry = 787
+		grammar PCMPISTRI <Vdq>,<Wdq>,<Ib>
+pri_opcd = 40
+	entry = 788
+		grammar CMOVO <Gvqp>,<Evqp>
+pri_opcd = 41
+	entry = 789
+		grammar CMOVNO <Gvqp>,<Evqp>
+pri_opcd = 42
+	entry = 790
+		grammar CMOVB <Gvqp>,<Evqp>
+		//extra_grammar CMOVNAE <Gvqp>,<Evqp>
+		//extra_grammar CMOVC <Gvqp>,<Evqp>
+pri_opcd = 43
+	entry = 791
+		//grammar CMOVNB <Gvqp>,<Evqp>
+		extra_grammar CMOVAE <Gvqp>,<Evqp>
+		//extra_grammar CMOVNC <Gvqp>,<Evqp>
+pri_opcd = 44
+	entry = 792
+		grammar CMOVZ <Gvqp>,<Evqp>
+		//extra_grammar CMOVE <Gvqp>,<Evqp>
+pri_opcd = 45
+	entry = 793
+		grammar CMOVNZ <Gvqp>,<Evqp>
+		//extra_grammar CMOVNE <Gvqp>,<Evqp>
+pri_opcd = 46
+	entry = 794
+		grammar CMOVBE <Gvqp>,<Evqp>
+		//extra_grammar CMOVNA <Gvqp>,<Evqp>
+pri_opcd = 47
+	entry = 795
+		//grammar CMOVNBE <Gvqp>,<Evqp>
+		extra_grammar CMOVA <Gvqp>,<Evqp>
+pri_opcd = 48
+	entry = 796
+		grammar CMOVS <Gvqp>,<Evqp>
+pri_opcd = 49
+	entry = 797
+		grammar CMOVNS <Gvqp>,<Evqp>
+pri_opcd = 4A
+	entry = 798
+		//grammar CMOVP <Gvqp>,<Evqp>
+		extra_grammar CMOVPE <Gvqp>,<Evqp>
+pri_opcd = 4B
+	entry = 799
+		//grammar CMOVNP <Gvqp>,<Evqp>
+		extra_grammar CMOVPO <Gvqp>,<Evqp>
+pri_opcd = 4C
+	entry = 800
+		grammar CMOVL <Gvqp>,<Evqp>
+		//extra_grammar CMOVNGE <Gvqp>,<Evqp>
+pri_opcd = 4D
+	entry = 801
+		//grammar CMOVNL <Gvqp>,<Evqp>
+		extra_grammar CMOVGE <Gvqp>,<Evqp>
+pri_opcd = 4E
+	entry = 802
+		grammar CMOVLE <Gvqp>,<Evqp>
+		//extra_grammar CMOVNG <Gvqp>,<Evqp>
+pri_opcd = 4F
+	entry = 803
+		//grammar CMOVNLE <Gvqp>,<Evqp>
+		extra_grammar CMOVG <Gvqp>,<Evqp>
+pri_opcd = 50
+	entry = 804
+		grammar MOVMSKPS <Gdqp>,<Ups>
+	exta_entry = 805
+		grammar MOVMSKPD <Gdqp>,<Upd>
+pri_opcd = 51
+	entry = 806
+		grammar SQRTPS <Vps>,<Wps>
+	exta_entry = 807
+		grammar SQRTSS <Vss>,<Wss>
+	exta_entry = 808
+		grammar SQRTPD <Vpd>,<Wpd>
+	exta_entry = 809
+		grammar SQRTSD <Vsd>,<Wsd>
+pri_opcd = 52
+	entry = 810
+		grammar RSQRTPS <Vps>,<Wps>
+	exta_entry = 811
+		grammar RSQRTSS <Vss>,<Wss>
+pri_opcd = 53
+	entry = 812
+		grammar RCPPS <Vps>,<Wps>
+	exta_entry = 813
+		grammar RCPSS <Vss>,<Wss>
+pri_opcd = 54
+	entry = 814
+		grammar ANDPS <Vps>,<Wps>
+	exta_entry = 815
+		grammar ANDPD <Vpd>,<Wpd>
+pri_opcd = 55
+	entry = 816
+		grammar ANDNPS <Vps>,<Wps>
+	exta_entry = 817
+		grammar ANDNPD <Vpd>,<Wpd>
+pri_opcd = 56
+	entry = 818
+		grammar ORPS <Vps>,<Wps>
+	exta_entry = 819
+		grammar ORPD <Vpd>,<Wpd>
+pri_opcd = 57
+	entry = 820
+		grammar XORPS <Vps>,<Wps>
+	exta_entry = 821
+		grammar XORPD <Vpd>,<Wpd>
+pri_opcd = 58
+	entry = 822
+		grammar ADDPS <Vps>,<Wps>
+	exta_entry = 823
+		grammar ADDSS <Vss>,<Wss>
+	exta_entry = 824
+		grammar ADDPD <Vpd>,<Wpd>
+	exta_entry = 825
+		grammar ADDSD <Vsd>,<Wsd>
+pri_opcd = 59
+	entry = 826
+		grammar MULPS <Vps>,<Wps>
+	exta_entry = 827
+		grammar MULSS <Vss>,<Wss>
+	exta_entry = 828
+		grammar MULPD <Vpd>,<Wpd>
+	exta_entry = 829
+		grammar MULSD <Vsd>,<Wsd>
+pri_opcd = 5A
+	entry = 830
+		grammar CVTPS2PD <Vpd>,<Wps>
+	exta_entry = 831
+		grammar CVTPD2PS <Vps>,<Wpd>
+	exta_entry = 832
+		grammar CVTSS2SD <Vsd>,<Wss>
+	exta_entry = 833
+		grammar CVTSD2SS <Vss>,<Wsd>
+pri_opcd = 5B
+	entry = 834
+		grammar CVTDQ2PS <Vps>,<Wdq>
+	exta_entry = 835
+		grammar CVTPS2DQ <Vdq>,<Wps>
+	exta_entry = 836
+		grammar CVTTPS2DQ <Vdq>,<Wps>
+pri_opcd = 5C
+	entry = 837
+		grammar SUBPS <Vps>,<Wps>
+	exta_entry = 838
+		grammar SUBSS <Vss>,<Wss>
+	exta_entry = 839
+		grammar SUBPD <Vpd>,<Wpd>
+	exta_entry = 840
+		grammar SUBSD <Vsd>,<Wsd>
+pri_opcd = 5D
+	entry = 841
+		grammar MINPS <Vps>,<Wps>
+	exta_entry = 842
+		grammar MINSS <Vss>,<Wss>
+	exta_entry = 843
+		grammar MINPD <Vpd>,<Wpd>
+	exta_entry = 844
+		grammar MINSD <Vsd>,<Wsd>
+pri_opcd = 5E
+	entry = 845
+		grammar DIVPS <Vps>,<Wps>
+	exta_entry = 846
+		grammar DIVSS <Vss>,<Wss>
+	exta_entry = 847
+		grammar DIVPD <Vpd>,<Wpd>
+	exta_entry = 848
+		grammar DIVSD <Vsd>,<Wsd>
+pri_opcd = 5F
+	entry = 849
+		grammar MAXPS <Vps>,<Wps>
+	exta_entry = 850
+		grammar MAXSS <Vss>,<Wss>
+	exta_entry = 851
+		grammar MAXPD <Vpd>,<Wpd>
+	exta_entry = 852
+		grammar MAXSD <Vsd>,<Wsd>
+pri_opcd = 60
+	entry = 853
+		grammar PUNPCKLBW <Pq>,<Qd>
+	exta_entry = 854
+		grammar PUNPCKLBW <Vdq>,<Wdq>
+pri_opcd = 61
+	entry = 855
+		grammar PUNPCKLWD <Pq>,<Qd>
+	exta_entry = 856
+		grammar PUNPCKLWD <Vdq>,<Wdq>
+pri_opcd = 62
+	entry = 857
+		grammar PUNPCKLDQ <Pq>,<Qd>
+	exta_entry = 858
+		grammar PUNPCKLDQ <Vdq>,<Wdq>
+pri_opcd = 63
+	entry = 859
+		grammar PACKSSWB <Pq>,<Qd>
+	exta_entry = 860
+		grammar PACKSSWB <Vdq>,<Wdq>
+pri_opcd = 64
+	entry = 861
+		grammar PCMPGTB <Pq>,<Qd>
+	exta_entry = 862
+		grammar PCMPGTB <Vdq>,<Wdq>
+pri_opcd = 65
+	entry = 863
+		grammar PCMPGTW <Pq>,<Qd>
+	exta_entry = 864
+		grammar PCMPGTW <Vdq>,<Wdq>
+pri_opcd = 66
+	entry = 865
+		grammar PCMPGTD <Pq>,<Qd>
+	exta_entry = 866
+		grammar PCMPGTD <Vdq>,<Wdq>
+pri_opcd = 67
+	entry = 867
+		grammar PACKUSWB <Pq>,<Qq>
+	exta_entry = 868
+		grammar PACKUSWB <Vdq>,<Wdq>
+pri_opcd = 68
+	entry = 869
+		grammar PUNPCKHBW <Pq>,<Qq>
+	exta_entry = 870
+		grammar PUNPCKHBW <Vdq>,<Wdq>
+pri_opcd = 69
+	entry = 871
+		grammar PUNPCKHWD <Pq>,<Qq>
+	exta_entry = 872
+		grammar PUNPCKHWD <Vdq>,<Wdq>
+pri_opcd = 6A
+	entry = 873
+		grammar PUNPCKHDQ <Pq>,<Qq>
+	exta_entry = 874
+		grammar PUNPCKHDQ <Vdq>,<Wdq>
+pri_opcd = 6B
+	entry = 875
+		grammar PACKSSDW <Pq>,<Qq>
+	exta_entry = 876
+		grammar PACKSSDW <Vdq>,<Wdq>
+pri_opcd = 6C
+	entry = 877
+		grammar PUNPCKLQDQ <Vdq>,<Wdq>
+pri_opcd = 6D
+	entry = 878
+		grammar PUNPCKHQDQ <Vdq>,<Wdq>
+pri_opcd = 6E
+	entry = 879
+		grammar MOVD <Pq>,<Ed>
+	exta_entry = 880
+
+
+	exta_entry = 881
+		grammar MOVD <Vdq>,<Ed>
+	exta_entry = 882
+
+
+pri_opcd = 6F
+	entry = 883
+		grammar MOVQ <Pq>,<Qq>
+	exta_entry = 884
+		grammar MOVDQA <Vdq>,<Wdq>
+	exta_entry = 885
+		grammar MOVDQU <Vdq>,<Wdq>
+pri_opcd = 70
+	entry = 886
+		grammar PSHUFW <Pq>,<Qq>,<Ib>
+	exta_entry = 887
+		grammar PSHUFLW <Vdq>,<Wdq>,<Ib>
+	exta_entry = 888
+		grammar PSHUFHW <Vdq>,<Wdq>,<Ib>
+	exta_entry = 889
+		grammar PSHUFD <Vdq>,<Wdq>,<Ib>
+pri_opcd = 71
+	entry = 890
+		grammar PSRLW <Nq>,<Ib>
+	exta_entry = 891
+		grammar PSRLW <Udq>,<Ib>
+	exta_entry = 892
+		grammar PSRAW <Nq>,<Ib>
+	exta_entry = 893
+		grammar PSRAW <Udq>,<Ib>
+	exta_entry = 894
+		grammar PSLLW <Nq>,<Ib>
+	exta_entry = 895
+		grammar PSLLW <Udq>,<Ib>
+pri_opcd = 72
+	entry = 896
+		grammar PSRLD <Nq>,<Ib>
+	exta_entry = 897
+		grammar PSRLD <Udq>,<Ib>
+	exta_entry = 898
+		grammar PSRAD <Nq>,<Ib>
+	exta_entry = 899
+		grammar PSRAD <Udq>,<Ib>
+	exta_entry = 900
+		grammar PSLLD <Nq>,<Ib>
+	exta_entry = 901
+		grammar PSLLD <Udq>,<Ib>
+pri_opcd = 73
+	entry = 902
+		grammar PSRLQ <Nq>,<Ib>
+	exta_entry = 903
+		grammar PSRLQ <Udq>,<Ib>
+	exta_entry = 904
+		grammar PSRLDQ <Udq>,<Ib>
+	exta_entry = 905
+		grammar PSLLQ <Nq>,<Ib>
+	exta_entry = 906
+		grammar PSLLQ <Udq>,<Ib>
+	exta_entry = 907
+		grammar PSLLDQ <Udq>,<Ib>
+pri_opcd = 74
+	entry = 908
+		grammar PCMPEQB <Pq>,<Qq>
+	exta_entry = 909
+		grammar PCMPEQB <Vdq>,<Wdq>
+pri_opcd = 75
+	entry = 910
+		grammar PCMPEQW <Pq>,<Qq>
+	exta_entry = 911
+		grammar PCMPEQW <Vdq>,<Wdq>
+pri_opcd = 76
+	entry = 912
+		grammar PCMPEQD <Pq>,<Qq>
+	exta_entry = 913
+		grammar PCMPEQD <Vdq>,<Wdq>
+pri_opcd = 77
+	entry = 914
+		grammar EMMS 
+pri_opcd = 78
+	entry = 915
+		grammar VMREAD <Ed>,<Gd>
+	exta_entry = 916
+
+pri_opcd = 79
+	entry = 917
+		grammar VMWRITE <Gd>,<Ed>
+	exta_entry = 918
+
+pri_opcd = 7C
+	entry = 919
+		grammar HADDPD <Vpd>,<Wpd>
+	exta_entry = 920
+		grammar HADDPS <Vps>,<Wps>
+pri_opcd = 7D
+	entry = 921
+		grammar HSUBPD <Vpd>,<Wpd>
+	exta_entry = 922
+		grammar HSUBPS <Vps>,<Wps>
+pri_opcd = 7E
+	entry = 923
+		grammar MOVD <Ed>,<Pq>
+	exta_entry = 924
+
+
+	exta_entry = 925
+		grammar MOVD <Ed>,<Vdq>
+	exta_entry = 926
+
+
+	exta_entry = 927
+		grammar MOVQ <Vq>,<Wq>
+pri_opcd = 7F
+	entry = 928
+		grammar MOVQ <Qq>,<Pq>
+	exta_entry = 929
+		grammar MOVDQA <Wdq>,<Vdq>
+	exta_entry = 930
+		grammar MOVDQU <Wdq>,<Vdq>
+pri_opcd = 80
+	entry = 931
+		grammar JO <Jvds>
+pri_opcd = 81
+	entry = 932
+		grammar JNO <Jvds>
+pri_opcd = 82
+	entry = 933
+		grammar JB <Jvds>
+		//extra_grammar JNAE <Jvds>
+		//extra_grammar JC <Jvds>
+pri_opcd = 83
+	entry = 934
+		//grammar JNB <Jvds>
+		extra_grammar JAE <Jvds>
+		//extra_grammar JNC <Jvds>
+pri_opcd = 84
+	entry = 935
+		grammar JZ <Jvds>
+		//extra_grammar JE <Jvds>
+pri_opcd = 85
+	entry = 936
+		grammar JNZ <Jvds>
+		//extra_grammar JNE <Jvds>
+pri_opcd = 86
+	entry = 937
+		grammar JBE <Jvds>
+		//extra_grammar JNA <Jvds>
+pri_opcd = 87
+	entry = 938
+		//grammar JNBE <Jvds>
+		extra_grammar JA <Jvds>
+pri_opcd = 88
+	entry = 939
+		grammar JS <Jvds>
+pri_opcd = 89
+	entry = 940
+		grammar JNS <Jvds>
+pri_opcd = 8A
+	entry = 941
+		//grammar JP <Jvds>
+		extra_grammar JPE <Jvds>
+pri_opcd = 8B
+	entry = 942
+		//grammar JNP <Jvds>
+		extra_grammar JPO <Jvds>
+pri_opcd = 8C
+	entry = 943
+		grammar JL <Jvds>
+		//extra_grammar JNGE <Jvds>
+pri_opcd = 8D
+	entry = 944
+		//grammar JNL <Jvds>
+		extra_grammar JGE <Jvds>
+pri_opcd = 8E
+	entry = 945
+		grammar JLE <Jvds>
+		//extra_grammar JNG <Jvds>
+pri_opcd = 8F
+	entry = 946
+		//grammar JNLE <Jvds>
+		extra_grammar JG <Jvds>
+pri_opcd = 90
+	entry = 947
+		grammar SETO <Eb>
+pri_opcd = 91
+	entry = 948
+		grammar SETNO <Eb>
+pri_opcd = 92
+	entry = 949
+		grammar SETB <Eb>
+		//extra_grammar SETNAE <Eb>
+		//extra_grammar SETC <Eb>
+pri_opcd = 93
+	entry = 950
+		//grammar SETNB <Eb>
+		extra_grammar SETAE <Eb>
+		//extra_grammar SETNC <Eb>
+pri_opcd = 94
+	entry = 951
+		grammar SETZ <Eb>
+		//extra_grammar SETE <Eb>
+pri_opcd = 95
+	entry = 952
+		grammar SETNZ <Eb>
+		//extra_grammar SETNE <Eb>
+pri_opcd = 96
+	entry = 953
+		grammar SETBE <Eb>
+		//extra_grammar SETNA <Eb>
+pri_opcd = 97
+	entry = 954
+		//grammar SETNBE <Eb>
+		extra_grammar SETA <Eb>
+pri_opcd = 98
+	entry = 955
+		grammar SETS <Eb>
+pri_opcd = 99
+	entry = 956
+		grammar SETNS <Eb>
+pri_opcd = 9A
+	entry = 957
+		//grammar SETP <Eb>
+		extra_grammar SETPE <Eb>
+pri_opcd = 9B
+	entry = 958
+		//grammar SETNP <Eb>
+		extra_grammar SETPO <Eb>
+pri_opcd = 9C
+	entry = 959
+		grammar SETL <Eb>
+		//extra_grammar SETNGE <Eb>
+pri_opcd = 9D
+	entry = 960
+		//grammar SETNL <Eb>
+		extra_grammar SETGE <Eb>
+pri_opcd = 9E
+	entry = 961
+		grammar SETLE <Eb>
+		//extra_grammar SETNG <Eb>
+pri_opcd = 9F
+	entry = 962
+		//grammar SETNLE <Eb>
+		extra_grammar SETG <Eb>
+pri_opcd = A0
+	entry = 963
+		grammar PUSH <FSEG>
+pri_opcd = A1
+	entry = 964
+		grammar POP <FSEG>
+pri_opcd = A2
+	entry = 965
+		grammar CPUID 
+pri_opcd = A3
+	entry = 966
+		grammar BT <Evqp>,<Gvqp>
+pri_opcd = A4
+	entry = 967
+		grammar SHLD <Evqp>,<Gvqp>,<Ib>
+pri_opcd = A5
+	entry = 968
+		grammar SHLD <Evqp>,<Gvqp>,<CL>
+pri_opcd = A8
+	entry = 969
+		grammar PUSH <GSEG>
+pri_opcd = A9
+	entry = 970
+		grammar POP <GSEG>
+pri_opcd = AA
+	entry = 971
+		grammar RSM 
+pri_opcd = AB
+	entry = 972
+		grammar BTS <Evqp>,<Gvqp>
+pri_opcd = AC
+	entry = 973
+		grammar SHRD <Evqp>,<Gvqp>,<Ib>
+pri_opcd = AD
+	entry = 974
+		grammar SHRD <Evqp>,<Gvqp>,<CL>
+pri_opcd = AE
+	entry = 975
+		grammar FXSAVE <Mstx>
+	exta_entry = 976
+
+	exta_entry = 977
+		grammar FXRSTOR <Mstx>
+	exta_entry = 978
+
+	exta_entry = 979
+		grammar LDMXCSR <Md>
+	exta_entry = 980
+		grammar STMXCSR <Md>
+	exta_entry = 981
+		grammar XSAVE <M>
+	exta_entry = 982
+
+	exta_entry = 983
+		grammar LFENCE 
+	exta_entry = 984
+		grammar XRSTOR <M>
+	exta_entry = 985
+
+	exta_entry = 986
+		grammar MFENCE 
+	exta_entry = 987
+		grammar SFENCE 
+	exta_entry = 988
+		grammar CLFLUSH <Mb>
+pri_opcd = AF
+	entry = 989
+		grammar IMUL <Gvqp>,<Evqp>
+pri_opcd = B0
+	entry = 990
+		grammar CMPXCHG <Eb>,<Gb>
+pri_opcd = B1
+	entry = 991
+		grammar CMPXCHG <Evqp>,<Gvqp>
+pri_opcd = B2
+	entry = 992
+		grammar LSS <Gvqp>,<Mptp>
+pri_opcd = B3
+	entry = 993
+		grammar BTR <Evqp>,<Gvqp>
+pri_opcd = B4
+	entry = 994
+		grammar LFS <Gvqp>,<Mptp>
+pri_opcd = B5
+	entry = 995
+		grammar LGS <Gvqp>,<Mptp>
+pri_opcd = B6
+	entry = 996
+		grammar MOVZX <Gvqp>,<Eb>
+pri_opcd = B7
+	entry = 997
+		grammar MOVZX <Gvqp>,<Ew>
+pri_opcd = B8
+	entry = 998
+		grammar JMPE 
+	exta_entry = 999
+		grammar POPCNT <Gvqp>,<Evqp>
+pri_opcd = B9
+	entry = 1000
+		grammar UD <Gd>,<Ed>
+pri_opcd = BA
+	entry = 1001
+		grammar BT <Evqp>,<Ib>
+	exta_entry = 1002
+		grammar BTS <Evqp>,<Ib>
+	exta_entry = 1003
+		grammar BTR <Evqp>,<Ib>
+	exta_entry = 1004
+		grammar BTC <Evqp>,<Ib>
+pri_opcd = BB
+	entry = 1005
+		grammar BTC <Evqp>,<Gvqp>
+pri_opcd = BC
+	entry = 1006
+		grammar BSF <Gvqp>,<Evqp>
+pri_opcd = BD
+	entry = 1007
+		grammar BSR <Gvqp>,<Evqp>
+pri_opcd = BE
+	entry = 1008
+		grammar MOVSX <Gvqp>,<Eb>
+pri_opcd = BF
+	entry = 1009
+		grammar MOVSX <Gvqp>,<Ew>
+pri_opcd = C0
+	entry = 1010
+		grammar XADD <Eb>,<Gb>
+pri_opcd = C1
+	entry = 1011
+		grammar XADD <Evqp>,<Gvqp>
+pri_opcd = C2
+	entry = 1012
+		grammar CMPPS <Vps>,<Wps>,<Ib>
+	exta_entry = 1013
+		grammar CMPSS <Vss>,<Wss>,<Ib>
+	exta_entry = 1014
+		grammar CMPPD <Vpd>,<Wpd>,<Ib>
+	exta_entry = 1015
+		grammar CMPSD <Vsd>,<Wsd>,<Ib>
+pri_opcd = C3
+	entry = 1016
+		grammar MOVNTI <Mdqp>,<Gdqp>
+pri_opcd = C4
+	entry = 1017
+		grammar PINSRW <Pq>,<Rdqp>,<Ib>
+		extra_grammar PINSRW <Pq>,<Mw>,<Ib>
+	exta_entry = 1018
+		grammar PINSRW <Vdq>,<Rdqp>,<Ib>
+		extra_grammar PINSRW <Vdq>,<Mw>,<Ib>
+pri_opcd = C5
+	entry = 1019
+		grammar PEXTRW <Gdqp>,<Nq>,<Ib>
+	exta_entry = 1020
+		grammar PEXTRW <Gdqp>,<Udq>,<Ib>
+pri_opcd = C6
+	entry = 1021
+		grammar SHUFPS <Vps>,<Wps>,<Ib>
+	exta_entry = 1022
+		grammar SHUFPD <Vpd>,<Wpd>,<Ib>
+pri_opcd = C7
+	entry = 1023
+		grammar CMPXCHG8B <Mq>
+	exta_entry = 1024
+
+
+	exta_entry = 1025
+		grammar VMPTRLD <Mq>
+	exta_entry = 1026
+		grammar VMCLEAR <Mq>
+	exta_entry = 1027
+		grammar VMXON <Mq>
+	exta_entry = 1028
+		grammar VMPTRST <Mq>
+pri_opcd = C8
+	entry = 1029
+		grammar BSWAP <Zvqp>
+pri_opcd = D0
+	entry = 1030
+		grammar ADDSUBPD <Vpd>,<Wpd>
+	exta_entry = 1031
+		grammar ADDSUBPS <Vps>,<Wps>
+pri_opcd = D1
+	entry = 1032
+		grammar PSRLW <Pq>,<Qq>
+	exta_entry = 1033
+		grammar PSRLW <Vdq>,<Wdq>
+pri_opcd = D2
+	entry = 1034
+		grammar PSRLD <Pq>,<Qq>
+	exta_entry = 1035
+		grammar PSRLD <Vdq>,<Wdq>
+pri_opcd = D3
+	entry = 1036
+		grammar PSRLQ <Pq>,<Qq>
+	exta_entry = 1037
+		grammar PSRLQ <Vdq>,<Wdq>
+pri_opcd = D4
+	entry = 1038
+		grammar PADDQ <Pq>,<Qq>
+	exta_entry = 1039
+		grammar PADDQ <Vdq>,<Wdq>
+pri_opcd = D5
+	entry = 1040
+		grammar PMULLW <Pq>,<Qq>
+	exta_entry = 1041
+		grammar PMULLW <Vdq>,<Wdq>
+pri_opcd = D6
+	entry = 1042
+		grammar MOVQ <Wq>,<Vq>
+	exta_entry = 1043
+		grammar MOVQ2DQ <Vdq>,<Nq>
+	exta_entry = 1044
+		grammar MOVDQ2Q <Pq>,<Uq>
+pri_opcd = D7
+	entry = 1045
+		grammar PMOVMSKB <Gdqp>,<Nq>
+	exta_entry = 1046
+		grammar PMOVMSKB <Gdqp>,<Udq>
+pri_opcd = D8
+	entry = 1047
+		grammar PSUBUSB <Pq>,<Qq>
+	exta_entry = 1048
+		grammar PSUBUSB <Vdq>,<Wdq>
+pri_opcd = D9
+	entry = 1049
+		grammar PSUBUSW <Pq>,<Qq>
+	exta_entry = 1050
+		grammar PSUBUSW <Vdq>,<Wdq>
+pri_opcd = DA
+	entry = 1051
+		grammar PMINUB <Pq>,<Qq>
+	exta_entry = 1052
+		grammar PMINUB <Vdq>,<Wdq>
+pri_opcd = DB
+	entry = 1053
+		grammar PAND <Pq>,<Qd>
+	exta_entry = 1054
+		grammar PAND <Vdq>,<Wdq>
+pri_opcd = DC
+	entry = 1055
+		grammar PADDUSB <Pq>,<Qq>
+	exta_entry = 1056
+		grammar PADDUSB <Vdq>,<Wdq>
+pri_opcd = DD
+	entry = 1057
+		grammar PADDUSW <Pq>,<Qq>
+	exta_entry = 1058
+		grammar PADDUSW <Vdq>,<Wdq>
+pri_opcd = DE
+	entry = 1059
+		grammar PMAXUB <Pq>,<Qq>
+	exta_entry = 1060
+		grammar PMAXUB <Vdq>,<Wdq>
+pri_opcd = DF
+	entry = 1061
+		grammar PANDN <Pq>,<Qq>
+	exta_entry = 1062
+		grammar PANDN <Vdq>,<Wdq>
+pri_opcd = E0
+	entry = 1063
+		grammar PAVGB <Pq>,<Qq>
+	exta_entry = 1064
+		grammar PAVGB <Vdq>,<Wdq>
+pri_opcd = E1
+	entry = 1065
+		grammar PSRAW <Pq>,<Qq>
+	exta_entry = 1066
+		grammar PSRAW <Vdq>,<Wdq>
+pri_opcd = E2
+	entry = 1067
+		grammar PSRAD <Pq>,<Qq>
+	exta_entry = 1068
+		grammar PSRAD <Vdq>,<Wdq>
+pri_opcd = E3
+	entry = 1069
+		grammar PAVGW <Pq>,<Qq>
+	exta_entry = 1070
+		grammar PAVGW <Vdq>,<Wdq>
+pri_opcd = E4
+	entry = 1071
+		grammar PMULHUW <Pq>,<Qq>
+	exta_entry = 1072
+		grammar PMULHUW <Vdq>,<Wdq>
+pri_opcd = E5
+	entry = 1073
+		grammar PMULHW <Pq>,<Qq>
+	exta_entry = 1074
+		grammar PMULHW <Vdq>,<Wdq>
+pri_opcd = E6
+	entry = 1075
+		grammar CVTPD2DQ <Vdq>,<Wpd>
+	exta_entry = 1076
+		grammar CVTTPD2DQ <Vdq>,<Wpd>
+	exta_entry = 1077
+		grammar CVTDQ2PD <Vpd>,<Wdq>
+pri_opcd = E7
+	entry = 1078
+		grammar MOVNTQ <Mq>,<Pq>
+	exta_entry = 1079
+		grammar MOVNTDQ <Mdq>,<Vdq>
+pri_opcd = E8
+	entry = 1080
+		grammar PSUBSB <Pq>,<Qq>
+	exta_entry = 1081
+		grammar PSUBSB <Vdq>,<Wdq>
+pri_opcd = E9
+	entry = 1082
+		grammar PSUBSW <Pq>,<Qq>
+	exta_entry = 1083
+		grammar PSUBSW <Vdq>,<Wdq>
+pri_opcd = EA
+	entry = 1084
+		grammar PMINSW <Pq>,<Qq>
+	exta_entry = 1085
+		grammar PMINSW <Vdq>,<Wdq>
+pri_opcd = EB
+	entry = 1086
+		grammar POR <Pq>,<Qq>
+	exta_entry = 1087
+		grammar POR <Vdq>,<Wdq>
+pri_opcd = EC
+	entry = 1088
+		grammar PADDSB <Pq>,<Qq>
+	exta_entry = 1089
+		grammar PADDSB <Vdq>,<Wdq>
+pri_opcd = ED
+	entry = 1090
+		grammar PADDSW <Pq>,<Qq>
+	exta_entry = 1091
+		grammar PADDSW <Vdq>,<Wdq>
+pri_opcd = EE
+	entry = 1092
+		grammar PMAXSW <Pq>,<Qq>
+	exta_entry = 1093
+		grammar PMAXSW <Vdq>,<Wdq>
+pri_opcd = EF
+	entry = 1094
+		grammar PXOR <Pq>,<Qq>
+	exta_entry = 1095
+		grammar PXOR <Vdq>,<Wdq>
+pri_opcd = F0
+	entry = 1096
+		grammar LDDQU <Vdq>,<Mdq>
+pri_opcd = F1
+	entry = 1097
+		grammar PSLLW <Pq>,<Qq>
+	exta_entry = 1098
+		grammar PSLLW <Vdq>,<Wdq>
+pri_opcd = F2
+	entry = 1099
+		grammar PSLLD <Pq>,<Qq>
+	exta_entry = 1100
+		grammar PSLLD <Vdq>,<Wdq>
+pri_opcd = F3
+	entry = 1101
+		grammar PSLLQ <Pq>,<Qq>
+	exta_entry = 1102
+		grammar PSLLQ <Vdq>,<Wdq>
+pri_opcd = F4
+	entry = 1103
+		grammar PMULUDQ <Pq>,<Qq>
+	exta_entry = 1104
+		grammar PMULUDQ <Vdq>,<Wdq>
+pri_opcd = F5
+	entry = 1105
+		grammar PMADDWD <Pq>,<Qd>
+	exta_entry = 1106
+		grammar PMADDWD <Vdq>,<Wdq>
+pri_opcd = F6
+	entry = 1107
+		grammar PSADBW <Pq>,<Qq>
+	exta_entry = 1108
+		grammar PSADBW <Vdq>,<Wdq>
+pri_opcd = F7
+	entry = 1109
+		grammar MASKMOVQ <Pq>,<Nq>
+	exta_entry = 1110
+		grammar MASKMOVDQU <Vdq>,<Udq>
+pri_opcd = F8
+	entry = 1111
+		grammar PSUBB <Pq>,<Qq>
+	exta_entry = 1112
+		grammar PSUBB <Vdq>,<Wdq>
+pri_opcd = F9
+	entry = 1113
+		grammar PSUBW <Pq>,<Qq>
+	exta_entry = 1114
+		grammar PSUBW <Vdq>,<Wdq>
+pri_opcd = FA
+	entry = 1115
+		grammar PSUBD <Pq>,<Qq>
+	exta_entry = 1116
+		grammar PSUBD <Vdq>,<Wdq>
+pri_opcd = FB
+	entry = 1117
+		grammar PSUBQ <Pq>,<Qq>
+	exta_entry = 1118
+		grammar PSUBQ <Vdq>,<Wdq>
+pri_opcd = FC
+	entry = 1119
+		grammar PADDB <Pq>,<Qq>
+	exta_entry = 1120
+		grammar PADDB <Vdq>,<Wdq>
+pri_opcd = FD
+	entry = 1121
+		grammar PADDW <Pq>,<Qq>
+	exta_entry = 1122
+		grammar PADDW <Vdq>,<Wdq>
+pri_opcd = FE
+	entry = 1123
+		grammar PADDD <Pq>,<Qq>
+	exta_entry = 1124
+		grammar PADDD <Vdq>,<Wdq>
+1125

@@ -1,0 +1,139 @@
+//NOTE(Alex): eaglefly_todo_list.txt
+
+
+THINGS TO DO:
+
+Make an instruction binary tester!
+- At the beginning it could be just a random instruction tester, following the tables specifications, so that every time it sees a new entry 
+it generates a random instruction to test.
+
+Platform organization
+
+- Make macros for separating 32 bit mode code and 64 bit mode code - in that way , later on,  i can make optimizations for both systems independently!
+
+
+Decoder system.
+
+- Add stack-address width option in 32 - bit mode so that it can be 16 bit / 32 -bit 
+
+Instructions that use the stack implcitly (such as PUSH and POP instructions) have two address size attributes eaxh of either 16 or 32 bits. This is because they always have the implicit address of the top of the stack, and they may also have an explicit memory address(for example, PUSH Array1[EBX]).
+The address size attribute of the top of the stack determines wether sp or ESP is used for the stack access. Stack operations with an address-size attribute of 16 use the 16-bit SP stack pointer register and can use a
+
+
+- Make file buffered I/O abstraction system, follow Fabien Giesen's idea of having a producer and a consumer streaming system!
+ - As well, have file I/O  error handling , that could be supported by the streaming system
+- Virtual memory system for handling big files!
+- Code optimization for instruction matching system - solutions - prefetching bits , have a lookup table as before that jumps you strainght on to the instruction?
+- Buffered Bit reader system - that eventually will serve as the consumer in file I/O system!
+- Complete decoder with all instruction sets!
+
+- Multi-platform (Windows, Mac, Linux)
+- address evaluator, and miscellaneus stuff.
+- console commands 
+- PE/COFF parser (Follow Fabien Giesen's idea for layered IO) 
+
+
+Formatter system:
+
+- different Assembler formats?
+- do we want to focus on more like assembly listings rather than assembly source files?
+
+SOURCE LISTING
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     $rb (0,1)
+                       2     NAME    CHAR_IO
+                       3     ;
+                       4     PUBLIC  PUTCHAR
+                       5
+                       6     CHAR_ROUTINES  SEGMENT  CODE
+                       7     VAR2           SEGMENT  DATA
+                       8
+----                   9             RSEG  CHAR_ROUTINES
+                      10
+                      11     ; This routine outputs a character.
+                      12     ; The character is given in A.
+0000                  13     PUTCHAR:
+0000 3099FD           14             JNB  TI,$
+0003 C299             15             CLR  TI
+0005 F599             16             MOV  SBUF,A
+0007 22               17             RET
+.
+.
+.
+                      25             END
+
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHAR_IO. . . . . .  N NUMB   -----
+CHAR_ROUTINES. . .  C SEG    0008H       REL=UNIT
+DUMMY. . . . . . .  D ADDR   0000H   R   SEG=VAR2
+PUTCHAR. . . . . .  C ADDR   0000H   R   SEG=CHAR_ROUTINES
+SBUF . . . . . . .  D ADDR   0099H   A
+TI . . . . . . . .  B ADDR   0098H.1 A
+VAR2 . . . . . . .  D SEG    0040H       REL=UNIT
+
+
+
+XREF SYMBOL TABLE LISTING
+---- ------ ----- -------
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES / REFERENCES
+
+CHAR_IO. . . . . .  N NUMB   -----          2
+CHAR_ROUTINES. . .  C SEG    0008H       REL=UNIT   6# 9
+DUMMY. . . . . . .  D ADDR   0000H   R   SEG=VAR2   22#
+PUTCHAR. . . . . .  C ADDR   0000H   R   SEG=CHAR_ROUTINES   4 13#
+SBUF . . . . . . .  D ADDR   0099H   A      16
+TI . . . . . . . .  B ADDR   0098H.1 A      14 15
+VAR2 . . . . . . .  D SEG    0040H       REL=UNIT   7# 21
+
+
+DEPENDENCY TABLE LISTING
+
+
+
+SPECIAL ASPECTS:
+
+-We have defined two important concepts user space, and developer space:
+
+on developer space we want to assert as much as we can, so we can debug and find errors in code.
+on user space we want to handle those erros in a specific way, so that we let the user get it wrong but the program wont crash!
+
+----------------------------------------------------------------------------------
+decoder user space - opcode stream buffer
+
+possible errors:
+
+invalid opcodes for operating mode - HANDLE - treat it as data
+invalid operating mode - HANDLE - output not valid operating mode - exit
+buffer not present - HANDLE - output buffer not present - exit
+
+----------------------------------------------------------------------------------
+PE parser user space - exe, dll, obj, file
+
+possible errors:
+
+//TODO(Alex): Possible errors
+
+----------------------------------------------------------------------------------
+
+the file access is going to be divided into processor modes, but how can we handle mixed buffers?, so that
+we have a nice thing because, in the way we have it we divided de decoder system from the PE parser, so that we
+can reconfigure the decoder for different code sections inside the PE32 file, 
+
+opcode id 0x26 mode=e null segment override
+
+
+File system:
+
+4297576 file size - worst case scenario, think on how to compress data and or to make encoding streaming on demand!
+
+
+

@@ -1,0 +1,171 @@
+Microsoft (R) Macro Assembler (x64) Version 14.15.26726.0   02/06/19 10:25:28
+..\eaglefly\code\test_asm0.asm				     Page 1 - 1
+
+
+				;NOTE(Alex): First asm 
+				COMMENT delimiter NOTE(Alex): C Calling convention specifies that calling func pushes and pops RSP , parameters are passed through rbx, rcx, r8d, r9d when possible and if more, parameters get pushed on the stack
+				
+				IFDEF FIBONACCI_TEST
+				ELSEIFDEF OPCODE_ENCODING
+				
+ 00000000			.data
+				extrn ExitProcess: PROC
+				
+				u8   TYPEDEF BYTE
+				s8   TYPEDEF SBYTE
+				u32  TYPEDEF DWORD
+				u64  TYPEDEF QWORD
+				r32  TYPEDEF REAL4
+				d32  TYPEDEF REAL8
+				ps8  TYPEDEF PTR char
+				
+				fptrq TYPEDEF FAR PTR QWORD 	
+				
+				
+				
+				
+ 00000000			disp64 u64  0000000000000004	
+	   0000000000000004
+ 00000008 00000004		disp32 u32  00000004	
+ 0000000C 00000004		disp16 u32  0004H	
+ 00000010 04			disp8 u8  04H	
+				
+ 00000011 0004			A  SWORD  04H	
+ 00000013 00000004		B  SDWORD  04H	
+ 00000017			C  SQWORD  04H	
+	   0000000000000004
+				
+				
+ 00000000			FIRST SEGMENT DWORD 'CODE'
+ 0000001F			FIRST ENDS
+ 00000000			SECOND SEGMENT DWORD 'CODE'
+ 0000001F			SECOND ENDS
+				
+				
+ 00000000			SECOND SEGMENT 
+ 00000000  33 C0		XOR EAX, EAX
+				
+ 0000001F			SECOND ENDS
+				
+ 00000000			FIRST SEGMENT
+ 00000000			START PROC
+ 00000000  33 C0		XOR EAX, EAX
+				
+				;MOV AX, SEG var
+				;MOV ES , AX 
+ 00000002  FF 2D 00000000 R	JMP fword ptr [disp64]
+				
+				
+ 00000008			START ENDP
+ 0000001F			FIRST ENDS
+				
+				ENDIF
+				END
+				
+				
+				
+				COMMENT ^ 
+				
+				START PROC
+				XOR RAX, RAX
+				
+				JMP RAX
+				JMP qword ptr [disp64]
+				JMP qword ptr [R13]
+				JMP BLOCK+1H 
+				JMP far ptr [ESP]
+				
+				;jmp es:[408000h]	
+				
+				;JMP qword [CS:]
+				;JMP dword ptr [ESP] this shows that JMP is forced to a 64 bit mode operand in 64 bit mode , we can have address size overrides but no operand size overrides!
+				
+				MOV R8, qword ptr [RAX + disp32]
+				MOV R8D, dword ptr [RAX + disp32]
+				MOV R8, qword ptr [R13]
+				MOV R8, qword ptr [R12]
+				MOV R8, qword ptr [R12 * 2 + R13]
+				MOV R8, qword ptr [RSP + R12 * 2]
+				MOV RBP, qword ptr [R12 * 8 + disp32 + RSP]
+				MOV RBX, qword ptr [RAX * 4 + disp32]
+				MOV RBX, qword ptr [RBP + RAX + disp8]
+				MOV RBX, qword ptr [R13 + RAX * 2]
+				MOV RBP, [RSP]
+				
+				MOV SPL, byte ptr[RAX]
+				MOV BH, byte ptr[RAX] (07FF72B325047h)
+				MOV BH, byte ptr[RAX + 2 * RDI + (07FF72B325047h)]
+				
+				BLOCK:
+				PUSH RAX 
+				PUSH AX
+				PUSH RSI
+				PUSH R8
+				PUSH R12
+				ADD byte ptr [RAX + disp8], 0B
+				FLD real8 ptr [disp32]	
+				
+				call ExitProcess
+				START ENDP
+				
+				
+				; speculative execution could store the value pointed to by F000H before being modified into rbx!, thats why we put a serializing instruction such as SFENCE 
+				;mov rax, cr3
+				;mov cr3, rax
+				;mov qword ptr [F0000000h], A000h
+				;sfence
+				;mov rbx, qword ptr [F0000000h]
+				
+				
+				^
+Microsoft (R) Macro Assembler (x64) Version 14.15.26726.0   02/06/19 10:25:28
+..\eaglefly\code\test_asm0.asm				     Symbols 2 - 1
+
+
+
+
+Types:
+
+                N a m e                  Size     Attr
+
+d32  . . . . . . . . . . . . . .	 00000008     QWord
+fptrq  . . . . . . . . . . . . .	 00000006     Far PTR QWord
+ps8  . . . . . . . . . . . . . .	 00000008     PTR char
+r32  . . . . . . . . . . . . . .	 00000004     DWord
+s8 . . . . . . . . . . . . . . .	 00000001     Byte
+u32  . . . . . . . . . . . . . .	 00000004     DWord
+u64  . . . . . . . . . . . . . .	 00000008     QWord
+u8 . . . . . . . . . . . . . . .	 00000001     Byte
+
+
+Segments:
+
+                N a m e                  Length   Align   Class
+
+FIRST  . . . . . . . . . . . . .	 00000008 4	  'CODE'	
+SECOND . . . . . . . . . . . . .	 00000002 4	  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+START  . . . . . . . . . . . . .	P 	 00000000 FIRST	Length= 00000008 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+A  . . . . . . . . . . . . . . .	Word	 00000011 _DATA	
+B  . . . . . . . . . . . . . . .	DWord	 00000013 _DATA	
+C  . . . . . . . . . . . . . . .	QWord	 00000017 _DATA	
+ExitProcess  . . . . . . . . . .	L 	 00000000 _DATA	External
+OPCODE_ENCODING  . . . . . . . .	Text   	 
+disp16 . . . . . . . . . . . . .	DWord	 0000000C _DATA	
+disp32 . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+disp64 . . . . . . . . . . . . .	QWord	 00000000 _DATA	
+disp8  . . . . . . . . . . . . .	Byte	 00000010 _DATA	
+
+	   0 Warnings
+	   0 Errors

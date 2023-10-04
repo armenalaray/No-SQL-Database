@@ -1,0 +1,448 @@
+<html>
+<head>
+ <title>sandpile.org -- x86 architecture -- 1 byte opcodes</title>
+</head>
+
+<body text="#000000" bgcolor="#FFFFFF" link="#004080" vlink="#008080" alink="#804040" background="./../pics/back.gif">
+<img src="./../pics/spacer.gif" width=1000 height=1 border=0><br>
+<table border=0 cellspacing=20 cellpadding=2>
+ <tr>
+  <td width=935>
+   <center>
+
+<font color="#008080" size=+4 face="Arial"><b>x86 architecture<br>1 byte opcodes</b></font><br>
+<br>
+<hr>
+<br>
+
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr align=center>
+  <td align=center width=75 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xxh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>x0h<br>&nbsp;</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x1h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x2h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x3h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x4h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x5h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x6h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x7h</font></td>
+ </tr>
+ <tr>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>0xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">ADD<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">ADD<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">ADD<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">ADD<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">ADD<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">ADD<br>rAX,Iz</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">PUSH<sup>I64</sup><br>ES</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">POP<sup>I64</sup><br>ES</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>1xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">ADC<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">ADC<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">ADC<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">ADC<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">ADC<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">ADC<br>rAX,Iz</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">PUSH<sup>I64</sup><br>SS</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">POP<sup>I64</sup><br>SS</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>2xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">AND<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">AND<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">AND<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">AND<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">AND<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">AND<br>rAx,Iz</font></td>
+  <td><font face="Arial" size="-1">ES:</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DAA<sup>I64</sup></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>3xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">XOR<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">XOR<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">XOR<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">XOR<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">XOR<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">XOR<br>rAX,Iz</font></td>
+  <td><font face="Arial" size="-1">SS:</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">AAA<sup>I64</sup></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center rowspan=2 bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>4xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eAX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eCX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eDX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eBX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eSP</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eBP</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eSI</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INC<sup>I64</sup> eDI</font></td>
+ </tr>
+ <tr align=center>
+  <td colspan=8 bgcolor="#B0D0D0"><font face="Arial" size="-1"><a href="opc_enc.htm">REX</a></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>5xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rAX<font color="#008080"> / r8</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rCX<font color="#008080"> / r9</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rDX<font color="#008080"> / r10</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rBX<font color="#008080"> / r11</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rSP<font color="#008080"> / r12</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rBP<font color="#008080"> / r13</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rSI<font color="#008080"> / r14</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>rDI<font color="#008080"> / r15</font></font></td>
+ </tr>
+ <tr align=center>
+  <td rowspan=2 align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>6xh<br>&nbsp;</font></td>
+  <td rowspan=2 bgcolor="#E0C0C0"><font face="Arial" size="-1">PUSHA<sup>I64</sup><br>PUSHAD<sup>I64</sup><br>(80186+)</font></td>
+  <td rowspan=2 bgcolor="#E0C0C0"><font face="Arial" size="-1">POPA<sup>I64</sup><br>POPAD<sup>I64</sup><br>(80186+)</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-2">BOUND<sup>I64</sup> Gv,Ma<br>(80186+)</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-2">ARPL<sup>I64</sup> Ew,Gw<br>(80286+)</font></td>
+  <td rowspan=2><font face="Arial" size="-2">FS:<br>(80386+)<br>Hint Alt Taken<br>for Jcc (P4)</font></td>
+  <td rowspan=2><font face="Arial" size="-1">GS:<br>(80386+)</font></td>
+  <td rowspan=2><font face="Arial" size="-1">OPSIZE:<br>(80386+)</font></td>
+  <td rowspan=2><font face="Arial" size="-1">ADSIZE:<br>(80386+)</font></td>
+ </tr>
+ <tr align=center>
+  <td><font face="Arial" size="-2"><sup><a href="opc_l1om.htm">L1OM</a></sup> <a href="opc_enc.htm">MVEX</a> <sub><a href="opc_enc.htm">EVEX</a></sub></font></td>
+  <td bgcolor="#B0D0D0"><font face="Arial" size="-2">MOVSXD Gv,Ed<br>(PM64)</font></td>
+ </tr>
+ <tr align=center>
+  <td rowspan=2 align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>7xh<br>&nbsp;</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JO<sup>Df64</sup><br>Jb</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JNO<sup>Df64</sup><br>Jb</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JB<sup>Df64</sup><br>Jb</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JNB<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JZ<sup>Df64</sup> Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JNZ<sup>Df64</sup> Jb</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JBE<sup>Df64</sup><br>Jb</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">JNBE<sup>Df64</sup><br>Jb</font></td>
+ </tr>
+ <tr align=center>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-2">JKZ<sup>Dv64</sup> vKw,Jb<sup>v</sup><br>(<a href="cpuid.htm">K1OM</a>)</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-2">JKNZ<sup>Dv64</sup> vKw,Jb<sup>v</sup><br>(<a href="cpuid.htm">K1OM</a>)</font></td>
+ </tr>
+ <tr>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>8xh<br>&nbsp;</font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #1<br>Eb,Ib</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #1<br>Ev,Iz</a></font></td>
+  <td align=center bgcolor="#E0C0C0"><font face="Arial" size="-1"><a href="opc_grp.htm">group #1*<sup>I64</sup><br>Eb,Ib</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #1<br>Ev,Ib</a></font></td>
+  <td><font face="Arial" size="-1">TEST<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">TEST<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">XCHG<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">XCHG<br>Ev,Gv</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>9xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-2">NOP<br><font color="#008080">(PM64 O32: !ZX)</font><br>(F3h) PAUSE<br>(see <a href="cpuid.htm">CPUID</a>)</font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rCX,rAX<br><font color="#008080">r9,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rDX,rAX<br><font color="#008080">r10,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rBX,rAX<br><font color="#008080">r11,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rSP,rAX<br><font color="#008080">r12,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rBP,rAX<br><font color="#008080">r13,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rSI,rAX<br><font color="#008080">r14,rAX</font></font></td>
+  <td><font face="Arial" size="-1">XCHG<br>rDI,rAX<br><font color="#008080">r15,rAX</font></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Axh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">MOV<br>AL,Ov</font></td>
+  <td><font face="Arial" size="-1">MOV<br>rAX,Ov</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Ov,AL</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Ov,rAX</font></td>
+  <td><font face="Arial" size="-1">MOVS<br>Yb,Xb</font></td>
+  <td><font face="Arial" size="-1">MOVS<br>Yv,Xv</font></td>
+  <td><font face="Arial" size="-1">CMPS<br>Yb,Xb</font></td>
+  <td><font face="Arial" size="-1">CMPS<br>Yv,Xv</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Bxh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">MOV<br>AL,Ib<br><font color="#008080">R8B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>CL,Ib<br><font color="#008080">R9B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>DL,Ib<br><font color="#008080">R10B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>BL,Ib<br><font color="#008080">R11B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>AH,Ib<br><font color="#008080">R12B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>CH,Ib<br><font color="#008080">R13B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>DH,Ib<br><font color="#008080">R14B,Ib</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>BH,Ib<br><font color="#008080">R15B,Ib</font></font></td>
+ </tr>
+ <tr align=center>
+  <td rowspan=2 align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Cxh<br>&nbsp;</font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Eb,Ib</a><br>(80186+)</font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Ev,Ib</a><br>(80186+)</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">RET near<sup>Df64</sup><br>Iw</font></td>
+  <td rowspan=2 bgcolor="#E0E0C0"><font face="Arial" size="-1">RET near<sup>Df64</sup></font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-2">LES<sup>I64</sup> Gv,Mp (w:v)</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-2">LDS<sup>I64</sup> Gv,Mp (w:v)</font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #11<br>Eb,Ib</a></font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #11<br>Ev,Iz</a></font></td>
+ </tr>
+ <tr align=center>
+  <td><font face="Arial" size="-1"><a href="opc_enc.htm">VEX3</a></font></td>
+  <td><font face="Arial" size="-1"><a href="opc_enc.htm">VEX2</a></font></td>
+ </tr>
+ <tr align=center>
+  <td rowspan=2 align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Dxh<br>&nbsp;</font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Eb,1</a></font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Ev,1</a></font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Eb,CL</a></font></td>
+  <td rowspan=2 align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #2<br>Ev,CL</a></font></td>
+  <td rowspan=2 bgcolor="#E0C0C0"><font face="Arial" size="-1">AAM<sup>I64</sup><br>Ib</font></td>
+  <td rowspan=2 bgcolor="#E0C0C0"><font face="Arial" size="-1">AAD<sup>I64</sup><br>Ib</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">S(ET)ALC<sup>I64</sup></font></td>
+  <td rowspan=2><font face="Arial" size="-1">XLAT</font></td>
+ </tr>
+ <tr align=center>
+  <td><font face="Arial" size="-1"><a href="opc_l1om.htm">L1OM</a></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Exh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">LOOPNE<sup>Df64</sup><br>LOOPNZ<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">LOOPE<sup>Df64</sup><br>LOOPZ<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">LOOP<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-2">JCXZ<sup>Df64</sup><br>JECX<sup>Df64</sup><br><font color="#008080">JRCX<sup>Df64</sup></font><br>Jb</font></td>
+  <td><font face="Arial" size="-1">IN<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">IN<br>eAX,Ib</font></td>
+  <td><font face="Arial" size="-1">OUT<br>Ib,AL</font></td>
+  <td><font face="Arial" size="-1">OUT<br>Ib,eAX</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Fxh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">LOCK:</font></td>
+  <td><font face="Arial" size="-1">INT1<br>(ICEBP)<br>(80386+)</font></td>
+  <td><font face="Arial" size="-2">REPNE:<br>&nbsp;<br>BND: (<a href="cpuid.htm">MPX</a>)<br>XAQUIRE: (<a href="cpuid.htm">HLE</a>)</font></td>
+  <td><font face="Arial" size="-2">REP:<br>REPE:<br>&nbsp;<br>XRELEASE: (<a href="cpuid.htm">HLE</a>)</font></td>
+  <td><font face="Arial" size="-1">HLT</font></td>
+  <td><font face="Arial" size="-1">CMC</font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #3<br>Eb</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #3<br>Ev</a></font></td>
+ </tr>
+</table>
+<br>
+
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr align=center>
+  <td align=center width=75 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xxh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>x8h<br>&nbsp;</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">x9h</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xAh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xBh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xCh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xDh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xEh</font></td>
+  <td align=center width=100 bgcolor="#004080"><font color="#FFFFFF" face="Arial">xFh</font></td>
+ </tr>
+ <tr>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>0xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">OR<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">OR<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">OR<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">OR<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">OR<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">OR<br>rAX,Iz</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">PUSH<sup>I64</sup><br>CS</font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_2.htm">2 byte<br>opcodes</a><br>(80286+)</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>1xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">SBB<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">SBB<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">SBB<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">SBB<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">SBB<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">SBB<br>rAX,Iz</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">PUSH<sup>I64</sup><br>DS</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">POP<sup>I64</sup><br>DS</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>2xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">SUB<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">SUB<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">SUB<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">SUB<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">SUB<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">SUB<br>rAX,Iz</font></td>
+  <td><font face="Arial" size="-2">CS:<br>&nbsp<br>Hint Not Taken<br>for Jcc (P4)</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DAS<sup>I64</sup></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>3xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">CMP<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">CMP<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">CMP<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">CMP<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">CMP<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">CMP<br>rAX,Iz</font></td>
+  <td><font face="Arial" size="-2">DS:<br>CET: (<a href="cpuid.htm">CET</a>)<br>Hint Taken<br>for Jcc (P4)</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">AAS<sup>I64</sup></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center rowspan=2 bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>4xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eAX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eCX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eDX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eBX</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eSP</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eBP</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eSI</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">DEC<sup>I64</sup> eDI</font></td>
+ </tr>
+ <tr align=center>
+  <td colspan=8 bgcolor="#B0D0D0"><font face="Arial" size="-1"><a href="opc_enc.htm">REX</a></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>5xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rAX<font color="#008080"> / r8</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rCX<font color="#008080"> / r9</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rDX<font color="#008080"> / r10</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rBX<font color="#008080"> / r11</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rSP<font color="#008080"> / r12</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rBP<font color="#008080"> / r13</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rSI<font color="#008080"> / r14</font></font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POP<sup>D64</sup><br>rDI<font color="#008080"> / r15</font></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>6xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>Iz<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">IMUL<br>Gv,Ev,Iz<br>(80186+)</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSH<sup>D64</sup><br>Ib<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">IMUL<br>Gv,Ev,Ib<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">INS<br>Yb,DX<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">INS<br>Yz,DX<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">OUTS<br>DX,Xb<br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">OUTS<br>DX,Xz<br>(80186+)</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>7xh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JS<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JNS<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JP<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JNP<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JL<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JNL<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JLE<sup>Df64</sup><br>Jb</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JNLE<sup>Df64</sup><br>Jb</font></td>
+ </tr>
+ <tr>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>8xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Eb,Gb</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Ev,Gv</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Gb,Eb</font></td>
+  <td><font face="Arial" size="-1">MOV<br>Gv,Ev</font></td>
+  <td><font face="Arial" size="-1">MOV Mw,Sw<br>MOV Rv,Sw</font></td>
+  <td><font face="Arial" size="-1">LEA Gv,M<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">MOV Sw,Mw<br>MOV Sw,Rv</font></td>
+  <td><font face="Arial" size="-1"><a href="opc_grp.htm">group #1A</a></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>9xh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">CBW (8088)<br>CWDE (80386+)<br><font color="#008080">CDQE (PM64)</font></font></td>
+  <td><font face="Arial" size="-1">CWD (8088)<br>CDQ (80386+)<br><font color="#008080">CQO (PM64)</font></font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">CALL<sup>I64</sup><br>Ap (w:z)</font></td>
+  <td><font face="Arial" size="-1">WAIT<br>FWAIT</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">PUSHF<sup>D64</sup><br>Fv</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">POPF<sup>D64</sup><br>Fv</font></td>
+  <td><font face="Arial" size="-1">SAHF<br>(<font color="#008080">LM</font>: if <a href="cpuid.htm">AHF64</a>)</font></td>
+  <td><font face="Arial" size="-1">LAHF<br>(<font color="#008080">LM</font>: if <a href="cpuid.htm">AHF64</a>)</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Axh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">TEST<br>AL,Ib</font></td>
+  <td><font face="Arial" size="-1">TEST<br>rAX,Iz</font></td>
+  <td><font face="Arial" size="-1">STOS<br>Yb,AL</font></td>
+  <td><font face="Arial" size="-1">STOS<br>Yv,rAX</font></td>
+  <td><font face="Arial" size="-1">LODS<br>AL,Xb</font></td>
+  <td><font face="Arial" size="-1">LODS<br>rAX,Xv</font></td>
+  <td><font face="Arial" size="-1">SCAS<br>Yb,AL</font></td>
+  <td><font face="Arial" size="-1">SCAS<br>Yv,rAX</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Bxh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">MOV<br>rAX,Iv<br><font color="#008080">r8,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rCX,Iv<br><font color="#008080">r9,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rDX,Iv<br><font color="#008080">r10,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rBX,Iv<br><font color="#008080">r11,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rSP,Iv<br><font color="#008080">r12,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rBP,Iv<br><font color="#008080">r13,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rSI,Iv<br><font color="#008080">r14,Iv</font></font></td>
+  <td><font face="Arial" size="-1">MOV<br>rDI,Iv<br><font color="#008080">r15,Iv</font></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Cxh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">ENTER<sup>D64</sup><br>Iw,Ib<br>(80186+)</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">LEAVE<sup>D64</sup><br>(80186+)</font></td>
+  <td><font face="Arial" size="-1">RET far<br>Iw</font></td>
+  <td><font face="Arial" size="-1">RET far</font></td>
+  <td><font face="Arial" size="-1">INT3</font></td>
+  <td><font face="Arial" size="-1">INT<br>Ib</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">INTO<sup>I64</sup></font></td>
+  <td><font face="Arial" size="-1">IRET</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Dxh<br>&nbsp;</font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>0</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>1</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>2</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>3</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>4</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>5</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>6</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_fpu.htm">ESC<br>7</a></font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Exh<br>&nbsp;</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">CALL<sup>Df64</sup><br>Jz</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JMP<sup>Df64</sup><br>Jz</font></td>
+  <td bgcolor="#E0C0C0"><font face="Arial" size="-1">JMP<sup>I64</sup><br>Ap (w:z)</font></td>
+  <td bgcolor="#E0E0C0"><font face="Arial" size="-1">JMP<sup>Df64</sup><br>Jb</font></td>
+  <td><font face="Arial" size="-1">IN<br>AL,DX</font></td>
+  <td><font face="Arial" size="-1">IN<br>eAX,DX</font></td>
+  <td><font face="Arial" size="-1">OUT<br>DX,AL</font></td>
+  <td><font face="Arial" size="-1">OUT<br>DX,eAX</font></td>
+ </tr>
+ <tr align=center>
+  <td align=center bgcolor="#004080"><font color="#FFFFFF" face="Arial">&nbsp;<br>Fxh<br>&nbsp;</font></td>
+  <td><font face="Arial" size="-1">CLC</font></td>
+  <td><font face="Arial" size="-1">STC</font></td>
+  <td><font face="Arial" size="-1">CLI</font></td>
+  <td><font face="Arial" size="-1">STI</font></td>
+  <td><font face="Arial" size="-1">CLD</font></td>
+  <td><font face="Arial" size="-1">STD</font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #4<br>INC/DEC</a></font></td>
+  <td align=center><font face="Arial" size="-1"><a href="opc_grp.htm">group #5<br>INC/DEC/etc.</a></font></td>
+ </tr>
+</table>
+<br>
+
+<hr>
+<br>
+
+<font face="Arial">
+note: The opcodes marked with * are aliases to other opcodes.<br>
+</font>
+<br>
+
+<hr>
+<br>
+<a href="./../index.htm"><img width=55 height=55 border=0 src="./../pics/logo_ani.gif" alt="main page"></a>
+
+   </center>
+  </td>
+ </tr>
+</table>
+</body>
+</html>
+
+
