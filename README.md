@@ -1,3 +1,3 @@
-# ETL Data Integration
+This is a Database, I modelled the data, I made the procedures to be queried and I made the ETL to insert the data into the database.
 
-This is an ETL of text data. that makes data integration from an XML File
+I made indices to search the data faster.
